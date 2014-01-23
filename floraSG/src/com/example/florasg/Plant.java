@@ -147,4 +147,16 @@ public class Plant {
 		this.family = family;
 	}
 
+	public String getSciName() {
+		return sciName;
+	}
+
+	public String getComName() {
+		return comName;
+	}
+
+	public String getFamily() {
+		return family;
+	}
+
 } 
