@@ -127,7 +127,7 @@ public class Plant {
 		this.associatedFauna = associatedFauna;
 	}
 
-	public boolean isBookmarkStatus() {
+	public boolean getBookmarkStatus() {
 		return bookmarkStatus;
 	}
 
