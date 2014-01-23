@@ -5,11 +5,11 @@ import java.util.Date;
 
 public class News {
 
-	int news_ID;
-	String title;
-	String content;
-	Date date;
-	URL url;
+	private int news_ID;
+	private String title;
+	private String content;
+	private Date date;
+	private URL url;
 	
 	public News(int news_ID, String title, String content, Date date, URL url) {
 		super();
