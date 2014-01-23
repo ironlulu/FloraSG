@@ -2,21 +2,21 @@ package com.example.florasg;
 
 public class Plant {
 	
-	int speciesID;
-	String sciName;
-	String comName;
-	String family;
-	String description;
-	String habitat;
-	int minLeafSize;
-	int maxLeafSize;
-	String distribution;
-	String conservationStatus;
-	String growthReq;
-	String horticulturalFeatures;
-	String uses;
-	String associatedFauna;
-	boolean bookmarkStatus;
+	private int speciesID;
+	private String sciName;
+	private String comName;
+	private String family;
+	private String description;
+	private String habitat;
+	private int minLeafSize;
+	private int maxLeafSize;
+	private String distribution;
+	private String conservationStatus;
+	private String growthReq;
+	private String horticulturalFeatures;
+	private String uses;
+	private String associatedFauna;
+	private boolean bookmarkStatus;
 	
 	Plant(int _id, String _sciName, String _comName, String _family, String _description, String 
 			_habitat, int _minLeafSize, int _maxLeafSize, String _distribution, String _conservationStatus,
