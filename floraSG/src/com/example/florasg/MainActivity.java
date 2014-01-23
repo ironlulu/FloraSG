@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
 	public void goIntoApp(View view) {
 		Intent intent = new Intent(this, SearchActivity.class);    
 		startActivity(intent);
+		//A comment here
 	}
 
 
