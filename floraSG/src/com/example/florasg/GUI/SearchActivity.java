@@ -1,5 +1,6 @@
-package com.example.florasg;
+package com.example.florasg.GUI;
 
+import com.example.florasg.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

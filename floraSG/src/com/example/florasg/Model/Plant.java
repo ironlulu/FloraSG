@@ -1,4 +1,4 @@
-package com.example.florasg;
+package com.example.florasg.Model;
 
 public class Plant {
 	
@@ -18,7 +18,7 @@ public class Plant {
 	private String associatedFauna;
 	private boolean bookmarkStatus;
 	
-	Plant(int _id, String _sciName, String _comName, String _family, String _description, String 
+	public Plant(int _id, String _sciName, String _comName, String _family, String _description, String 
 			_habitat, int _minLeafSize, int _maxLeafSize, String _distribution, String _conservationStatus,
 			String _growthReq, String _horticulturalFeatures, String _uses, String _associatedFauna,
 			boolean _bookmarkStatus) {

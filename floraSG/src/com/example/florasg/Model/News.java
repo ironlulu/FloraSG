@@ -1,4 +1,4 @@
-package com.example.florasg;
+package com.example.florasg.Model;
 
 import java.net.URL;
 import java.util.Date;

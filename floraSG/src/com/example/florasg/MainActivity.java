@@ -1,5 +1,8 @@
 package com.example.florasg;
 
+
+import com.example.florasg.GUI.SearchActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

@@ -23,8 +23,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.florasg.SearchActivity"
+            android:name="com.example.florasg.GUI.SearchActivity"
             android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.BrowseActivity"
+            android:label="@string/title_activity_browse"
+            android:parentActivityName="com.example.florasg.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.florasg.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.NewsActivity"
+            android:label="@string/title_activity_news"
+            android:parentActivityName="com.example.florasg.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.florasg.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.CameraActivity"
+            android:label="@string/title_activity_camera"
+            android:parentActivityName="com.example.florasg.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.florasg.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:parentActivityName="com.example.florasg.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.florasg.MainActivity" />
         </activity>
     </application>
 
