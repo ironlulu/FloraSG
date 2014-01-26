@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.florasg"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" xmlns:tools="http://schemas.android.com/tools">
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -23,40 +23,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.florasg.GUI.SearchActivity"
+            android:name="com.example.florasg.GUI.TabMainActivity"
             android:label="@string/title_activity_search" >
         </activity>
         <activity
             android:name="com.example.florasg.GUI.BrowseActivity"
-            android:label="@string/title_activity_browse"
-            android:parentActivityName="com.example.florasg.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.florasg.MainActivity" />
+            android:label="@string/title_activity_browse" >
         </activity>
         <activity
             android:name="com.example.florasg.GUI.NewsActivity"
-            android:label="@string/title_activity_news"
-            android:parentActivityName="com.example.florasg.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.florasg.MainActivity" />
+            android:label="@string/title_activity_news" >
         </activity>
         <activity
             android:name="com.example.florasg.GUI.CameraActivity"
-            android:label="@string/title_activity_camera"
-            android:parentActivityName="com.example.florasg.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.florasg.MainActivity" />
+            android:label="@string/title_activity_camera" >
         </activity>
         <activity
             android:name="com.example.florasg.GUI.ProfileActivity"
-            android:label="@string/title_activity_profile"
-            android:parentActivityName="com.example.florasg.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.florasg.MainActivity" />
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.SearchActivity"
+            android:label="@string/title_activity_search" >
         </activity>
     </application>
 
