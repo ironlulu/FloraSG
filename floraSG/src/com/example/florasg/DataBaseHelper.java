@@ -13,9 +13,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper{
 	 //The Android's default system path of your application database.
-	private static String DB_PATH = "/data/data/YOUR_PACKAGE/databases/";
+	private static String DB_PATH = "/floraSG/assets/";
 	 
-	private static String DB_NAME = "myDBName";
+	private static String DB_NAME = "plantDB.db";
 	 
 	private SQLiteDatabase myDataBase;
 	 
@@ -31,7 +31,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	super(context, DB_NAME, null, 1);
 	this.myContext = context;
 	}	
-	 
+	
 	/**
 	  * Creates a empty database on the system and rewrites it with your own database.
 	  * */
@@ -148,5 +148,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	// Add your public helper methods to access and get content from the database.
 	// You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
 	// to you to create adapters for your views.
+	
+	//return myDataBase
+	public SQLiteDatabase getDatabase(){
+		return myDataBase;
+	}
 
 }

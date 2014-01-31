@@ -5,13 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
+	
+	private PlantDataRetriever pdr;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		pdr=new PlantDataRetriever(this);
+		pdr.openDB();
+		
+		pdr.getAllGlossary();
+		
+		TextView tv=(TextView) findViewById(R.id.helloID);
+        tv.setText(pdr.getGlossary(1));
 	}
 
 
