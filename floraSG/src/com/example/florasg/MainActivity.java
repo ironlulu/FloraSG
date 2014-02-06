@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 		pdr.getAllGlossary();
 		
 		TextView tv=(TextView) findViewById(R.id.helloID);
-        tv.setText(pdr.getGlossary(1));
+        tv.setText(pdr.getGlossary(24));
 	}
 
 
@@ -33,12 +33,12 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void goIntoApp(View view) {
+	/*public void goIntoApp(View view) {
 		Intent intent = new Intent(this, SearchActivity.class);    
 		startActivity(intent);
 		//A comment here
 		// I add another comment :3
-	}
+	}*/
 
 
 }

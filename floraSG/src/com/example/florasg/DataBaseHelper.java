@@ -1,5 +1,6 @@
 package com.example.florasg;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper{
 	 //The Android's default system path of your application database.
-	private static String DB_PATH = "/floraSG/assets/";
+	private static String DB_PATH;
 	 
 	private static String DB_NAME = "plantDB.db";
 	 
@@ -30,6 +31,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	 
 	super(context, DB_NAME, null, 1);
 	this.myContext = context;
+	DB_PATH= "/data/data/" + context.getPackageName() + "/databases";
 	}	
 	
 	/**
@@ -66,7 +68,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	  */
 	private boolean checkDataBase(){
 	 
-	SQLiteDatabase checkDB = null;
+	/*SQLiteDatabase checkDB = null;
 	 
 	try{
 	String myPath = DB_PATH + DB_NAME;
@@ -84,7 +86,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	 
 	}
 	 
-	return checkDB != null ? true : false;
+	return checkDB != null ? true : false;*/
+		File dbFile = new File(DB_PATH + DB_NAME);
+	    return dbFile.exists();
 	}
 	 
 	/**
@@ -95,7 +99,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	private void copyDataBase() throws IOException{
 	 
 	//Open your local db as the input stream
-	InputStream myInput = myContext.getAssets().open(DB_NAME);
+	InputStream myInput = myContext.getAssets().open("plantDB.sqlite");
 	 
 	// Path to the just created empty db
 	String outFileName = DB_PATH + DB_NAME;
