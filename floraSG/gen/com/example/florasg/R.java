@@ -10,28 +10,57 @@ package com.example.florasg;
 public final class R {
     public static final class attr {
     }
-    public static final class dimen {
+    public static final class color {
         /**  Default screen margins, per the Android Design guidelines. 
-
+         */
+        public static final int black=0x7f040000;
+    }
+    public static final class dimen {
+        /** 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050002;
+        /**  Default screen margins, per the Android Design guidelines. 
+         */
+        public static final int activity_horizontal_padding=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050003;
+        public static final int activity_vertical_padding=0x7f050001;
+        public static final int character_image_margin=0x7f050004;
+        public static final int search_category_button_width=0x7f050005;
     }
     public static final class drawable {
         public static final int first_bg=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int ic_tab_browse=0x7f020002;
-        public static final int ic_tab_camera=0x7f020003;
-        public static final int ic_tab_news=0x7f020004;
-        public static final int ic_tab_profile=0x7f020005;
-        public static final int ic_tab_search=0x7f020006;
-        public static final int main_bg=0x7f020007;
+        public static final int habit_habit_aquatic=0x7f020001;
+        public static final int habit_habit_climber=0x7f020002;
+        public static final int habit_habit_epiphyte=0x7f020003;
+        public static final int habit_habit_herb=0x7f020004;
+        public static final int habit_habit_shrub=0x7f020005;
+        public static final int habit_habit_tree=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int ic_tab_browse=0x7f020008;
+        public static final int ic_tab_camera=0x7f020009;
+        public static final int ic_tab_news=0x7f02000a;
+        public static final int ic_tab_profile=0x7f02000b;
+        public static final int ic_tab_search=0x7f02000c;
+        public static final int main_bg=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int action_settings=0x7f09000d;
+        public static final int charListScrollView=0x7f090006;
+        public static final int charTableScrollView=0x7f090007;
+        public static final int flowerButton=0x7f090003;
+        public static final int fruitButton=0x7f090004;
+        public static final int habitButton=0x7f090001;
+        public static final int leafButton=0x7f090002;
+        public static final int linearLayout1=0x7f090000;
+        public static final int otherButton=0x7f090005;
+        public static final int subCategoryIconCheckBox=0x7f090009;
+        public static final int subCategoryIconImageView=0x7f090008;
+        public static final int subCategoryImageScrollView=0x7f09000c;
+        public static final int subCategoryRow=0x7f09000a;
+        public static final int subCategoryTextView=0x7f09000b;
     }
     public static final class layout {
         public static final int activity_browse=0x7f030000;
@@ -41,30 +70,44 @@ public final class R {
         public static final int activity_search=0x7f030004;
         public static final int activity_starting=0x7f030005;
         public static final int activity_tab_main=0x7f030006;
+        public static final int sub_category_icon=0x7f030007;
+        public static final int sub_category_row=0x7f030008;
     }
     public static final class menu {
-        public static final int browse=0x7f070000;
-        public static final int camera=0x7f070001;
-        public static final int news=0x7f070002;
-        public static final int profile=0x7f070003;
-        public static final int search=0x7f070004;
-        public static final int starting=0x7f070005;
-        public static final int tab_main=0x7f070006;
+        public static final int browse=0x7f080000;
+        public static final int camera=0x7f080001;
+        public static final int news=0x7f080002;
+        public static final int profile=0x7f080003;
+        public static final int search=0x7f080004;
+        public static final int starting=0x7f080005;
+        public static final int tab_main=0x7f080006;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int browse_content=0x7f050008;
-        public static final int camera_content=0x7f05000c;
-        public static final int hello_world=0x7f050002;
-        public static final int news_content=0x7f05000a;
-        public static final int profile_content=0x7f05000b;
-        public static final int search_content=0x7f050009;
-        public static final int title_activity_browse=0x7f050004;
-        public static final int title_activity_camera=0x7f050006;
-        public static final int title_activity_news=0x7f050005;
-        public static final int title_activity_profile=0x7f050007;
-        public static final int title_activity_search=0x7f050003;
+        public static final int action_settings=0x7f060001;
+        public static final int app_name=0x7f060000;
+        public static final int browse_content=0x7f060008;
+        public static final int camera_content=0x7f06000c;
+        public static final int habit_habit_aquatic=0x7f060013;
+        public static final int habit_habit_climber=0x7f060014;
+        public static final int habit_habit_epiphyte=0x7f060015;
+        public static final int habit_habit_herb=0x7f060016;
+        public static final int habit_habit_shrub=0x7f060017;
+        public static final int habit_habit_tree=0x7f060018;
+        public static final int hello_world=0x7f060002;
+        public static final int news_content=0x7f06000a;
+        public static final int profile_content=0x7f06000b;
+        public static final int search_category_flower=0x7f06000f;
+        public static final int search_category_fruit=0x7f060010;
+        public static final int search_category_habit=0x7f06000d;
+        public static final int search_category_leaf=0x7f06000e;
+        public static final int search_category_other=0x7f060011;
+        public static final int search_content=0x7f060009;
+        public static final int search_subcategory_habit=0x7f060012;
+        public static final int title_activity_browse=0x7f060004;
+        public static final int title_activity_camera=0x7f060006;
+        public static final int title_activity_news=0x7f060005;
+        public static final int title_activity_profile=0x7f060007;
+        public static final int title_activity_search=0x7f060003;
     }
     public static final class style {
         /** 
@@ -88,10 +131,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

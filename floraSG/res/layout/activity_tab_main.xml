@@ -7,17 +7,19 @@
         android:layout_width="fill_parent" 
         android:layout_height="fill_parent">
         
-        <FrameLayout android:id="@android:id/tabcontent"
+        
+    	<TabWidget android:id="@android:id/tabs"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true" />
+    	
+    	<FrameLayout android:id="@android:id/tabcontent"
              android:layout_width="fill_parent" 
              android:layout_height="fill_parent"
              android:background="@drawable/main_bg"
              android:layout_alignParentTop="true" 
              android:layout_above="@android:id/tabs" />
     	
-    	<TabWidget android:id="@android:id/tabs"
-             android:layout_width="fill_parent" 
-             android:layout_height="wrap_content"
-             android:layout_alignParentBottom="true" />
     
     </RelativeLayout>
 </TabHost>
