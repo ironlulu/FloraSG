@@ -1,4 +1,4 @@
-package com.example.florasg.GUI;
+package com.example.florasg.GUI.profileGUI;
 
 import com.example.florasg.R;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.Menu;
+<<<<<<< HEAD:floraSG/src/com/example/florasg/GUI/SearchActivity.java
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -46,12 +47,25 @@ public class SearchActivity extends Activity {
 		fruitButton.setOnClickListener(fruitButtonListener);
 		otherButton.setOnClickListener(otherButtonListener);
 		
+=======
+import android.widget.TextView;
+
+public class BookmarkActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		TextView textview = new TextView(this);
+        textview.setText("Bookmark List!");
+        setContentView(textview);
+>>>>>>> c03376b068d5364dea67ad7cef8d85a3ecc734c9:floraSG/src/com/example/florasg/GUI/profileGUI/BookmarkActivity.java
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.search, menu);
+		getMenuInflater().inflate(R.menu.bookmark, menu);
 		return true;
 	}
 	

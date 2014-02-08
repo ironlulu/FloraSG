@@ -1,6 +1,9 @@
 package com.example.florasg.GUI;
 
 import com.example.florasg.R;
+import com.example.florasg.GUI.profileGUI.ProfileActivity;
+import com.example.florasg.GUI.searchGUI.SearchActivity;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +20,7 @@ public class TabMainActivity extends TabActivity implements OnTabChangeListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab_main);
          
-        TabHost tabHost = getTabHost();
+        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         
         tabHost.setOnTabChangedListener(this);
          
@@ -57,14 +60,14 @@ public class TabMainActivity extends TabActivity implements OnTabChangeListener 
         newsspec.setContent(newsIntent);
          
         // Adding all TabSpec to TabHost
-        tabHost.addTab(searchspec); // Adding photos tab
-        tabHost.addTab(browsespec); // Adding songs tab
-        tabHost.addTab(cameraspec); // Adding videos tab
-        tabHost.addTab(profilespec); // Adding photos tab
-        tabHost.addTab(newsspec); // Adding songs tab
+        tabHost.addTab(searchspec); // Adding search tab
+        tabHost.addTab(browsespec); // Adding browse tab
+        tabHost.addTab(cameraspec); // Adding camera tab
+        tabHost.addTab(profilespec); // Adding profile tab
+        tabHost.addTab(newsspec); // Adding news tab
         
         // set Windows tab as default (zero based)
-		tabHost.setCurrentTab(4);
+		tabHost.setCurrentTab(0);
     }
 
 	@Override
