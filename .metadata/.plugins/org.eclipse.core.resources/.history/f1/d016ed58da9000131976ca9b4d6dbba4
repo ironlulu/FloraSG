@@ -29,9 +29,6 @@
     <string name="habit_habit_shrub">shrub</string>
     <string name="habit_habit_tree">tree</string>
 
-    <string name="button_clear">Clear</string>
-    <string name="button_result">Result</string>   
-    
     <string name="title_activity_select_char">SelectCharActivity</string>
     <string name="title_activity_bookmark">BookmarkActivity</string>
     <string name="title_activity_photo">PhotoActivity</string>

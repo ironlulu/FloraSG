@@ -118,11 +118,6 @@ public class SearchActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			charTableScrollView.removeAllViews();
-			
-			//get subcategory list from database
-			//getSubCategoryList();
-			//update scrollview on GUI
-			//updateScrollView();
 
 			// Get the LayoutInflator service
 			LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
