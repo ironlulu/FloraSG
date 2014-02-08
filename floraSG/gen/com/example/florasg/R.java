@@ -47,22 +47,24 @@ public final class R {
         public static final int main_bg=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000f;
+        public static final int action_settings=0x7f090011;
         public static final int charListScrollView=0x7f090006;
         public static final int charTableScrollView=0x7f090007;
         public static final int clearButton=0x7f090009;
         public static final int flowerButton=0x7f090003;
         public static final int fruitButton=0x7f090004;
         public static final int habitButton=0x7f090001;
+        public static final int imageScrollView=0x7f09000f;
         public static final int leafButton=0x7f090002;
         public static final int linearLayout1=0x7f090000;
         public static final int otherButton=0x7f090005;
         public static final int resultButton=0x7f090008;
-        public static final int subCategoryIconCheckBox=0x7f09000b;
-        public static final int subCategoryIconImageView=0x7f09000a;
-        public static final int subCategoryImageScrollView=0x7f09000e;
-        public static final int subCategoryRow=0x7f09000c;
-        public static final int subCategoryTextView=0x7f09000d;
+        public static final int searchResult=0x7f09000a;
+        public static final int subCategoryIconCheckBox=0x7f09000c;
+        public static final int subCategoryIconImageView=0x7f09000b;
+        public static final int subCategoryImageScrollView=0x7f090010;
+        public static final int subCategoryRow=0x7f09000d;
+        public static final int subCategoryTextView=0x7f09000e;
     }
     public static final class layout {
         public static final int activity_bookmark=0x7f030000;
@@ -73,11 +75,12 @@ public final class R {
         public static final int activity_photo=0x7f030005;
         public static final int activity_profile=0x7f030006;
         public static final int activity_search=0x7f030007;
-        public static final int activity_select_char=0x7f030008;
-        public static final int activity_starting=0x7f030009;
-        public static final int activity_tab_main=0x7f03000a;
-        public static final int sub_category_icon=0x7f03000b;
-        public static final int sub_category_row=0x7f03000c;
+        public static final int activity_search_result=0x7f030008;
+        public static final int activity_select_char=0x7f030009;
+        public static final int activity_starting=0x7f03000a;
+        public static final int activity_tab_main=0x7f03000b;
+        public static final int sub_category_icon=0x7f03000c;
+        public static final int sub_category_row=0x7f03000d;
     }
     public static final class menu {
         public static final int bookmark=0x7f080000;
@@ -88,9 +91,10 @@ public final class R {
         public static final int photo=0x7f080005;
         public static final int profile=0x7f080006;
         public static final int search=0x7f080007;
-        public static final int select_char=0x7f080008;
-        public static final int starting=0x7f080009;
-        public static final int tab_main=0x7f08000a;
+        public static final int search_result=0x7f080008;
+        public static final int select_char=0x7f080009;
+        public static final int starting=0x7f08000a;
+        public static final int tab_main=0x7f08000b;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -123,6 +127,7 @@ public final class R {
         public static final int title_activity_photo=0x7f06001d;
         public static final int title_activity_profile=0x7f060007;
         public static final int title_activity_search=0x7f060003;
+        public static final int title_activity_search_result=0x7f06001f;
         public static final int title_activity_select_char=0x7f06001b;
     }
     public static final class style {

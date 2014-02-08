@@ -1,7 +1,10 @@
 package com.example.florasg.GUI.searchGUI;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.florasg.R;
+import com.example.florasg.GUI.TabMainActivity;
 
 /*
 
@@ -75,6 +79,8 @@ public class SearchActivity extends TabActivity implements OnTabChangeListener {
 
 public class SearchActivity extends Activity {
 	
+	public final static  String CHAR_LIST = "com.example.florasg.GUI.searchGUI.CHARLIST";
+
 	private TableLayout charTableScrollView;
 	
 	Button habitButton ;
@@ -82,6 +88,8 @@ public class SearchActivity extends Activity {
 	Button flowerButton ;
 	Button fruitButton ;
 	Button otherButton ;
+	Button clearButton;
+	Button resultButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +109,13 @@ public class SearchActivity extends Activity {
 		flowerButton.setOnClickListener(flowerButtonListener);
 		fruitButton.setOnClickListener(fruitButtonListener);
 		otherButton.setOnClickListener(otherButtonListener);
+		
+		clearButton = (Button) findViewById(R.id.clearButton);
+		resultButton = (Button) findViewById(R.id.resultButton);
+		
+		
+		clearButton.setOnClickListener(clearButtonListener);
+		resultButton.setOnClickListener(resultButtonListener);
 		
 
 	}
@@ -224,6 +239,50 @@ public class SearchActivity extends Activity {
 		}
 		
 	};
+	
+	
+	public OnClickListener clearButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			//TODO
+			//clear all the characteristics checked
+			
+		}
+		
+	};
+	
+	
+	public OnClickListener resultButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			
+			ArrayList<String> charList = new ArrayList<String>();
+			/*
+			int noSubCates = charTableScrollView.getChildCount();
+			for(int i=0;i<noSubCates;i++){
+				View subCateRow = charTableScrollView.getChildAt(i);
+				
+				View charView = subCate.findViewById(R.id.subCategoryIconCheckBox);
+				String c = charView.toString();
+				
+				int noSubCateIcons = subCateRow.findViewById(R.id.imageScrollView);
+				
+				String c = "only show habit";
+				charList.add(c);
+			}
+			*/
+			
+			Intent intent = new Intent(getBaseContext(), SearchResultActivity.class); 
+			//intent.putStringArrayListExtra(CHAR_LIST, charList);
+			startActivity(intent);			
+		}
+		
+	};
+
+	
+	
 }
 
 

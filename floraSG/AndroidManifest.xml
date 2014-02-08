@@ -63,6 +63,14 @@
             android:name="com.example.florasg.GUI.profileGUI.MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
+        <activity
+            android:name="com.example.florasg.GUI.searchGUI.SearchResultActivity"
+            android:label="@string/title_activity_search_result" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.searchGUI.SearchResultActivity"
+            android:label="@string/title_activity_search_result" >
+        </activity>
     </application>
 
 </manifest>
