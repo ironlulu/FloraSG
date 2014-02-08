@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.florasg"
     android:versionCode="1"
-    android:versionName="1.0" xmlns:tools="http://schemas.android.com/tools">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -39,12 +40,28 @@
             android:label="@string/title_activity_camera" >
         </activity>
         <activity
-            android:name="com.example.florasg.GUI.ProfileActivity"
+            android:name="com.example.florasg.GUI.profileGUI.ProfileActivity"
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
-            android:name="com.example.florasg.GUI.SearchActivity"
+            android:name="com.example.florasg.GUI.searchGUI.SearchActivity"
             android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.searchGUI.SelectCharActivity"
+            android:label="@string/title_activity_select_char" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.profileGUI.BookmarkActivity"
+            android:label="@string/title_activity_bookmark" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.profileGUI.PhotoActivity"
+            android:label="@string/title_activity_photo" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.GUI.profileGUI.MapActivity"
+            android:label="@string/title_activity_map" >
         </activity>
     </application>
 

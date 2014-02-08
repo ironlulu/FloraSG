@@ -14,5 +14,9 @@
     <string name="news_content">News conent</string>
     <string name="profile_content">Profile content</string>
     <string name="camera_content">Camera content</string>
+    <string name="title_activity_select_char">SelectCharActivity</string>
+    <string name="title_activity_bookmark">BookmarkActivity</string>
+    <string name="title_activity_photo">PhotoActivity</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>
