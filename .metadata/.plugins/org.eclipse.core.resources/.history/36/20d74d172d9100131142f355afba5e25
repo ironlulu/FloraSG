@@ -260,8 +260,8 @@ public class SearchActivity extends Activity {
 		public void onClick(View v) {
 			
 			ArrayList<String> charList = new ArrayList<String>();
-			String c = "The checked sub cates are-->";
-			charList.add(c);			
+			String c = null;
+			
 			int noSubCates = charTableScrollView.getChildCount();
 			for(int i=0;i<noSubCates;i++){				
 				View subCateRow = charTableScrollView.getChildAt(i);			
@@ -271,10 +271,8 @@ public class SearchActivity extends Activity {
 				for(int j=0;j<noSubCateIcon;j++){
 					View subCateIcon = subCateImgScrollView.getChildAt(j);
 					CheckBox cb = (CheckBox) subCateIcon.findViewById(R.id.subCategoryIconCheckBox);
-					if(cb.isChecked()){
-						c = (String) cb.getText();
-						charList.add(c);
-					}
+					c = (String) cb.getText();
+					charList.add(c);
 				}
 				
 			}

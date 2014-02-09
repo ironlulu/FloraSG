@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -260,23 +259,21 @@ public class SearchActivity extends Activity {
 		public void onClick(View v) {
 			
 			ArrayList<String> charList = new ArrayList<String>();
-			String c = "The checked sub cates are-->";
-			charList.add(c);			
-			int noSubCates = charTableScrollView.getChildCount();
-			for(int i=0;i<noSubCates;i++){				
-				View subCateRow = charTableScrollView.getChildAt(i);			
-				LinearLayout subCateImgScrollView = (LinearLayout) subCateRow.findViewById(R.id.subCategoryImageScrollView);
+			
+			//int noSubCates = charTableScrollView.getChildCount();
+			int noSubCates = 1;
+			for(int i=0;i<noSubCates;i++){
 				
-				int noSubCateIcon = subCateImgScrollView.getChildCount();
-				for(int j=0;j<noSubCateIcon;j++){
-					View subCateIcon = subCateImgScrollView.getChildAt(j);
-					CheckBox cb = (CheckBox) subCateIcon.findViewById(R.id.subCategoryIconCheckBox);
-					if(cb.isChecked()){
-						c = (String) cb.getText();
-						charList.add(c);
-					}
-				}
+				/*
+				View subCateRow = charTableScrollView.getChildAt(i);
 				
+				View charView = subCate.findViewById(R.id.subCategoryIconCheckBox);
+				String c = charView.toString();
+				
+				int noSubCateIcons = subCateRow.findViewById(R.id.imageScrollView);
+				*/
+				String c = "only show habit";
+				charList.add(c);
 			}
 		
 			

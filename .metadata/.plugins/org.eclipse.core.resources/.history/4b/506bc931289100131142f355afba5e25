@@ -19,13 +19,15 @@ public class SearchResultActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_result);
 
-		Intent intent = getIntent();		
+		Intent intent = getIntent();
+		
+		
 		ArrayList<String> charList = intent.getStringArrayListExtra(SearchActivity.CHAR_LIST);
 
 		String s = "";
 		for(int i=0;i<charList.size();i++){
 			s = s + charList.get(i);
-			s = s+"\n";
+			s = s+"/n";
 
 		}
 		

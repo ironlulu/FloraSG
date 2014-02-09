@@ -260,8 +260,8 @@ public class SearchActivity extends Activity {
 		public void onClick(View v) {
 			
 			ArrayList<String> charList = new ArrayList<String>();
-			String c = "The checked sub cates are-->";
-			charList.add(c);			
+			String c = "The checked sub cates are\n---------------------";
+			
 			int noSubCates = charTableScrollView.getChildCount();
 			for(int i=0;i<noSubCates;i++){				
 				View subCateRow = charTableScrollView.getChildAt(i);			
