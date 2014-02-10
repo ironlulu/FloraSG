@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -90,6 +91,8 @@ public class PlantDataRetriever {
 		int highest_matched_index=0;
 		//find the top 10 result from the bucket array
 		for (int i=0;i<10;i++){
+			highest_matched=0;
+			highest_matched_index=0;
 			for(int j=0;j<description_count.length;j++){
 				if(description_count[j]>highest_matched && !picked[j]){
 					highest_matched=description_count[j];
@@ -98,7 +101,6 @@ public class PlantDataRetriever {
 			}
 			//marked it as picked
 			picked[highest_matched_index]=true;
-			highest_matched=0;
 			//add the plant with the current highest matched characteristics to result list
 			cursor=database.rawQuery("SELECT * FROM species WHERE species_id= ?", new String[]{Integer.toString(highest_matched_index+1)});
 			cursor.moveToFirst();
