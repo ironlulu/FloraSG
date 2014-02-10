@@ -18,10 +18,11 @@ public class SearchResultActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_result);
-
+	
 		Intent intent = getIntent();		
 		ArrayList<String> charList = intent.getStringArrayListExtra(SearchActivity.CHAR_LIST);
 
+		//Print out the checked characteristics for testing
 		String s = "";
 		for(int i=0;i<charList.size();i++){
 			s = s + charList.get(i);
@@ -29,9 +30,6 @@ public class SearchResultActivity extends Activity {
 
 		}
 		
-
-
-		// Use the inflater to inflate a stock row from stock_quote_row.xml
 		TextView searchResult = (TextView) findViewById(R.id.searchResult);
 		searchResult.setText(s);
 	}

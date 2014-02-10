@@ -71,6 +71,22 @@
             android:name="com.example.florasg.GUI.searchGUI.SearchResultActivity"
             android:label="@string/title_activity_search_result" >
         </activity>
+        <activity
+            android:name="com.example.florasg.FaqActivity"
+            android:label="@string/title_activity_faq" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.AboutUsActivity"
+            android:label="@string/title_activity_about_us" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.UpdatesActivity"
+            android:label="@string/title_activity_updates" >
+        </activity>
+        <activity
+            android:name="com.example.florasg.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

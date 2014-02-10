@@ -124,7 +124,7 @@ public class SearchActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.bookmark, menu);
+		getMenuInflater().inflate(R.menu.search, menu);
 		return true;
 	}
 	
@@ -135,6 +135,7 @@ public class SearchActivity extends Activity {
 		public void onClick(View arg0) {
 			charTableScrollView.removeAllViews();
 			
+			//TODO
 			//get subcategory list from database
 			//getSubCategoryList();
 			//update scrollview on GUI
