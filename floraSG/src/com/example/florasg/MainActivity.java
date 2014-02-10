@@ -1,6 +1,7 @@
 package com.example.florasg;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import android.app.Activity;
@@ -37,11 +38,17 @@ public class MainActivity extends Activity {
         description_id.add(23);
         
         List<Plant> values = pdr.searchPlantbyCharacteristics(description_id);
-
+        List<String> sciName = new ArrayList<String>();
+        
+        Iterator<Plant> iterator = values.iterator();
+		while (iterator.hasNext()) {
+				sciName.add(iterator.next().getSciName());
+		}
+	
         // use the SimpleCursorAdapter to show the
         // elements in a ListView
-        ArrayAdapter<Plant> adapter = new ArrayAdapter<Plant>(this,
-            android.R.layout.simple_list_item_1, values);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_list_item_1, sciName);
         ListView lv = (ListView) findViewById(R.id.list);
         lv.setAdapter(adapter);
 	}

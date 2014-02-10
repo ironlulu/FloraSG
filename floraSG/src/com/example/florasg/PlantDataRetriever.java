@@ -98,6 +98,7 @@ public class PlantDataRetriever {
 			}
 			//marked it as picked
 			picked[highest_matched_index]=true;
+			highest_matched=0;
 			//add the plant with the current highest matched characteristics to result list
 			cursor=database.rawQuery("SELECT * FROM species WHERE species_id= ?", new String[]{Integer.toString(highest_matched_index+1)});
 			cursor.moveToFirst();
