@@ -1,10 +1,15 @@
 package com.example.florasg;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -23,6 +28,21 @@ public class MainActivity extends Activity {
 		
 		TextView tv=(TextView) findViewById(R.id.helloID);
         tv.setText(pdr.getGlossary(24));
+        
+        List<Integer>description_id=new ArrayList<Integer>();
+        
+        description_id.add(5);
+        description_id.add(6);
+        description_id.add(15);
+        
+        List<Plant> values = pdr.searchPlantbyCharacteristics(description_id);
+
+        // use the SimpleCursorAdapter to show the
+        // elements in a ListView
+        ArrayAdapter<Plant> adapter = new ArrayAdapter<Plant>(this,
+            android.R.layout.simple_list_item_1, values);
+        ListView lv = (ListView) findViewById(R.id.list);
+        lv.setAdapter(adapter);
 	}
 
 

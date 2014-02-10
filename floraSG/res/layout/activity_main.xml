@@ -15,6 +15,12 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_world" 
         android:id="@+id/helloID"/>
+    
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
 
 
 </RelativeLayout>
