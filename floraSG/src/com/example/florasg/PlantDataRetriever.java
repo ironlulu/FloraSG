@@ -99,7 +99,9 @@ public class PlantDataRetriever {
 			//marked it as picked
 			picked[highest_matched_index]=true;
 			//add the plant with the current highest matched characteristics to result list
-			cursor=database.rawQuery("SELECT * FROM species WHERE species_id= ?", new String[]{Integer.toString(highest_matched_index)});
+			cursor=database.rawQuery("SELECT * FROM species WHERE species_id= ?", new String[]{Integer.toString(highest_matched_index+1)});
+			cursor.moveToFirst();
+			System.out.println("No. of column= "+cursor.getColumnCount());
 			//get all the plant information to construct a plant object
 			speciesID=cursor.getInt(16);
 			speciesCode=cursor.getString(0);

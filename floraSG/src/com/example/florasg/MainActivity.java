@@ -32,8 +32,9 @@ public class MainActivity extends Activity {
         List<Integer>description_id=new ArrayList<Integer>();
         
         description_id.add(5);
-        description_id.add(6);
+        description_id.add(7);
         description_id.add(15);
+        description_id.add(23);
         
         List<Plant> values = pdr.searchPlantbyCharacteristics(description_id);
 
