@@ -15,11 +15,9 @@ public class PlantDataRetriever {
 	
 	private SQLiteDatabase database;
 	private DataBaseHelper dbHelper;
-	private List<String> glossary;
 	
 	public PlantDataRetriever (Context context) {
 		dbHelper = new DataBaseHelper(context);
-		glossary=new ArrayList<String>();
 	}
 	
 	//open the DB or create the DB if it doesn't exist
@@ -40,22 +38,12 @@ public class PlantDataRetriever {
 	}
 	
 	//display plant info page
-	public Plant getPlant(int species_id){
-		return new Plant(1, "speciesCode", "scientificName", "authorName", "commonName", "family", "description", "habitat", 5, 10, "distribution", "conservationStatus", "growthRequirement", "horticulturalFeatures", "uses", "associatedFauna", "reference", false);
-	}
-	
-	//search by characteristics
-	public List<Plant> searchPlantbyCharacteristics(List<Integer> description_id){
-		//TODO: is ArrayList the way to do this?
-		List<Plant> result=new ArrayList<Plant>();
-		Cursor cursor;
-		Plant p;
-		
+	public Plant getPlant(String scientific_name){
 		int speciesID;
 		String speciesCode;
-		String scientificName;
 		String authorName;
 		String commonName;
+		String scientificName;
 		String family;
 		String description;
 		String habitat;
@@ -69,6 +57,44 @@ public class PlantDataRetriever {
 		String associatedFauna;
 		String reference;
 		boolean bookmarkStatus;
+		Cursor cursor;
+		cursor=database.rawQuery("SELECT * FROM species WHERE scientific_name= ?", new String[]{scientific_name});
+		cursor.moveToFirst();
+		//System.out.println("No. of column= "+cursor.getColumnCount());
+		//get all the plant information to construct a plant object
+		speciesID=cursor.getInt(16);
+		speciesCode=cursor.getString(0);
+		scientificName=cursor.getString(1);
+		authorName=cursor.getString(2);
+		commonName=cursor.getString(3);
+		family=cursor.getString(4);
+		description=cursor.getString(5);
+		habitat=cursor.getString(6);
+		minLeafSize=cursor.getInt(7);
+		maxLeafSize=cursor.getInt(8);
+		distribution=cursor.getString(9);
+		conservationStatus=cursor.getString(10);
+		growthRequirement=cursor.getString(11);
+		horticulturalFeatures=cursor.getString(12);
+		uses=cursor.getString(13);
+		associatedFauna=cursor.getString(14);
+		reference=cursor.getString(15);
+		bookmarkStatus=Boolean.valueOf(cursor.getString(17));
+		return new Plant(speciesID,speciesCode,scientificName,authorName,commonName,family,
+				description,habitat,minLeafSize,maxLeafSize, distribution, 
+				conservationStatus,growthRequirement,horticulturalFeatures,uses,
+				associatedFauna,reference,bookmarkStatus);
+	}
+	
+	//search by characteristics
+	public List<String[]> searchPlantbyCharacteristics(List<Integer> description_id){
+		//TODO: is ArrayList the way to do this?
+		List<String[]> result=new ArrayList<String[]>();
+		Cursor cursor;
+		
+		String speciesCode;
+		String scientificName;
+		String commonName;
 		
 		//construct a description count bucket table to tally characteristics matched
 		cursor = database.rawQuery("SELECT species_id FROM species", null);
@@ -99,36 +125,22 @@ public class PlantDataRetriever {
 					highest_matched_index=j;
 				}
 			}
+			System.out.println("Characteristics Matched: "+highest_matched);
 			//marked it as picked
 			picked[highest_matched_index]=true;
 			//add the plant with the current highest matched characteristics to result list
-			cursor=database.rawQuery("SELECT * FROM species WHERE species_id= ?", new String[]{Integer.toString(highest_matched_index+1)});
+			cursor=database.rawQuery("SELECT species_code, scientific_name, common_name FROM species WHERE species_id= ?", new String[]{Integer.toString(highest_matched_index+1)});
 			cursor.moveToFirst();
 			System.out.println("No. of column= "+cursor.getColumnCount());
 			//get all the plant information to construct a plant object
-			speciesID=cursor.getInt(16);
 			speciesCode=cursor.getString(0);
 			scientificName=cursor.getString(1);
-			authorName=cursor.getString(2);
-			commonName=cursor.getString(3);
-			family=cursor.getString(4);
-			description=cursor.getString(5);
-			habitat=cursor.getString(6);
-			minLeafSize=cursor.getInt(7);
-			maxLeafSize=cursor.getInt(8);
-			distribution=cursor.getString(9);
-			conservationStatus=cursor.getString(10);
-			growthRequirement=cursor.getString(11);
-			horticulturalFeatures=cursor.getString(12);
-			uses=cursor.getString(13);
-			associatedFauna=cursor.getString(14);
-			reference=cursor.getString(15);
-			bookmarkStatus=Boolean.valueOf(cursor.getString(17));
-			p=new Plant(speciesID,speciesCode,scientificName,authorName,commonName,family,
-					description,habitat,minLeafSize,maxLeafSize, distribution, 
-					conservationStatus,growthRequirement,horticulturalFeatures,uses,
-					associatedFauna,reference,bookmarkStatus);
-			result.add(p);
+			commonName=cursor.getString(2);
+			String[] plantParticular= new String[3];
+			plantParticular[0]=speciesCode;
+			plantParticular[1]=scientificName;
+			plantParticular[2]=commonName;
+			result.add(plantParticular);
 		}
 		
 		return result;
@@ -137,23 +149,6 @@ public class PlantDataRetriever {
 	//sort search result
 	public List<Plant> sortResult(List<Plant> result){
 		return result;
-	}
-	
-	//get all glossary to memory
-	public void getAllGlossary(){
-		Cursor cursor = database.rawQuery("SELECT Glossary FROM subcategory",null);
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-		      glossary.add(cursor.getString(0));
-		      cursor.moveToNext();
-		    }
-		    // make sure to close the cursor
-		cursor.close();
-	}
-	
-	//display sub-category glossary
-	public String getGlossary(int subcategory_id){
-		return glossary.get(subcategory_id-1);
 	}
 	
 	//browse plant
