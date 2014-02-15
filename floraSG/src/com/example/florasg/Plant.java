@@ -19,12 +19,12 @@ public class Plant {
 	private String uses;
 	private String associatedFauna;
 	private String reference;
-	private boolean bookmarkStatus;
+	private String bookmarkStatus;
 	
 	Plant(int _id, String _speciesCode, String _sciName, String _authorName, String _comName, String _family, String _description, String 
 			_habitat, int _minLeafSize, int _maxLeafSize, String _distribution, String _conservationStatus,
 			String _growthReq, String _horticulturalFeatures, String _uses, String _associatedFauna,
-			String _reference, boolean _bookmarkStatus) {
+			String _reference, String _bookmarkStatus) {
 		speciesID = _id;
 		speciesCode= _speciesCode;
 		sciName = _sciName;
@@ -137,11 +137,11 @@ public class Plant {
 		this.associatedFauna = associatedFauna;
 	}
 
-	public boolean getBookmarkStatus() {
+	public String getBookmarkStatus() {
 		return bookmarkStatus;
 	}
 
-	public void setBookmarkStatus(boolean bookmarkStatus) {
+	public void setBookmarkStatus(String bookmarkStatus) {
 		this.bookmarkStatus = bookmarkStatus;
 	}
 

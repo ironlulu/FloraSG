@@ -5,10 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,7 +14,8 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 	
 	private PlantDataRetriever pdr;
-
+	private SearchElementRetriever ser;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,11 +23,12 @@ public class MainActivity extends Activity {
 		
 		pdr=new PlantDataRetriever(this);
 		pdr.openDB();
-		
-		pdr.getAllGlossary();
+		ser= new SearchElementRetriever(this);
+		ser.openDB();
+		List<String[]> subcategory=ser.getSubCategory(1);
 		
 		TextView tv=(TextView) findViewById(R.id.helloID);
-        tv.setText(pdr.getGlossary(24));
+        tv.setText(subcategory.get(0)[1]);
         
         List<Integer>description_id=new ArrayList<Integer>();
         
@@ -37,12 +37,12 @@ public class MainActivity extends Activity {
         description_id.add(15);
         description_id.add(23);
         
-        List<Plant> values = pdr.searchPlantbyCharacteristics(description_id);
+        List<String[]> values = pdr.searchPlantbyCharacteristics(description_id);
         List<String> sciName = new ArrayList<String>();
         
-        Iterator<Plant> iterator = values.iterator();
+        Iterator<String[]> iterator = values.iterator();
 		while (iterator.hasNext()) {
-				sciName.add(iterator.next().getSciName());
+				sciName.add(iterator.next()[1]);
 		}
 	
         // use the SimpleCursorAdapter to show the

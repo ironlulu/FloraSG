@@ -56,7 +56,7 @@ public class PlantDataRetriever {
 		String uses;
 		String associatedFauna;
 		String reference;
-		boolean bookmarkStatus;
+		String bookmarkStatus;
 		Cursor cursor;
 		cursor=database.rawQuery("SELECT * FROM species WHERE scientific_name= ?", new String[]{scientific_name});
 		cursor.moveToFirst();
@@ -79,7 +79,7 @@ public class PlantDataRetriever {
 		uses=cursor.getString(13);
 		associatedFauna=cursor.getString(14);
 		reference=cursor.getString(15);
-		bookmarkStatus=Boolean.valueOf(cursor.getString(17));
+		bookmarkStatus=cursor.getString(17);
 		return new Plant(speciesID,speciesCode,scientificName,authorName,commonName,family,
 				description,habitat,minLeafSize,maxLeafSize, distribution, 
 				conservationStatus,growthRequirement,horticulturalFeatures,uses,
@@ -142,7 +142,6 @@ public class PlantDataRetriever {
 			plantParticular[2]=commonName;
 			result.add(plantParticular);
 		}
-		
 		return result;
 	}
 	
