@@ -69,12 +69,13 @@ public class SearchElementRetriever {
 	//get description
 	public List<String[]> getDescription(int subcategory_id){
 		List<String[]> description= new ArrayList<String[]>();
-		String[] description_element=new String[2];
-		Cursor cursor = database.rawQuery("SELECT description_name, description_image FROM description WHERE subcategory_id= ?", new String[]{Integer.toString(subcategory_id)});
+		String[] description_element=new String[3];
+		Cursor cursor = database.rawQuery("SELECT description_id, description_name, description_image FROM description WHERE subcategory_id= ?", new String[]{Integer.toString(subcategory_id)});
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			 description_element[0]=cursor.getString(0);
 			 description_element[1]=cursor.getString(1);
+			 description_element[2]=cursor.getString(2);
 			 description.add(description_element);
 			 cursor.moveToNext();
 	    }
