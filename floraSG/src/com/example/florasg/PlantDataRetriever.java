@@ -41,7 +41,7 @@ public class PlantDataRetriever {
 	
 	//display plant info page
 	public Plant getPlant(int species_id){
-		return new Plant(1, "speciesCode", "scientificName", "authorName", "commonName", "family", "description", "habitat", 5, 10, "distribution", "conservationStatus", "growthRequirement", "horticulturalFeatures", "uses", "associatedFauna", "reference", false);
+		return new Plant(1, "speciesCode", "scientificName", "authorName", "commonName", "family", "description", "habitat", 5, 10, "distribution", "conservationStatus", "growthRequirement", "horticulturalFeatures", "uses", "associatedFauna", "reference", "TRUE");
 	}
 	
 	//search by characteristics
@@ -68,7 +68,7 @@ public class PlantDataRetriever {
 		String uses;
 		String associatedFauna;
 		String reference;
-		boolean bookmarkStatus;
+		String bookmarkStatus;
 		
 		//construct a description count bucket table to tally characteristics matched
 		cursor = database.rawQuery("SELECT species_id FROM species", null);
@@ -123,7 +123,7 @@ public class PlantDataRetriever {
 			uses=cursor.getString(13);
 			associatedFauna=cursor.getString(14);
 			reference=cursor.getString(15);
-			bookmarkStatus=Boolean.valueOf(cursor.getString(17));
+			bookmarkStatus=cursor.getString(17);
 			p=new Plant(speciesID,speciesCode,scientificName,authorName,commonName,family,
 					description,habitat,minLeafSize,maxLeafSize, distribution, 
 					conservationStatus,growthRequirement,horticulturalFeatures,uses,
