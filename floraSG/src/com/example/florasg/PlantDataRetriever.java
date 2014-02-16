@@ -112,11 +112,18 @@ public class PlantDataRetriever {
 			}
 		}
 		
+		int search_count=0;
+		for(int i=0;i<description_count.length;i++){
+			if(description_count[i]>0){
+				search_count++;
+			}
+		}
+		
 		boolean[] picked= new boolean[description_count.length];
 		int highest_matched=0;
 		int highest_matched_index=0;
 		//find the top 10 result from the bucket array
-		for (int i=0;i<10;i++){
+		for (int i=0;i<search_count;i++){
 			highest_matched=0;
 			highest_matched_index=0;
 			for(int j=0;j<description_count.length;j++){
@@ -136,10 +143,11 @@ public class PlantDataRetriever {
 			speciesCode=cursor.getString(0);
 			scientificName=cursor.getString(1);
 			commonName=cursor.getString(2);
-			String[] plantParticular= new String[3];
+			String[] plantParticular= new String[4];
 			plantParticular[0]=speciesCode;
 			plantParticular[1]=scientificName;
 			plantParticular[2]=commonName;
+			plantParticular[3]=Integer.toString(highest_matched);
 			result.add(plantParticular);
 		}
 		return result;
