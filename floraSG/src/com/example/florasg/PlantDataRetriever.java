@@ -88,7 +88,6 @@ public class PlantDataRetriever {
 	
 	//search by characteristics
 	public List<String[]> searchPlantbyCharacteristics(List<Integer> description_id){
-		//TODO: is ArrayList the way to do this?
 		List<String[]> result=new ArrayList<String[]>();
 		Cursor cursor;
 		
@@ -160,14 +159,12 @@ public class PlantDataRetriever {
 	
 	//browse plant
 	public List<Plant> browsePlant(int browsing_mode){
-		//TODO: is ArrayList the way to do this?
 		List<Plant> all_plant=new ArrayList<Plant>();
 		return all_plant;
 	}
 	
 	//search plant by keyword
 	public List<Plant> searchPlantbyKeyword(String keyword){
-		//TODO: is ArrayList the way to do this?
 		List<Plant> result=new ArrayList<Plant>();
 		return result;
 	}
