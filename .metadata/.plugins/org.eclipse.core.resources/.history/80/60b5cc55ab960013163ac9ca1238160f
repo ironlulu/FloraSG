@@ -1,0 +1,79 @@
+package com.example.florasg.GUI.searchGUI;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.View;
+
+import com.example.florasg.R;
+import com.example.florasg.Controller.PlantDataRetriever;
+import com.example.florasg.Model.Plant;
+
+public class SearchResultActivity extends Activity {
+	
+	PlantDataRetriever pdr = new PlantDataRetriever();
+	ArrayList<Plant> searchResults = new ArrayList<Plant>();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_search_result);
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	
+		Intent intent = getIntent();		
+		ArrayList<Integer> descIdList = intent.getIntegerArrayListExtra(SearchActivity.DESC_LIST);
+		
+		View newSearchResultRow = null;
+		
+		//Print out the checked characteristics for testing
+		/*
+		String s = "The desc ids are\n";
+		s += Integer.toString(descIdList.size());
+		s += "\n";
+		
+		for(int i=0;i<descIdList.size();i++){
+			
+			s = s + descIdList.get(i);
+			s = s+"\n";
+
+		}
+		
+		TextView searchResult = (TextView) findViewById(R.id.searchResult);
+		searchResult.setText(s);
+		*/
+		
+		//TODO
+		//List<Plant> searchResults = pdr.getPlants(descIdList);
+		//hard code the searchPlants for testing
+		Plant p = new Plant(1, "sciName1", "comName1", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		searchResults.add(p);
+		p = new Plant(2, "sciName2", "comName2", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		searchResults.add(p);
+		p = new Plant(3, "sciName3", "comName3", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		searchResults.add(p);
+		p = new Plant(4, "sciName4", "comName4", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		searchResults.add(p);
+		
+		int noSpecies = searchResults.size();
+		for(int i=0;i<noSpecies;i++){
+			newSearchResultRow = inflater.inflate(R.layout.search_result_row, null);
+		}
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.search_result, menu);
+
+
+		return true;
+	}
+
+}

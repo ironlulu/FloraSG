@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.net.URL"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="android.widget.TableLayout"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
@@ -24,4 +23,6 @@
 <fullyQualifiedTypeName name="android.support.v4.view.MenuItemCompat.OnActionExpandListener"/>
 <fullyQualifiedTypeName name="android.widget.SearchView"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>
