@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class BookmarkManager {
 	private SQLiteDatabase database;
@@ -19,30 +17,26 @@ public class BookmarkManager {
 	public BookmarkManager(Context context) {
 		dbHelper = new DataBaseHelper(context);
 		bookmarked_plants = new ArrayList<ArrayList<String>>();
-	}
-	
-	//open the DB or create the DB if it doesn't exist
-		public void openDB(){
-			try {
-				 dbHelper.createDataBase();
-			} catch (IOException ioe) {			  
-				 throw new Error("Unable to create database");
-			}
-				  
-			try { 
-				dbHelper.openDataBase(); 
-			} catch(SQLException sqle){  
-				 throw sqle;
-			}
-			
-			database = dbHelper.getDatabase();
+		try {
+			dbHelper.createDataBase();
+		} catch (IOException ioe) {
+			throw new Error("Unable to create database");
 		}
+					  
+		try { 
+			dbHelper.openDataBase(); 
+		} catch(SQLException sqle){  
+			throw sqle;
+		}
+				
+		database = dbHelper.getDatabase();
+	}
 	
 	public boolean toggleBookmark(int species_id) {
 		Cursor getBookmark;
-		getBookmark = database.rawQuery("SELECT * FROM species WHERE species_id = ?", new String[]{Integer.toString(species_id)});
+		getBookmark = database.rawQuery("SELECT bookmark FROM species WHERE species_id = ?", new String[]{Integer.toString(species_id)});
 		getBookmark.moveToFirst();
-		String oriBookmark = getBookmark.getString(17);
+		String oriBookmark = getBookmark.getString(0);
 		
 		if (oriBookmark.equals("TRUE")) {
 			database.execSQL("UPDATE species SET bookmark = ? WHERE species_id = ?", new String[]{"FALSE", Integer.toString(species_id)});
@@ -51,7 +45,17 @@ public class BookmarkManager {
 			database.execSQL("UPDATE species SET bookmark = ? WHERE species_id = ?", new String[]{"TRUE", Integer.toString(species_id)});
 		}
 		
-		return true;
+		Cursor afterToggle;
+		afterToggle = database.rawQuery("SELECT bookmark FROM species WHERE species_id = ?", new String[]{Integer.toString(species_id)});
+		afterToggle.moveToFirst();
+		String newStatus = afterToggle.getString(0);
+		
+		if (newStatus.equals(oriBookmark)) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 	
 	public List<ArrayList<String>> viewBookmark() {
@@ -60,6 +64,7 @@ public class BookmarkManager {
 		String speciesCode;
 		String scientificName;
 		
+		//database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		cursor = database.rawQuery("SELECT species_code, scientific_name FROM species WHERE bookmark = ?", new String[]{"TRUE"});
 		cursor.moveToFirst();
 		int cursorSize = cursor.getCount();
