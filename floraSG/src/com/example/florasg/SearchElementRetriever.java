@@ -75,7 +75,7 @@ public class SearchElementRetriever {
 		while (!cursor.isAfterLast()) {
 			 description_element[0]=cursor.getString(0);
 			 description_element[1]=cursor.getString(1);
-			 description_element[2]=cursor.getString(2);
+			 description_element[2]=cursor.getString(2).toLowerCase();
 			 description.add(description_element);
 			 cursor.moveToNext();
 	    }

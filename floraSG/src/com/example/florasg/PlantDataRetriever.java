@@ -144,7 +144,7 @@ public class PlantDataRetriever {
 			scientificName=cursor.getString(1);
 			commonName=cursor.getString(2);
 			String[] plantParticular= new String[4];
-			plantParticular[0]=speciesCode;
+			plantParticular[0]=speciesCode.toLowerCase();
 			plantParticular[1]=scientificName;
 			plantParticular[2]=commonName;
 			plantParticular[3]=Integer.toString(highest_matched);
