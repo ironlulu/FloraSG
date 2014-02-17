@@ -67,10 +67,7 @@
             android:name="com.example.florasg.GUI.searchGUI.SearchResultActivity"
             android:label="@string/title_activity_search_result" >
         </activity>
-        <activity
-            android:name="com.example.florasg.GUI.searchGUI.SearchResultActivity"
-            android:label="@string/title_activity_search_result" >
-        </activity>
+        
         <activity
             android:name="com.example.florasg.FaqActivity"
             android:label="@string/title_activity_faq" >
@@ -90,3 +87,4 @@
     </application>
 
 </manifest>
+

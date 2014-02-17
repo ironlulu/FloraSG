@@ -1,9 +1,12 @@
+
 package com.example.florasg.Model;
 
 public class Plant {
 	
 	private int speciesID;
+	private String speciesCode;
 	private String sciName;
+	private String authorName;
 	private String comName;
 	private String family;
 	private String description;
@@ -16,14 +19,17 @@ public class Plant {
 	private String horticulturalFeatures;
 	private String uses;
 	private String associatedFauna;
-	private boolean bookmarkStatus;
+	private String reference;
+	private String bookmarkStatus;
 	
-	public Plant(int _id, String _sciName, String _comName, String _family, String _description, String 
+	public Plant(int _id, String _speciesCode, String _sciName, String _authorName, String _comName, String _family, String _description, String 
 			_habitat, int _minLeafSize, int _maxLeafSize, String _distribution, String _conservationStatus,
 			String _growthReq, String _horticulturalFeatures, String _uses, String _associatedFauna,
-			boolean _bookmarkStatus) {
+			String _reference, String _bookmarkStatus) {
 		speciesID = _id;
+		speciesCode= _speciesCode;
 		sciName = _sciName;
+		authorName= _authorName;
 		comName = _comName;
 		family = _family;
 		description = _description;
@@ -36,6 +42,7 @@ public class Plant {
 		horticulturalFeatures = _horticulturalFeatures;
 		uses = _uses;
 		associatedFauna = _associatedFauna;
+		reference = _reference;
 		bookmarkStatus = _bookmarkStatus;				
 	}
 
@@ -45,6 +52,10 @@ public class Plant {
 
 	public void setSpeciesID(int speciesID) {
 		this.speciesID = speciesID;
+	}
+	
+	public String getSpeciesCode(){
+		return speciesCode;
 	}
 
 	public String getDescription() {
@@ -127,11 +138,11 @@ public class Plant {
 		this.associatedFauna = associatedFauna;
 	}
 
-	public boolean getBookmarkStatus() {
+	public String getBookmarkStatus() {
 		return bookmarkStatus;
 	}
 
-	public void setBookmarkStatus(boolean bookmarkStatus) {
+	public void setBookmarkStatus(String bookmarkStatus) {
 		this.bookmarkStatus = bookmarkStatus;
 	}
 
@@ -157,6 +168,14 @@ public class Plant {
 
 	public String getFamily() {
 		return family;
+	}
+	
+	public String getAuthorName(){
+		return authorName;
+	}
+	
+	public String getReference(){
+		return reference;
 	}
 
 } 

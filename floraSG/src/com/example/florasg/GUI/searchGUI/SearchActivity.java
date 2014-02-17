@@ -21,6 +21,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.florasg.R;
+import com.example.florasg.SearchElementRetriever;
 
 /*
 
@@ -101,7 +102,7 @@ public class SearchActivity extends Activity {
 	private ArrayList<Integer> descIdList =  new ArrayList<Integer>();
 
 
-	//SearchElementRetriever ser = new SearchElementRetriever();
+	SearchElementRetriever ser = new SearchElementRetriever(getBaseContext());
 
 	Button habitButton ;
 	Button leafButton ;
@@ -295,7 +296,7 @@ public class SearchActivity extends Activity {
 			newdescImageScrollView.removeAllViews();
 			descList.clear();
 			
-			//descList = ser.getdescacteristics(subCateList.get(i));
+			//descList = ser.getDescription(subCateList.get(i));
 			String[] characteristic1 = new String[3];
 			characteristic1[0] = Integer.toString(i*10+1);
 			characteristic1[1] = "aquatic";

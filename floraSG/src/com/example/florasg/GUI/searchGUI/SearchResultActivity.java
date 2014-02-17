@@ -22,7 +22,7 @@ import com.example.florasg.Model.Plant;
 public class SearchResultActivity extends Activity {
 
 	private TableLayout newseacrhResultsTableScrollView;
-	PlantDataRetriever pdr = new PlantDataRetriever();
+	PlantDataRetriever pdr = new PlantDataRetriever(getBaseContext());
 	ArrayList<Plant> searchResults = new ArrayList<Plant>();
 
 	@Override
@@ -57,20 +57,23 @@ public class SearchResultActivity extends Activity {
 		//TODO
 		//List<Plant> searchResults = pdr.getPlants(descIdList);
 		//hard code the searchPlants for testing
-		Plant p = new Plant(1, "sciName1", "comName1", null, null, null, 0, 0, null, null, null, null, null, null, false);
+
+
+		Plant p = new Plant(1, null,  "sciName1", null, "comName1", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
-		p = new Plant(2, "sciName2", "comName2", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		p = new Plant(2, null,  "sciName2", null, "comName2", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
-		p = new Plant(3, "sciName3", "comName3", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		p = new Plant(3, null,  "sciName3", null, "comName3", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
-		p = new Plant(4, "sciName4", "comName4", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		p = new Plant(4, null,  "sciName4", null, "comName4", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
-		p = new Plant(5, "sciName5", "comName5", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		p = new Plant(5, null,  "sciName5", null, "comName5", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
-		p = new Plant(6, "sciName6", "comName6", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		p = new Plant(6, null,  "sciName6", null, "comName6", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
-		p = new Plant(7, "sciName7", "comName7", null, null, null, 0, 0, null, null, null, null, null, null, false);
+		p = new Plant(7, null,  "sciName7", null, "comName7", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
+
 
 		int noSpecies = searchResults.size();
 		for(int i=0;i<noSpecies;i++){
@@ -91,7 +94,7 @@ public class SearchResultActivity extends Activity {
 
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(160,200);
 			lp.setMargins(16,16,16,16);
-			
+
 
 			/*
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(R.dimen.search_result_species_image_width, 
