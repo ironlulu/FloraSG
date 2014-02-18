@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class SearchElementRetriever {
 	private SQLiteDatabase database;
@@ -55,8 +56,9 @@ public class SearchElementRetriever {
 		List<String[]> subcategory= new ArrayList<String[]>();
 		Cursor cursor = database.rawQuery("SELECT subcategory_id, subcategory_name, Glossary FROM subcategory WHERE category_id= ?", new String[]{Integer.toString(category_id)});
 		cursor.moveToFirst();
-		String[] subcategory_element=new String[3];
+		String[] subcategory_element;
 		while (!cursor.isAfterLast()) {
+			subcategory_element=new String[3];
 			subcategory_element[0]=cursor.getString(0);
 			subcategory_element[1]=cursor.getString(1);
 			subcategory_element[2]=cursor.getString(2);
@@ -71,10 +73,11 @@ public class SearchElementRetriever {
 	//get description
 	public List<String[]> getDescription(int subcategory_id){
 		List<String[]> description= new ArrayList<String[]>();
-		String[] description_element=new String[3];
+		String[] description_element;
 		Cursor cursor = database.rawQuery("SELECT description_id, description_name, description_image FROM description WHERE subcategory_id= ?", new String[]{Integer.toString(subcategory_id)});
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
+			 description_element=new String[3];
 			 description_element[0]=cursor.getString(0);
 			 description_element[1]=cursor.getString(1);
 			 description_element[2]=cursor.getString(2).toLowerCase();
