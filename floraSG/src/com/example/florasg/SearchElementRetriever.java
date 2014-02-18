@@ -3,6 +3,7 @@ package com.example.florasg;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -52,12 +53,13 @@ public class SearchElementRetriever {
 	//get subcategory
 	public List<String[]> getSubCategory(int category_id){
 		List<String[]> subcategory= new ArrayList<String[]>();
-		Cursor cursor = database.rawQuery("SELECT subcategory_name, Glossary FROM subcategory WHERE category_id= ?", new String[]{Integer.toString(category_id)});
+		Cursor cursor = database.rawQuery("SELECT subcategory_id, subcategory_name, Glossary FROM subcategory WHERE category_id= ?", new String[]{Integer.toString(category_id)});
 		cursor.moveToFirst();
-		String[] subcategory_element=new String[2];
+		String[] subcategory_element=new String[3];
 		while (!cursor.isAfterLast()) {
 			subcategory_element[0]=cursor.getString(0);
 			subcategory_element[1]=cursor.getString(1);
+			subcategory_element[2]=cursor.getString(2);
 			subcategory.add(subcategory_element);
 			cursor.moveToNext();
 	    }
