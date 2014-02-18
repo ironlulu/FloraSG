@@ -1,6 +1,8 @@
 package com.example.florasg;
 
 
+import java.util.ArrayList;
+
 import com.example.florasg.GUI.TabMainActivity;
 
 import android.app.Activity;
@@ -15,6 +17,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_starting);
+		
+		//SearchElementRetriever ser = new SearchElementRetriever(this);
+		//ArrayList<String> categoryList = (ArrayList<String>) ser.getAllCategory();
 	}
 
 

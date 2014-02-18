@@ -31,7 +31,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	 
 	super(context, DB_NAME, null, 1);
 	this.myContext = context;
-	DB_PATH= context.getFilesDir().getPath() + context.getPackageName() + "/databases";
+	DB_PATH=  "/data/data/" + context.getPackageName() + "/databases";
 	}	
 	
 	/**

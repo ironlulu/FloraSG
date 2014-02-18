@@ -22,7 +22,7 @@ import com.example.florasg.Model.Plant;
 public class SearchResultActivity extends Activity {
 
 	private TableLayout newseacrhResultsTableScrollView;
-	PlantDataRetriever pdr = new PlantDataRetriever(getBaseContext());
+	PlantDataRetriever pdr = new PlantDataRetriever(this);
 	ArrayList<Plant> searchResults = new ArrayList<Plant>();
 
 	@Override

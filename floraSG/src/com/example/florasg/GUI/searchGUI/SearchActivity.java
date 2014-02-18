@@ -23,71 +23,15 @@ import android.widget.TextView;
 import com.example.florasg.R;
 import com.example.florasg.SearchElementRetriever;
 
-/*
-
-@SuppressWarnings("deprecation")
-public class SearchActivity extends TabActivity implements OnTabChangeListener {
-
-	public static String categoryName;
-	public static ArrayList<String> categoryList;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_search);
-
-		categoryList = new ArrayList<String>();
-
-		//Test data
-		categoryList.add("Habit");
-		categoryList.add("Leaf");
-		categoryList.add("Flower");
-		categoryList.add("Fruit");
-		categoryList.add("Other");
-		int size = categoryList.size();
-
-		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
-		tabHost.setOnTabChangedListener(this);
-
-		for (int i=0;i<size;i++){
-			String category = categoryList.get(i);
-			Intent newIntent = new Intent().setClass(this, SelectCharActivity.class);
-			TabSpec newSpec = tabHost
-					  .newTabSpec(category)
-					  .setIndicator(category)
-					  .setContent(newIntent);
-			tabHost.addTab(newSpec);
-		}
-		tabHost.setCurrentTab(0);
-		categoryName = categoryList.get(0);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.search, menu);
-		return true;
-	}
-
-	@Override
-	public void onTabChanged(String tabId) {
-		// TODO Auto-generated method stub
-		Log.i("Tab id", ""+tabId);
-        categoryName = tabId;
-        //Log.i("Category Name", ""+categoryName);
-	}
-
-
- */
 
 public class SearchActivity extends Activity {
 
 	public final static  String DESC_LIST = "com.example.florasg.GUI.searchGUI.DESC_LIST";
-	private static final int       CATE_HABIT = 0;
-	private static final int       CATE_LEAF = 1;
-	private static final int       CATE_FLOWER = 2;
-	private static final int       CATE_FRUIT = 3;
-	private static final int       CATE_OTHER = 4;
+	private static final int       CATE_HABIT = 1;
+	private static final int       CATE_LEAF = 2;
+	private static final int       CATE_FLOWER = 3;
+	private static final int       CATE_FRUIT = 4;
+	private static final int       CATE_OTHER = 5;
 
 	private static final String    CATE_HABIT_STRING = "Habit";
 	private static final String       CATE_LEAF_STRING = "Leaf";
@@ -97,12 +41,13 @@ public class SearchActivity extends Activity {
 
 	private LinearLayout categoryScrollView;
 	private TableLayout descTableScrollView;
-	private List<String> categoryList = new ArrayList<String>();
-	private List<String> subCateList =  new ArrayList<String>();
+	private ArrayList<String> categoryList = new ArrayList<String>();
+	private ArrayList<String[]> subCateList =  new ArrayList<String[]>();
 	private ArrayList<Integer> descIdList =  new ArrayList<Integer>();
+	private ArrayList<String[]> descList = new ArrayList<String[]>();
 
 
-	SearchElementRetriever ser = new SearchElementRetriever(getBaseContext());
+	SearchElementRetriever ser;
 
 	Button habitButton ;
 	Button leafButton ;
@@ -121,7 +66,13 @@ public class SearchActivity extends Activity {
 		descTableScrollView = (TableLayout) findViewById(R.id.subCateTableScrollView);
 
 		descIdList =  new ArrayList<Integer>();
-		//categoryList = ser.getCategory();
+		
+		ser = new SearchElementRetriever(this);
+		ser.openDB();
+		categoryList = (ArrayList<String>) ser.getAllCategory();
+		
+		/*
+		//tetsing
 		categoryList.add("Habit");
 		categoryList.add("Leaf");
 		categoryList.add("Flower");
@@ -130,6 +81,7 @@ public class SearchActivity extends Activity {
 		categoryList.add("blalala");
 		categoryList.add("blalala");
 		categoryList.add("blalala");
+		*/
 
 
 		int cateNum = categoryList.size();
@@ -195,17 +147,16 @@ public class SearchActivity extends Activity {
 	
 	protected void onResume(Bundle savedInstanceState){
 		super.onResume();
-		descIdList =  new ArrayList<Integer>();
+		//descIdList =  new ArrayList<Integer>();
 
 	}
 
 	public OnClickListener habitButtonListener = new OnClickListener(){
 
-		@SuppressWarnings("null")
 		@Override
 		public void onClick(View arg0) {
 			descTableScrollView.removeAllViews();			
-			updateSubCategoryView(CATE_HABIT_STRING);
+			updateSubCategoryView(CATE_HABIT);
 		}
 
 	};
@@ -275,28 +226,41 @@ public class SearchActivity extends Activity {
 
 	};
 	
-	private void updateSubCategoryView(String cateString){
+	private void updateSubCategoryView(int cate){
 		
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		//subCateList = ser.getSubCategory(cateString);
+		
+		subCateList = (ArrayList<String[]>) ser.getSubCategory(cate);
+		ArrayList<String> subCateNameList = new ArrayList<String>();
+		
+		/*
+		 * testing
 		subCateList.add("Habit");
 		subCateList.add("Habit sub2");
 		subCateList.add("Habit sub3");
+		*/
+		
+		for(int i=0;i<subCateList.size();i++){
+			String[] subCate = subCateList.get(i);
+			subCateNameList.add(subCate[1]);//get the subCate Name
+		}
 
 		int subCateNum = subCateList.size();
 		View newSubCategoryRow = null;
-		List<String[]> descList = new ArrayList<String[]>();
 
 		for(int i=0;i<subCateNum;i++){
 			newSubCategoryRow = inflater.inflate(R.layout.sub_category_row, null);
 			TextView newSubCategoryTextView = (TextView) newSubCategoryRow.findViewById(R.id.subCategoryTextView);
-			newSubCategoryTextView.setText(subCateList.get(i));
+			newSubCategoryTextView.setText(subCateNameList.get(i));
 			LinearLayout newdescImageScrollView = (LinearLayout) newSubCategoryRow.findViewById(R.id.descImageScrollView);
 			
 			newdescImageScrollView.removeAllViews();
 			descList.clear();
 			
-			//descList = ser.getDescription(subCateList.get(i));
+			descList = (ArrayList<String[]>) ser.getDescription(Integer.parseInt(subCateList.get(i)[0]));
+			
+			/*
+			 * testing
 			String[] characteristic1 = new String[3];
 			characteristic1[0] = Integer.toString(i*10+1);
 			characteristic1[1] = "aquatic";
@@ -327,7 +291,7 @@ public class SearchActivity extends Activity {
 			characteristic6[1] = "tree";
 			characteristic6[2] = "habit_habit_tree";
 			descList.add(characteristic6);
-	
+			*/
 
 			int descNum = descList.size();
 			for(int j=0;j<descNum;j++){

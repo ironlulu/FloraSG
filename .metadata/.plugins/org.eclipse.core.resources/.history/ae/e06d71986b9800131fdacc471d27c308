@@ -6,7 +6,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,14 +13,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.HorizontalScrollView;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.florasg.R;
-import com.example.florasg.GUI.TabMainActivity;
+import com.example.florasg.SearchElementRetriever;
 
 /*
 
@@ -82,12 +82,12 @@ public class SearchActivity extends TabActivity implements OnTabChangeListener {
 
 public class SearchActivity extends Activity {
 
-	public final static  String CHAR_LIST = "com.example.florasg.GUI.searchGUI.CHARLIST";
-	private static final int       CATE_HABIT = 0;
-	private static final int       CATE_LEAF = 1;
-	private static final int       CATE_FLOWER = 2;
-	private static final int       CATE_FRUIT = 3;
-	private static final int       CATE_OTHER = 4;
+	public final static  String DESC_LIST = "com.example.florasg.GUI.searchGUI.DESC_LIST";
+	private static final int       CATE_HABIT = 1;
+	private static final int       CATE_LEAF = 2;
+	private static final int       CATE_FLOWER = 3;
+	private static final int       CATE_FRUIT = 4;
+	private static final int       CATE_OTHER = 5;
 
 	private static final String    CATE_HABIT_STRING = "Habit";
 	private static final String       CATE_LEAF_STRING = "Leaf";
@@ -96,12 +96,14 @@ public class SearchActivity extends Activity {
 	private static final String       CATE_OTHER_STRING = "Other";
 
 	private LinearLayout categoryScrollView;
-	private TableLayout charTableScrollView;
-	private List<String> categoryList = new ArrayList<String>();
-	private List<String> subCateList =  new ArrayList<String>();
+	private TableLayout descTableScrollView;
+	private ArrayList<String> categoryList = new ArrayList<String>();
+	private ArrayList<String[]> subCateList =  new ArrayList<String[]>();
+	private ArrayList<Integer> descIdList =  new ArrayList<Integer>();
+	private ArrayList<String[]> descList = new ArrayList<String[]>();
 
 
-	//SearchElementRetriever ser = new SearchElementRetriever();
+	SearchElementRetriever ser = new SearchElementRetriever(this);
 
 	Button habitButton ;
 	Button leafButton ;
@@ -117,9 +119,12 @@ public class SearchActivity extends Activity {
 		setContentView(R.layout.activity_search);
 
 		categoryScrollView = (LinearLayout)findViewById(R.id.categoryListScrollView);
-		charTableScrollView = (TableLayout) findViewById(R.id.subCateTableScrollView);
+		descTableScrollView = (TableLayout) findViewById(R.id.subCateTableScrollView);
 
-		//categoryList = ser.getCategory();
+		descIdList =  new ArrayList<Integer>();
+		categoryList = (ArrayList<String>) ser.getAllCategory();
+		
+		/*
 		categoryList.add("Habit");
 		categoryList.add("Leaf");
 		categoryList.add("Flower");
@@ -128,6 +133,7 @@ public class SearchActivity extends Activity {
 		categoryList.add("blalala");
 		categoryList.add("blalala");
 		categoryList.add("blalala");
+		*/
 
 
 		int cateNum = categoryList.size();
@@ -189,79 +195,21 @@ public class SearchActivity extends Activity {
 		getMenuInflater().inflate(R.menu.search, menu);
 		return true;
 	}
+	
+	
+	protected void onResume(Bundle savedInstanceState){
+		super.onResume();
+		descIdList =  new ArrayList<Integer>();
+
+	}
 
 	public OnClickListener habitButtonListener = new OnClickListener(){
 
 		@SuppressWarnings("null")
 		@Override
 		public void onClick(View arg0) {
-			charTableScrollView.removeAllViews();
-
-			//TODO
-			//get subcategory list from database
-			//getSubCategoryList();
-			//update scrollview on GUI
-
-			//updateScrollView();
-
-			// Get the LayoutInflator service
-			LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-			//subCateList = ser.getSubCategory(CATE_HABIT_STRING);
-			subCateList.add("Habit");
-			subCateList.add("Habit sub2");
-			subCateList.add("Habit sub3");
-
-			int subCateNum = subCateList.size();
-			View newSubCategoryRow = null;
-			List<String[]> charList = new ArrayList<String[]>();
-
-			for(int i=0;i<subCateNum;i++){
-				newSubCategoryRow = inflater.inflate(R.layout.sub_category_row, null);
-				TextView newSubCategoryTextView = (TextView) newSubCategoryRow.findViewById(R.id.subCategoryTextView);
-				newSubCategoryTextView.setText(subCateList.get(i));
-				LinearLayout newCharImageScrollView = (LinearLayout) newSubCategoryRow.findViewById(R.id.charImageScrollView);
-
-				//charList = ser.getCharacteristics(subCateList.get(i));
-				String[] characteristic = new String[2];
-				characteristic[0] = "aquatic";
-				characteristic[1] = "habit_habit_aquatic";
-				charList.add(characteristic);
-				characteristic[0] = "climer";
-				characteristic[1] = "habit_habit_climer";
-				charList.add(characteristic);
-				characteristic[0] = "epiphyte";
-				characteristic[1] = "habit_habit_epiphyte";
-				charList.add(characteristic);
-				characteristic[0] = "herb";
-				characteristic[1] = "habit_habit_herb";
-				charList.add(characteristic);
-				characteristic[0] = "shrub";
-				characteristic[1] = "habit_habit_shrub";
-				charList.add(characteristic);
-				characteristic[0] = "tree";
-				characteristic[1] = "habit_habit_tree";
-				charList.add(characteristic);
-
-				int charNum = charList.size();
-				for(int j=0;j<charNum;j++){
-					String charName = charList.get(j)[0];
-					String charImgName = charList.get(j)[1];
-					View newCharIcon = inflater.inflate(R.layout.sub_category_icon, null);
-					ImageView newCharIconImageView = (ImageView) newSubCategoryIcon.findViewById(R.id.charIconImageView);
-
-					int resID = getResources().getIdentifier(charImgName, "drawable", getPackageName());
-					newCharIconImageView.setImageResource(resID);			
-					CheckBox newCharIconCheckBox = (CheckBox)newSubCategoryIcon.findViewById(R.id.charIconCheckBox);
-					newCharIconCheckBox.setText(charName);
-					newCharImageScrollView.addView(newSubCategoryIcon);
-				}
-
-				charTableScrollView.addView(newSubCategoryRow);
-
-			}
-
-
+			descTableScrollView.removeAllViews();			
+			updateSubCategoryView(CATE_HABIT);
 		}
 
 	};
@@ -270,7 +218,7 @@ public class SearchActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			charTableScrollView.removeAllViews();
+			descTableScrollView.removeAllViews();
 
 		}
 
@@ -280,7 +228,7 @@ public class SearchActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			charTableScrollView.removeAllViews();
+			descTableScrollView.removeAllViews();
 
 		}
 
@@ -290,7 +238,7 @@ public class SearchActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			charTableScrollView.removeAllViews();
+			descTableScrollView.removeAllViews();
 
 		}
 
@@ -300,7 +248,7 @@ public class SearchActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			charTableScrollView.removeAllViews();
+			descTableScrollView.removeAllViews();
 
 		}
 
@@ -324,32 +272,120 @@ public class SearchActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 
-			ArrayList<String> charList = new ArrayList<String>();
-			String c = "The checked sub cates are-->";
-			charList.add(c);			
-			int noSubCates = charTableScrollView.getChildCount();
-			for(int i=0;i<noSubCates;i++){				
-				View subCateRow = charTableScrollView.getChildAt(i);			
-				LinearLayout subCateImgScrollView = (LinearLayout) subCateRow.findViewById(R.id.subCategoryImageScrollView);
-
-				int noSubCateIcon = subCateImgScrollView.getChildCount();
-				for(int j=0;j<noSubCateIcon;j++){
-					View subCateIcon = subCateImgScrollView.getChildAt(j);
-					CheckBox cb = (CheckBox) subCateIcon.findViewById(R.id.subCategoryIconCheckBox);
-					if(cb.isChecked()){
-						c = (String) cb.getText();
-						charList.add(c);
-					}
-				}
-
-			}
-
-
 			Intent intent = new Intent(getBaseContext(), SearchResultActivity.class); 
-			intent.putStringArrayListExtra(CHAR_LIST, charList);
+			intent.putIntegerArrayListExtra(DESC_LIST, descIdList);
 			startActivity(intent);			
 		}
 
+	};
+	
+	private void updateSubCategoryView(int cate){
+		
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		subCateList = (ArrayList<String[]>) ser.getSubCategory(cate);
+		ArrayList<String> subCateNameList = new ArrayList<String>();
+		
+		/*
+		subCateList.add("Habit");
+		subCateList.add("Habit sub2");
+		subCateList.add("Habit sub3");
+		*/
+		for(int i=0;i<subCateList.size();i++){
+			String[] subCate = subCateList.get(i);
+			subCateNameList.add(subCate[1]);//get the subCate Name
+		}
+
+		int subCateNum = subCateList.size();
+		View newSubCategoryRow = null;
+
+		for(int i=0;i<subCateNum;i++){
+			newSubCategoryRow = inflater.inflate(R.layout.sub_category_row, null);
+			TextView newSubCategoryTextView = (TextView) newSubCategoryRow.findViewById(R.id.subCategoryTextView);
+			newSubCategoryTextView.setText(subCateNameList.get(i));
+			LinearLayout newdescImageScrollView = (LinearLayout) newSubCategoryRow.findViewById(R.id.descImageScrollView);
+			
+			newdescImageScrollView.removeAllViews();
+			descList.clear();
+			
+			descList = ser.getDescription(Integer.parseInt(subCateList.get(i)[0]));
+			String[] characteristic1 = new String[3];
+			characteristic1[0] = Integer.toString(i*10+1);
+			characteristic1[1] = "aquatic";
+			characteristic1[2] = "habit_habit_aquatic";
+			descList.add(characteristic1);
+			String[] characteristic2 = new String[3];
+			characteristic2[0] = Integer.toString(i*10+2);
+			characteristic2[1] = "climber";
+			characteristic2[2] = "habit_habit_climber";
+			descList.add(characteristic2);
+			String[] characteristic3 = new String[3];
+			characteristic3[0] = Integer.toString(i*10+3);
+			characteristic3[1] = "epiphyte";
+			characteristic3[2] = "habit_habit_epiphyte";
+			descList.add(characteristic3);
+			String[] characteristic4 = new String[3];
+			characteristic4[0] = Integer.toString(i*10+4);
+			characteristic4[1] = "herb";
+			characteristic4[2] = "habit_habit_herb";
+			descList.add(characteristic4);
+			String[] characteristic5 = new String[3];
+			characteristic5[0] = Integer.toString(i*10+5);
+			characteristic5[1] = "shrub";
+			characteristic5[2] = "habit_habit_shrub";
+			descList.add(characteristic5);
+			String[] characteristic6 = new String[3];
+			characteristic6[0] = Integer.toString(i*10+6);
+			characteristic6[1] = "tree";
+			characteristic6[2] = "habit_habit_tree";
+			descList.add(characteristic6);
+	
+
+			int descNum = descList.size();
+			for(int j=0;j<descNum;j++){
+				int descId = Integer.parseInt(descList.get(j)[0]);
+				String descName = descList.get(j)[1];
+				String descImgName = descList.get(j)[2];
+				View newdescIcon = inflater.inflate(R.layout.sub_category_icon, null);
+				
+				ImageView newdescIconImageView = (ImageView) newdescIcon.findViewById(R.id.descIconImageView);
+				int resID = getResources().getIdentifier(descImgName, "drawable", getPackageName());
+				newdescIconImageView.setImageResource(resID);			
+				
+				CheckBox newdescIconCheckBox = (CheckBox)newdescIcon.findViewById(R.id.descIconCheckBox);
+				newdescIconCheckBox.setText(descName);
+				//newdescIconCheckBox.setId(descId);
+				
+				newdescIconCheckBox.setTag(descId);
+				newdescIconCheckBox.setOnCheckedChangeListener(checkBoxListener);
+				newdescImageScrollView.addView(newdescIcon);
+			}
+			
+			
+			descTableScrollView.addView(newSubCategoryRow);
+
+		}
+
+
+	
+	}
+	
+	public OnCheckedChangeListener checkBoxListener = new OnCheckedChangeListener(){
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			if(isChecked){
+				int c = (Integer)buttonView.getTag();
+				descIdList.add(c);
+			}
+			else{
+				descIdList.remove(buttonView.getTag());
+
+		}
+			
+		}
+		
 	};
 
 
