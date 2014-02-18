@@ -32,21 +32,21 @@ public class BookmarkManager {
 		database = dbHelper.getDatabase();
 	}
 	
-	public boolean toggleBookmark(int species_id) {
+	public boolean toggleBookmark(String scientific_name) {
 		Cursor getBookmark;
-		getBookmark = database.rawQuery("SELECT bookmark FROM species WHERE species_id = ?", new String[]{Integer.toString(species_id)});
+		getBookmark = database.rawQuery("SELECT bookmark FROM species WHERE scientific_name = ?", new String[]{scientific_name});
 		getBookmark.moveToFirst();
 		String oriBookmark = getBookmark.getString(0);
 		
 		if (oriBookmark.equals("TRUE")) {
-			database.execSQL("UPDATE species SET bookmark = ? WHERE species_id = ?", new String[]{"FALSE", Integer.toString(species_id)});
+			database.execSQL("UPDATE species SET bookmark = ? WHERE scientific_name = ?", new String[]{"FALSE", scientific_name});
 		}
 		else {
-			database.execSQL("UPDATE species SET bookmark = ? WHERE species_id = ?", new String[]{"TRUE", Integer.toString(species_id)});
+			database.execSQL("UPDATE species SET bookmark = ? WHERE scientific_name = ?", new String[]{"TRUE", scientific_name});
 		}
 		
 		Cursor afterToggle;
-		afterToggle = database.rawQuery("SELECT bookmark FROM species WHERE species_id = ?", new String[]{Integer.toString(species_id)});
+		afterToggle = database.rawQuery("SELECT bookmark FROM species WHERE scientific_name = ?", new String[]{scientific_name});
 		afterToggle.moveToFirst();
 		String newStatus = afterToggle.getString(0);
 		
@@ -81,5 +81,14 @@ public class BookmarkManager {
 		cursor.close();
 		
 		return bookmarked_plants;
+	}
+	
+	public void deleteBookmarks(List<String> plantsToBeUnbookmarked) {
+		int size = plantsToBeUnbookmarked.size();
+		for (int i = 0; i < size; i++) {
+			while (!toggleBookmark(plantsToBeUnbookmarked.get(i))) {
+				continue;
+			}
+		}
 	}
 }
