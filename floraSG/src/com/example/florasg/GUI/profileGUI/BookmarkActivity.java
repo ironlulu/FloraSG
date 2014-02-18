@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.florasg.R;
+import com.example.florasg.Controller.BookmarkManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,6 +20,7 @@ public class BookmarkActivity extends Activity {
 	
 	private TableLayout bookmarkTable;
 	private List<ArrayList<String>> bookmarkList = new ArrayList<ArrayList<String>>();
+	BookmarkManager bm;
 	
 
 	@Override
@@ -26,12 +28,18 @@ public class BookmarkActivity extends Activity {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_bookmark);
 				
+		/*
 		for (int i=0; i<10;i++){
 			ArrayList<String> list = new ArrayList<String>();
 			list.add("img"+i);
 			list.add(i + " dkaldkalkd;a");
 			bookmarkList.add(list);
 		}		
+		*/
+		bm = new BookmarkManager(this);
+		//bm.toggleBookmark(i);
+		
+		bookmarkList = bm.viewBookmark();
 		
 		bookmarkTable = (TableLayout) findViewById(R.id.bookmarkListTable);
 		
