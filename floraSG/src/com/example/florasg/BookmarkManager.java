@@ -12,11 +12,9 @@ import android.database.sqlite.SQLiteDatabase;
 public class BookmarkManager {
 	private SQLiteDatabase database;
 	private DataBaseHelper dbHelper;
-	private List<ArrayList<String>> bookmarked_plants;
 
 	public BookmarkManager(Context context) {
 		dbHelper = new DataBaseHelper(context);
-		bookmarked_plants = new ArrayList<ArrayList<String>>();
 		try {
 			dbHelper.createDataBase();
 		} catch (IOException ioe) {
@@ -63,6 +61,7 @@ public class BookmarkManager {
 		ArrayList<String> p;
 		String speciesCode;
 		String scientificName;
+		List<ArrayList<String>> bookmarked_plants = new ArrayList<ArrayList<String>>();
 		
 		//database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		cursor = database.rawQuery("SELECT species_code, scientific_name FROM species WHERE bookmark = ?", new String[]{"TRUE"});
@@ -90,5 +89,25 @@ public class BookmarkManager {
 				continue;
 			}
 		}
+		
+		return;
+	}
+	
+	// For testing purposes only
+	public void initTestCase1() {
+		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
+		
+		return;
+	}
+	
+	// For testing purposes only
+	public void initTestCase2(int size) {
+		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
+		for (int i = 0; i < size; i++) {
+			String species_id = Integer.toString(i + 1);
+			database.execSQL("UPDATE species SET bookmark = ? WHERE species_id = ?", new String[]{"TRUE", species_id});
+		}
+		
+		return;
 	}
 }
