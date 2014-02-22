@@ -3,11 +3,16 @@ package com.example.florasg.GUI.profileGUI;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.florasg.MainActivity;
 import com.example.florasg.R;
 import com.example.florasg.Controller.BookmarkManager;
+import com.example.florasg.GUI.PlantInfo;
+import com.example.florasg.GUI.TabMainActivity;
+import com.example.florasg.GUI.searchGUI.SearchActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 public class BookmarkActivity extends Activity {
 	
@@ -37,7 +43,13 @@ public class BookmarkActivity extends Activity {
 		}		
 		*/
 		bm = new BookmarkManager(this);
-		//bm.toggleBookmark(i);
+		
+		//bm.toggleBookmark(5);
+		//bm.toggleBookmark(30);
+		//bm.toggleBookmark(3);
+		//bm.toggleBookmark(7);
+		//bm.toggleBookmark(9);
+		
 		
 		bookmarkList = bm.viewBookmark();
 		
@@ -52,9 +64,25 @@ public class BookmarkActivity extends Activity {
 			newImage.setImageResource(R.drawable.ic_launcher);
 			Button newBtn = (Button) newRow.findViewById(R.id.plantName);
 			newBtn.setText(bookmarkList.get(i).get(1));
-			bookmarkTable.addView(newRow);			
+			bookmarkTable.addView(newRow);
+			
+			newBtn.setOnClickListener(btnclick);
 		}
 		
 	}
+	
+	Button.OnClickListener btnclick = new Button.OnClickListener(){
+
+	    @Override
+	    public void onClick(View v) {
+
+	        Button btn = (Button)v;
+	        //Toast.makeText(getApplicationContext(), button.getText().toString(),2).show(); 
+	        MainActivity.plant = btn.getText().toString();
+	        Intent intent = new Intent(getApplicationContext(), PlantInfo.class);  
+			startActivity(intent);
+	    }
+
+	};
 
 }

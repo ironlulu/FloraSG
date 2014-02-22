@@ -12,7 +12,9 @@ import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends Activity {
-
+	
+	public static String plant;  //The plant that user select to view detailed info
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
