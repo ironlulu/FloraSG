@@ -1,13 +1,57 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/main_bg"
     tools:context=".PlantInfo" >
+    
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            
+        	<TableRow
+		        android:id="@+id/imageRow"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="10dp" >
+		
+		        <!--  
+		        <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/hello_world"/>
+			    -->
+		        
+		        <HorizontalScrollView
+		            android:id="@+id/imageScrollView"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content" >
+		
+		            <LinearLayout
+		                android:id="@+id/imageListScrollView"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:orientation="horizontal"
+		                android:dividerPadding="@dimen/activity_horizontal_padding" >
+		            </LinearLayout>
+		        </HorizontalScrollView>
+	    	 </TableRow>
+	    	 
+        	 <TableRow
+        	     android:id="@+id/contentRow"
+        	     android:layout_width="match_parent"
+		         android:layout_height="fill_parent" >
+		        
+        	    <TableLayout
+	                android:id="@+id/plantInfoTable"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:orientation="vertical" >
+            	</TableLayout>
+        	            	 
+        	 </TableRow>     	            
+    </TableLayout>       
+	    
+</ScrollView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-</RelativeLayout>
