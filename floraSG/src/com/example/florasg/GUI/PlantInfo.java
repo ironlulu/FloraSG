@@ -39,6 +39,9 @@ public class PlantInfo extends Activity {
 		PDR = new PlantDataRetriever(this);
 		PDR.openDB();
 		plantObj = PDR.getPlant(MainActivity.plant);
+		View newRow;
+		TextView newTitle;
+		TextView newContent;
 		
 		// Display pictures
 		LinearLayout imgRow = (LinearLayout) findViewById(R.id.imageListScrollView);
@@ -56,46 +59,57 @@ public class PlantInfo extends Activity {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 		// Scientific name
-		View newRow = inflater.inflate(R.layout.plant_info_row, null);
-		TextView newTitle = (TextView)newRow.findViewById(R.id.title);
+		if (plantObj.getSciName()!= null){
+		newRow = inflater.inflate(R.layout.plant_info_row, null);
+		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Scientific Name");
-		TextView newContent = (TextView)newRow.findViewById(R.id.content);
+		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getSciName());
 		infoTable.addView(newRow);
+		}
 		
 		// Common name
+		if (plantObj.getComName()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Common Name");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getComName());
 		infoTable.addView(newRow);
+		}
 		
 		// Family 
+		if (plantObj.getFamily()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Family");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getFamily());
 		infoTable.addView(newRow);
+		}
 		
 		// Description
+		if (plantObj.getDescription()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Description");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getDescription());
 		infoTable.addView(newRow);
+		}
 		
 		// Habitat
+		if (plantObj.getHabitat()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Habitat");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getHabitat());
 		infoTable.addView(newRow);
+		}
 		
 		// Leaf size
+		if (plantObj.getMinLeafSize() != 0 && plantObj.getMaxLeafSize()!= 0){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Leaf size");
@@ -103,54 +117,67 @@ public class PlantInfo extends Activity {
 		newContent.setText("Min Leaf size: " + plantObj.getMinLeafSize() + "\n" + "Max Leaf size: "
 		+ plantObj.getMaxLeafSize());
 		infoTable.addView(newRow);
+		}
 		
 		// distribution
+		if (plantObj.getDistribution()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Distribution");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getDistribution());
 		infoTable.addView(newRow);
+		}
 		
 		// conservationStatus
+		if (plantObj.getConservationStatus()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Conservation Status");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getConservationStatus());
 		infoTable.addView(newRow);
+		}
 		
 		// growthReq
+		if (plantObj.getGrowthReq()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Growth Requirements");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getGrowthReq());
 		infoTable.addView(newRow);
+		}
 		
 		// horticulturalFeatures
+		if (plantObj.getHorticulturalFeatures()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Horticultural Features");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getHorticulturalFeatures());
 		infoTable.addView(newRow);
+		}
 		
 		// uses
+		if (plantObj.getUses()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Uses");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getUses());
 		infoTable.addView(newRow);
+		}
 		
 		// associatedFauna
+		if (plantObj.getAssociatedFauna()!= null){
 		newRow = inflater.inflate(R.layout.plant_info_row, null);
 		newTitle = (TextView)newRow.findViewById(R.id.title);
 		newTitle.setText("Associated Fauna");
 		newContent = (TextView)newRow.findViewById(R.id.content);
 		newContent.setText(plantObj.getAssociatedFauna());
 		infoTable.addView(newRow);
+		}
 						
 	}
 
