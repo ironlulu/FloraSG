@@ -8,15 +8,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class BookmarkManager {
 	private SQLiteDatabase database;
 	private DataBaseHelper dbHelper;
-	private List<ArrayList<String>> bookmarked_plants;
 
 	public BookmarkManager(Context context) {
 		dbHelper = new DataBaseHelper(context);
-		bookmarked_plants = new ArrayList<ArrayList<String>>();
 		try {
 			dbHelper.createDataBase();
 		} catch (IOException ioe) {
@@ -32,6 +31,7 @@ public class BookmarkManager {
 		database = dbHelper.getDatabase();
 	}
 	
+	// toggle a plant's bookmark status
 	public boolean toggleBookmark(String scientific_name) {
 		Cursor getBookmark;
 		getBookmark = database.rawQuery("SELECT bookmark FROM species WHERE scientific_name = ?", new String[]{scientific_name});
@@ -58,13 +58,14 @@ public class BookmarkManager {
 		}
 	}
 	
+	// return a list of all bookmarked plants' scientific name and species code
 	public List<ArrayList<String>> viewBookmark() {
 		Cursor cursor;
 		ArrayList<String> p;
 		String speciesCode;
 		String scientificName;
+		List<ArrayList<String>> bookmarked_plants = new ArrayList<ArrayList<String>>();
 		
-		//database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		cursor = database.rawQuery("SELECT species_code, scientific_name FROM species WHERE bookmark = ?", new String[]{"TRUE"});
 		cursor.moveToFirst();
 		int cursorSize = cursor.getCount();
@@ -83,6 +84,7 @@ public class BookmarkManager {
 		return bookmarked_plants;
 	}
 	
+	// change multiple plants' bookmark status to FALSE
 	public void deleteBookmarks(List<String> plantsToBeUnbookmarked) {
 		int size = plantsToBeUnbookmarked.size();
 		for (int i = 0; i < size; i++) {
@@ -90,5 +92,39 @@ public class BookmarkManager {
 				continue;
 			}
 		}
+		
+		return;
+	}
+	
+	// For testing purposes only
+	public void initTestCase1() {
+		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
+		
+		return;
+	}
+	
+	// For testing purposes only
+	public void initTestCase2(int size) {
+		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
+		for (int i = 0; i < size; i++) {
+			String species_id = Integer.toString(i + 1);
+			database.execSQL("UPDATE species SET bookmark = ? WHERE species_id = ?", new String[]{"TRUE", species_id});
+		}
+		
+		return;
+	}
+	
+	// For testing purposes only
+	public List<String> initTestCase3(int size) {
+		List<String> p = new ArrayList<String>();
+		initTestCase2(size);
+		for (int i = 0; i < size; i++) {
+			String species_id = Integer.toString(i + 1);
+			Cursor c = database.rawQuery("SELECT scientific_name FROM species WHERE species_id = ?", new String[]{species_id});
+			c.moveToFirst();
+			p.add(c.getString(0));
+		}
+		
+		return p;
 	}
 }
