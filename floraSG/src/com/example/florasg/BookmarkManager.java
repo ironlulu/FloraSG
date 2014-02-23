@@ -96,14 +96,14 @@ public class BookmarkManager {
 		return;
 	}
 	
-	// For testing purposes only
+	// For testing purpose only
 	public void initTestCase1() {
 		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		
 		return;
 	}
 	
-	// For testing purposes only
+	// For testing purpose only
 	public void initTestCase2(int size) {
 		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		for (int i = 0; i < size; i++) {
@@ -114,7 +114,7 @@ public class BookmarkManager {
 		return;
 	}
 	
-	// For testing purposes only
+	// For testing purpose only
 	public List<String> initTestCase3(int size) {
 		List<String> p = new ArrayList<String>();
 		initTestCase2(size);
