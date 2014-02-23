@@ -26,6 +26,9 @@
             android:name="com.example.florasg.SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
+        <uses-library android:name="android.test.runner" />
     </application>
-
+	<instrumentation android:name="android.test.InstrumentationTestRunner"
+    android:targetPackage="com.example.florasg"
+    android:label="your tests label" />
 </manifest>
