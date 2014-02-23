@@ -32,53 +32,10 @@
                 android:id="@+id/descImageScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:dividerPadding="@dimen/activity_horizontal_padding"
+                android:dividerPadding="@dimen/description_image_margin"
                 android:orientation="horizontal" >
 
-                <!--
-                <ImageView
-                    android:id="@+id/subCategoryImageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/character_image_margin"
-                    android:src="@drawable/ic_launcher" />
-                
-                <ImageView
-                    android:id="@+id/subCategoryImageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/character_image_margin"
-                    android:src="@drawable/ic_launcher" />
-                
-                <ImageView
-                    android:id="@+id/subCategoryImageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/character_image_margin"              
-                    android:src="@drawable/ic_launcher" />
-                
-                <ImageView
-                    android:id="@+id/subCategoryImageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/character_image_margin"
-                    android:src="@drawable/ic_launcher" />
-                
-                
-                <ImageView
-                    android:id="@+id/subCategoryImageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/character_image_margin"
-                    android:src="@drawable/ic_launcher" />
-                
-                <ImageView
-                    android:id="@+id/subCategoryImageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/character_image_margin"
-                    android:src="@drawable/ic_launcher" />
-                -->
+              
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>

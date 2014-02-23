@@ -24,7 +24,7 @@
                 android:id="@+id/categoryListScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:dividerPadding="@dimen/activity_horizontal_padding"
+                android:dividerPadding="@dimen/description_image_margin"
                 android:orientation="horizontal" >
             </LinearLayout>
         </HorizontalScrollView>

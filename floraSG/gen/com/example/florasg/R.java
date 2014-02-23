@@ -33,11 +33,13 @@ public final class R {
         public static final int activity_horizontal_padding=0x7f060000;
         public static final int activity_vertical_margin=0x7f060003;
         public static final int activity_vertical_padding=0x7f060001;
-        public static final int character_image_margin=0x7f060004;
+        public static final int description_checkbox_text_size=0x7f060007;
+        public static final int description_image_margin=0x7f060004;
+        public static final int search_category_button_height=0x7f060006;
         public static final int search_category_button_width=0x7f060005;
-        public static final int search_result_species_image_height=0x7f060008;
-        public static final int search_result_species_image_margin=0x7f060006;
-        public static final int search_result_species_image_width=0x7f060007;
+        public static final int search_result_species_image_height=0x7f06000a;
+        public static final int search_result_species_image_margin=0x7f060008;
+        public static final int search_result_species_image_width=0x7f060009;
     }
     public static final class drawable {
         public static final int acraur1=0x7f020000;

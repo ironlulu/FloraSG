@@ -9,7 +9,6 @@
             android:id="@+id/descIconImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/character_image_margin"
             android:src="@drawable/ic_launcher" />
     </TableRow>
 
@@ -17,8 +16,9 @@
 
         <CheckBox
             android:id="@+id/descIconCheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/description_checkbox_text_size"
             android:text="empty" />
     </TableRow>
 

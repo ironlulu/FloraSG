@@ -1,12 +1,19 @@
 package com.example.florasg.GUI.searchGUI;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -66,11 +73,11 @@ public class SearchActivity extends Activity {
 		descTableScrollView = (TableLayout) findViewById(R.id.subCateTableScrollView);
 
 		descIdList =  new ArrayList<Integer>();
-		
+
 		ser = new SearchElementRetriever(this);
 		ser.openDB();
 		categoryList = (ArrayList<String>) ser.getAllCategory();
-		
+
 		/*
 		//tetsing
 		categoryList.add("Habit");
@@ -81,33 +88,42 @@ public class SearchActivity extends Activity {
 		categoryList.add("blalala");
 		categoryList.add("blalala");
 		categoryList.add("blalala");
-		*/
+		 */
 
 
 		int cateNum = categoryList.size();
 		for (int i = 0; i < cateNum; i++) {
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT);
+
 			Button btn = new Button(this);
 			btn.setId(i);
 			final int id_ = btn.getId();
 			String cate = categoryList.get(i);
 			btn.setText(cate);
+
+			Resources r = getResources();
+			int widthDp = (int) (getResources().getDimension(R.dimen.search_category_button_width) / getResources().getDisplayMetrics().density);
+			int heightDp = (int) (getResources().getDimension(R.dimen.search_category_button_height) / getResources().getDisplayMetrics().density);
+
+			int widthPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, widthDp, r.getDisplayMetrics());
+			int heightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, heightDp, r.getDisplayMetrics());
+			
+			btn.setWidth(widthPx);
+			btn.setHeight(heightPx);
+			
 			categoryScrollView.addView(btn);
 			Button btn1 = ((Button) findViewById(id_));
 
 
 			int cateId = 0;
-			if(cate == "Habit")
+			if(cate.equals("Habit"))
 				cateId = CATE_HABIT;
-			else if(cate == "Leaf")
+			else if(cate.equals("Leaf"))
 				cateId = CATE_LEAF;
-			else if(cate == "Flower")
+			else if(cate.equals("Flower"))
 				cateId = CATE_FLOWER;
-			else if(cate == "Fruit")
+			else if(cate.equals("Fruit"))
 				cateId = CATE_FRUIT;
-			else if(cate == "Other")
+			else if(cate.equals("Other"))
 				cateId = CATE_OTHER;
 
 
@@ -143,8 +159,8 @@ public class SearchActivity extends Activity {
 		getMenuInflater().inflate(R.menu.search, menu);
 		return true;
 	}
-	
-	
+
+
 	protected void onResume(Bundle savedInstanceState){
 		super.onResume();
 		//descIdList =  new ArrayList<Integer>();
@@ -225,21 +241,21 @@ public class SearchActivity extends Activity {
 		}
 
 	};
-	
+
 	private void updateSubCategoryView(int cate){
-		
+
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
+
 		subCateList = (ArrayList<String[]>) ser.getSubCategory(cate);
 		ArrayList<String> subCateNameList = new ArrayList<String>();
-		
+
 		/*
 		 * testing
 		subCateList.add("Habit");
 		subCateList.add("Habit sub2");
 		subCateList.add("Habit sub3");
-		*/
-		
+		 */
+
 		for(int i=0;i<subCateList.size();i++){
 			String[] subCate = subCateList.get(i);
 			subCateNameList.add(subCate[1]);//get the subCate Name
@@ -253,12 +269,13 @@ public class SearchActivity extends Activity {
 			TextView newSubCategoryTextView = (TextView) newSubCategoryRow.findViewById(R.id.subCategoryTextView);
 			newSubCategoryTextView.setText(subCateNameList.get(i));
 			LinearLayout newdescImageScrollView = (LinearLayout) newSubCategoryRow.findViewById(R.id.descImageScrollView);
-			
+
 			newdescImageScrollView.removeAllViews();
 			descList.clear();
 			
+			Log.i("sub cate","sub cate id "+subCateList.get(i)[0]);
 			descList = (ArrayList<String[]>) ser.getDescription(Integer.parseInt(subCateList.get(i)[0]));
-			
+
 			/*
 			 * testing
 			String[] characteristic1 = new String[3];
@@ -291,7 +308,7 @@ public class SearchActivity extends Activity {
 			characteristic6[1] = "tree";
 			characteristic6[2] = "habit_habit_tree";
 			descList.add(characteristic6);
-			*/
+			 */
 
 			int descNum = descList.size();
 			for(int j=0;j<descNum;j++){
@@ -299,29 +316,37 @@ public class SearchActivity extends Activity {
 				String descName = descList.get(j)[1];
 				String descImgName = descList.get(j)[2];
 				View newdescIcon = inflater.inflate(R.layout.sub_category_icon, null);
-				
+
 				ImageView newdescIconImageView = (ImageView) newdescIcon.findViewById(R.id.descIconImageView);
-				int resID = getResources().getIdentifier(descImgName, "drawable", getPackageName());
-				newdescIconImageView.setImageResource(resID);			
 				
+				AssetManager assetManager = getAssets();
+		        InputStream istr = null;
+		        try {
+		            istr = assetManager.open(descImgName);
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        Bitmap bitmap = BitmapFactory.decodeStream(istr);
+		        newdescIconImageView.setImageBitmap(bitmap);
+
 				CheckBox newdescIconCheckBox = (CheckBox)newdescIcon.findViewById(R.id.descIconCheckBox);
 				newdescIconCheckBox.setText(descName);
 				//newdescIconCheckBox.setId(descId);
-				
+
 				newdescIconCheckBox.setTag(descId);
 				newdescIconCheckBox.setOnCheckedChangeListener(checkBoxListener);
 				newdescImageScrollView.addView(newdescIcon);
 			}
-			
-			
+
+
 			descTableScrollView.addView(newSubCategoryRow);
 
 		}
 
 
-	
+
 	}
-	
+
 	public OnCheckedChangeListener checkBoxListener = new OnCheckedChangeListener(){
 
 		@Override
@@ -334,10 +359,10 @@ public class SearchActivity extends Activity {
 			else{
 				descIdList.remove(buttonView.getTag());
 
+			}
+
 		}
-			
-		}
-		
+
 	};
 
 
