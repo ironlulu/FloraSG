@@ -182,6 +182,7 @@ public class SearchActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			descTableScrollView.removeAllViews();
+			updateSubCategoryView(CATE_LEAF);
 
 		}
 
@@ -192,6 +193,7 @@ public class SearchActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			descTableScrollView.removeAllViews();
+			updateSubCategoryView(CATE_FLOWER);
 
 		}
 
@@ -202,6 +204,7 @@ public class SearchActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			descTableScrollView.removeAllViews();
+			updateSubCategoryView(CATE_FRUIT);
 
 		}
 
@@ -212,6 +215,7 @@ public class SearchActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			descTableScrollView.removeAllViews();
+			updateSubCategoryView(CATE_OTHER);
 
 		}
 
@@ -222,8 +226,9 @@ public class SearchActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
+			descList.clear();
 			//TODO
-			//clear all the characteristics checked
+			//clear all checkboxes
 
 		}
 
@@ -322,7 +327,9 @@ public class SearchActivity extends Activity {
 				AssetManager assetManager = getAssets();
 		        InputStream istr = null;
 		        try {
-		            istr = assetManager.open(descImgName);
+		        	int dot = descImgName.indexOf(".");
+		        	descImgName = new String(descImgName.substring(0,dot)+".JPG");
+		            istr = assetManager.open("descriptions/"+descImgName);
 		        } catch (IOException e) {
 		            e.printStackTrace();
 		        }

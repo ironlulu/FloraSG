@@ -1,29 +1,33 @@
 package com.example.florasg.GUI.searchGUI;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.florasg.R;
 import com.example.florasg.Controller.PlantDataRetriever;
-import com.example.florasg.Model.Plant;
 
 public class SearchResultActivity extends Activity {
 
 	private TableLayout newseacrhResultsTableScrollView;
 	PlantDataRetriever pdr = new PlantDataRetriever(this);
-	ArrayList<Plant> searchResults = new ArrayList<Plant>();
+	List<String[]> searchResults = new ArrayList<String[]>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +59,11 @@ public class SearchResultActivity extends Activity {
 		 */
 
 		//TODO
-		//List<Plant> searchResults = pdr.getPlants(descIdList);
+		pdr.openDB();
+		searchResults = pdr.searchPlantbyCharacteristics(descIdList);
 		//hard code the searchPlants for testing
 
-
+		/*
 		Plant p = new Plant(1, null,  "sciName1", null, "comName1", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
 		p = new Plant(2, null,  "sciName2", null, "comName2", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
@@ -73,27 +78,28 @@ public class SearchResultActivity extends Activity {
 		searchResults.add(p);
 		p = new Plant(7, null,  "sciName7", null, "comName7", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
 		searchResults.add(p);
-
+		 */
 
 		int noSpecies = searchResults.size();
 		for(int i=0;i<noSpecies;i++){
-			Plant plant = searchResults.get(i);
+			String[] plant = searchResults.get(i);
 			newSearchResultRow = inflater.inflate(R.layout.search_result_row, null);
 
 			TextView newSpeciesName = (TextView) newSearchResultRow.findViewById(R.id.speciesNameTextView);
-			String name = plant.getSciName()+ "; "+ plant.getComName();
+			String speciesCode = plant[0];
+			String name = plant[1]+ "; "+ plant[2];
 			newSpeciesName.setText(name);
 
 			TextView newMatchNum = (TextView) newSearchResultRow.findViewById(R.id.matchNumber);
 			String match = null;
-			match = "No. of Matches: "+Integer.toString(7-noSpecies);
+			match = "Matches: "+plant[3];
 			newMatchNum.setText(match);
 
 			LinearLayout newspeciesImageScrollView = (LinearLayout) newSearchResultRow.findViewById(R.id.speciesImageScrollView);
 			ImageView iv;
 
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(160,200);
-			lp.setMargins(16,16,16,16);
+			lp.setMargins(10,10,10,10);
 
 
 			/*
@@ -105,7 +111,7 @@ public class SearchResultActivity extends Activity {
 					R.dimen.search_result_species_image_margin);
 			 */
 
-
+			/*
 			if(i%2==0){
 				iv = new ImageView(getBaseContext());
 				iv.setImageResource(R.drawable.acraur1);	
@@ -140,6 +146,29 @@ public class SearchResultActivity extends Activity {
 				iv.setImageResource(R.drawable.alpaqu6);	
 				newspeciesImageScrollView.addView(iv,lp);
 			}
+			 */
+
+			AssetManager am = getAssets();
+			String[] files;
+			try {
+				files = am.list(speciesCode);
+
+				int noImages = files.length;
+				for(int j=0;j<noImages;j++){
+					Log.i("species image","species image name: "+speciesCode+"/"+files[j]);
+					Bitmap bmp=BitmapFactory.decodeStream(am.open(speciesCode+"/"+files[j]));
+					int bmpW = 120;
+					int bmpH = 80;
+					bmp = Bitmap.createScaledBitmap(bmp, bmpW, bmpH, true);
+					iv = new ImageView(getBaseContext());
+					iv.setImageBitmap(bmp);	
+					newspeciesImageScrollView.addView(iv,lp);
+				} 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+
 
 
 			newseacrhResultsTableScrollView.addView(newSearchResultRow);

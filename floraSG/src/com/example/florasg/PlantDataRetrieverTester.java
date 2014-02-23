@@ -2,6 +2,9 @@ package com.example.florasg;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.florasg.Controller.PlantDataRetriever;
+import com.example.florasg.Model.Plant;
+
 public class PlantDataRetrieverTester extends ActivityInstrumentationTestCase2<MainActivity> {
 	
 	PlantDataRetriever pdr;

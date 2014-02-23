@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-import junit.framework.TestCase;
+
+import com.example.florasg.Controller.BookmarkManager;
 
 public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainActivity> {
 	private BookmarkManager bmk;
@@ -21,7 +21,7 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 	}
 
 	public void testViewBookmark() {
-		bmk.initTestCase1();
+		//bmk.initTestCase1();
 		boolean passed = false;
 		List<ArrayList<String>> results1 = bmk.viewBookmark();
 		if (results1.isEmpty()) {
@@ -31,7 +31,7 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 	}
 
 	public void testDeleteBookmarks() {
-		bmk.initTestCase2(5);
+		//bmk.initTestCase2(5);
 		boolean passed = false;
 		List<ArrayList<String>> results2 = bmk.viewBookmark();
 		if (results2.size() == 5) {
@@ -41,7 +41,7 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 	}
 
 	public void testToggleBookmark() {
-		bmk.deleteBookmarks(bmk.initTestCase3(5));
+		//bmk.deleteBookmarks(bmk.initTestCase3(5));
 		boolean passed = false;
 		List<ArrayList<String>> results3 = bmk.viewBookmark();
 		if (results3.isEmpty()) {
