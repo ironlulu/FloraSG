@@ -15,6 +15,7 @@ public class BookmarkManager {
 	private DataBaseHelper dbHelper;
 
 	public BookmarkManager(Context context) {
+		// open database for access
 		dbHelper = new DataBaseHelper(context);
 		try {
 			dbHelper.createDataBase();
@@ -96,14 +97,14 @@ public class BookmarkManager {
 		return;
 	}
 	
-	// For testing purpose only
+	// For testing purposes only
 	public void initTestCase1() {
 		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		
 		return;
 	}
 	
-	// For testing purpose only
+	// For testing purposes only
 	public void initTestCase2(int size) {
 		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		for (int i = 0; i < size; i++) {
@@ -114,7 +115,7 @@ public class BookmarkManager {
 		return;
 	}
 	
-	// For testing purpose only
+	// For testing purposes only
 	public List<String> initTestCase3(int size) {
 		List<String> p = new ArrayList<String>();
 		initTestCase2(size);

@@ -20,7 +20,8 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 		bmk = new BookmarkManager(mainActivity);
 	}
 
-	public void testViewBookmark() {
+	// can view an empty list of bookmarks without crashing
+	public void testCase1() {
 		bmk.initTestCase1();
 		boolean passed = false;
 		List<ArrayList<String>> results1 = bmk.viewBookmark();
@@ -30,18 +31,22 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 		assertTrue(passed);
 	}
 
-	public void testDeleteBookmarks() {
-		bmk.initTestCase2(5);
+	// can view n numbers of bookmarks where n = expected
+	public void testCase2() {
+		int expected = 5; // modify this value when needed
+		bmk.initTestCase2(expected);
 		boolean passed = false;
 		List<ArrayList<String>> results2 = bmk.viewBookmark();
-		if (results2.size() == 5) {
+		if (results2.size() == expected) {
 			passed = true;
 		}
 		assertTrue(passed);
 	}
 
-	public void testToggleBookmark() {
-		bmk.deleteBookmarks(bmk.initTestCase3(5));
+	// can delete n numbers of bookmarks where n = size
+	public void testCase3() {
+		int size = 5; // modify this value when needed
+		bmk.deleteBookmarks(bmk.initTestCase3(size));
 		boolean passed = false;
 		List<ArrayList<String>> results3 = bmk.viewBookmark();
 		if (results3.isEmpty()) {
