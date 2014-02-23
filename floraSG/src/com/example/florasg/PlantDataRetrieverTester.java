@@ -1,15 +1,16 @@
 package com.example.florasg;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.test.ActivityInstrumentationTestCase2;
 
 public class PlantDataRetrieverTester extends ActivityInstrumentationTestCase2<MainActivity> {
 	
 	PlantDataRetriever pdr;
 	
-	//private TextView result;
-	@SuppressWarnings("deprecation")
 	public PlantDataRetrieverTester() {
-	super ("com.example.florasg", MainActivity.class);
+		super (MainActivity.class);
 	}
 	
 	@Override
@@ -17,17 +18,24 @@ public class PlantDataRetrieverTester extends ActivityInstrumentationTestCase2<M
 		super.setUp();
 		MainActivity mainActivity = getActivity();
 		pdr=new PlantDataRetriever(mainActivity);
-		//result = (TextView) mainActivity.findViewById(R.id.result);
 	}
 
 	public void testGetPlant() {
-		Plant p= pdr.getPlant("Ardisia crenata");
-		assertEquals("Correct plant","Ardisia crenata", p.getSciName());
-		//fail("Not yet implemented");
+		Plant p1= pdr.getPlant("Ardisia crenata");
+		Plant p2= pdr.getPlant("Zoysia matrella");
+		assertEquals("Correct plant p1","Ardisia crenata", p1.getSciName());
+		assertEquals("Correct plant p2", "ZOYMAT", p2.getSpeciesCode());
 	}
 
 	public void testSearchPlantbyCharacteristics() {
-		fail("Not yet implemented");
+		List<Integer>description_id=new ArrayList<Integer>();
+		description_id.add(2);
+    	description_id.add(77);
+    	description_id.add(30);
+		List<String[]> search_result=pdr.searchPlantbyCharacteristics(description_id);
+		assertEquals("Correct species", "Ardisia crenata", search_result.get(0)[1]);
+		assertEquals("Correct species", "Fagraea auriculata", search_result.get(3)[1]);
+		assertEquals("Correct species", "Common tree-vine, jolok-jolok, merbati padang", search_result.get(6)[2]);
 	}
 
 }
