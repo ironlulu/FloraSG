@@ -228,7 +228,7 @@ public class PlantInfo extends Activity {
 	        //bm.toggleBookmark(MainActivity.plant)
 	        invalidateOptionsMenu();
 	        Toast.makeText(getApplicationContext(), 
-                    "Add to Bookmark List!", Toast.LENGTH_LONG).show();
+                    "Add to Bookmark List!", Toast.LENGTH_SHORT).show();
 	        //Toast("Removed from Favourites");
 	        return true;
 	    case R.id.remove:
@@ -236,7 +236,7 @@ public class PlantInfo extends Activity {
 	        //bm.toggleBookmark(MainActivity.plant)
 	        invalidateOptionsMenu();
 	        Toast.makeText(getApplicationContext(), 
-                    "Deleted from Bookmark List!", Toast.LENGTH_LONG).show();
+                    "Deleted from Bookmark List!", Toast.LENGTH_SHORT).show();
 	        return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
