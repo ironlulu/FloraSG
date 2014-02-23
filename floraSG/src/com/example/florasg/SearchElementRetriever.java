@@ -3,11 +3,13 @@ package com.example.florasg;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class SearchElementRetriever {
 	private SQLiteDatabase database;
@@ -17,22 +19,22 @@ public class SearchElementRetriever {
 	public SearchElementRetriever (Context context) {
 		dbHelper = new DataBaseHelper(context);
 		category=new ArrayList<String>();
+		openDB();
 	}
 	
 	//open the DB or create the DB if it doesn't exist
 	public void openDB(){
-			try {
-				 dbHelper.createDataBase();
-			} catch (IOException ioe) {			  
-				 throw new Error("Unable to create database");
-			}
+		try {
+			dbHelper.createDataBase();
+		} catch (IOException ioe) {			  
+			throw new Error("Unable to create database");
+		}
 				  
-			try { 
-				dbHelper.openDataBase(); 
-			} catch(SQLException sqle){  
-				 throw sqle;
-			}
-			
+		try { 
+			dbHelper.openDataBase(); 
+		} catch(SQLException sqle){  
+			throw sqle;
+		}
 			database=dbHelper.getDatabase();
 	}
 	
@@ -41,43 +43,46 @@ public class SearchElementRetriever {
 		Cursor cursor = database.rawQuery("SELECT category_name FROM category",null);
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			 category.add(cursor.getString(0));
-			 cursor.moveToNext();
+			category.add(cursor.getString(0));
+			cursor.moveToNext();
 	    }
-	// make sure to close the cursor
+		// make sure to close the cursor
 		cursor.close();
 		return category;
 	}
 	
-	//get subcategory
+	//get subcategory according to category id.
 	public List<String[]> getSubCategory(int category_id){
 		List<String[]> subcategory= new ArrayList<String[]>();
-		Cursor cursor = database.rawQuery("SELECT subcategory_name, Glossary FROM subcategory WHERE category_id= ?", new String[]{Integer.toString(category_id)});
+		Cursor cursor = database.rawQuery("SELECT subcategory_id, subcategory_name, Glossary FROM subcategory WHERE category_id= ?", new String[]{Integer.toString(category_id)});
 		cursor.moveToFirst();
-		String[] subcategory_element=new String[2];
+		String[] subcategory_element;
 		while (!cursor.isAfterLast()) {
+			subcategory_element=new String[3];
 			subcategory_element[0]=cursor.getString(0);
 			subcategory_element[1]=cursor.getString(1);
+			subcategory_element[2]=cursor.getString(2);
 			subcategory.add(subcategory_element);
 			cursor.moveToNext();
 	    }
-	// make sure to close the cursor
+		// make sure to close the cursor
 		cursor.close();
 		return subcategory;
 	}
 	
-	//get description
+	//get description according to subcategory id
 	public List<String[]> getDescription(int subcategory_id){
 		List<String[]> description= new ArrayList<String[]>();
-		String[] description_element=new String[3];
+		String[] description_element;
 		Cursor cursor = database.rawQuery("SELECT description_id, description_name, description_image FROM description WHERE subcategory_id= ?", new String[]{Integer.toString(subcategory_id)});
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			 description_element[0]=cursor.getString(0);
-			 description_element[1]=cursor.getString(1);
-			 description_element[2]=cursor.getString(2).toLowerCase();
-			 description.add(description_element);
-			 cursor.moveToNext();
+			description_element=new String[3];
+			description_element[0]=cursor.getString(0);
+			description_element[1]=cursor.getString(1);
+			description_element[2]=cursor.getString(2).toLowerCase();
+			description.add(description_element);
+			cursor.moveToNext();
 	    }
 		// make sure to close the cursor
 		cursor.close();

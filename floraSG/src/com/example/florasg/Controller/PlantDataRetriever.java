@@ -22,6 +22,7 @@ public class PlantDataRetriever {
 	
 	public PlantDataRetriever (Context context) {
 		dbHelper = new DataBaseHelper(context);
+		openDB();
 	}
 	
 	//open the DB or create the DB if it doesn't exist
@@ -29,19 +30,19 @@ public class PlantDataRetriever {
 		try {
 			 dbHelper.createDataBase();
 		} catch (IOException ioe) {			  
-			 throw new Error("Unable to create database");
+			throw new Error("Unable to create database");
 		}
-			  
+		
 		try { 
 			dbHelper.openDataBase(); 
 		} catch(SQLException sqle){  
-			 throw sqle;
+			throw sqle;
 		}
 		
 		database=dbHelper.getDatabase();
 	}
 	
-	//display plant info page
+	//display plant info page by getting a plant object by its scientific name
 	public Plant getPlant(String scientific_name){
 		int speciesID;
 		String speciesCode;
@@ -99,13 +100,13 @@ public class PlantDataRetriever {
 		String scientificName;
 		String commonName;
 		
-		//construct a description count bucket table to tally characteristics matched
+		/*construct a description count bucket table to tally characteristics matched
+		for each plant*/
 		cursor = database.rawQuery("SELECT species_id FROM species", null);
 		int[] description_count=new int[cursor.getCount()];
 		
 		Iterator<Integer> iterator = description_id.iterator();
 		while (iterator.hasNext()) {
-			//System.out.println(iterator.next());
 			cursor = database.rawQuery("SELECT species_id FROM species_description WHERE description_id= ?", new String[]{iterator.next().toString()});
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
@@ -115,6 +116,8 @@ public class PlantDataRetriever {
 			}
 		}
 		
+		/*count the number of plant to be picked to display 
+		(plants with at least 1 characteristic matched)*/
 		int search_count=0;
 		for(int i=0;i<description_count.length;i++){
 			if(description_count[i]>0){
@@ -123,9 +126,9 @@ public class PlantDataRetriever {
 		}
 		
 		boolean[] picked= new boolean[description_count.length];
-		int highest_matched=0;
-		int highest_matched_index=0;
-		//find the top 10 result from the bucket array
+		int highest_matched=0; //no. of characteristics matched
+		int highest_matched_index=0; //keep the index of plant with highest characteristics matched
+		//find the result from the bucket array
 		for (int i=0;i<search_count;i++){
 			highest_matched=0;
 			highest_matched_index=0;
@@ -142,7 +145,7 @@ public class PlantDataRetriever {
 			cursor=database.rawQuery("SELECT species_code, scientific_name, common_name FROM species WHERE species_id= ?", new String[]{Integer.toString(highest_matched_index+1)});
 			cursor.moveToFirst();
 			System.out.println("No. of column= "+cursor.getColumnCount());
-			//get all the plant information to construct a plant object
+			//get plant information to pass to GUI 
 			speciesCode=cursor.getString(0);
 			scientificName=cursor.getString(1);
 			commonName=cursor.getString(2);
@@ -153,11 +156,6 @@ public class PlantDataRetriever {
 			plantParticular[3]=Integer.toString(highest_matched);
 			result.add(plantParticular);
 		}
-		return result;
-	}
-	
-	//sort search result
-	public List<Plant> sortResult(List<Plant> result){
 		return result;
 	}
 	

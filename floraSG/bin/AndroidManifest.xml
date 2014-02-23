@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -87,6 +88,11 @@
             android:name="com.example.florasg.GUI.PlantInfo"
             android:label="@string/title_activity_plant_info" >
         </activity>
+         <uses-library android:name="android.test.runner" />
     </application>
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+    android:targetPackage="com.example.florasg"
+    android:label="your tests label" />
 
 </manifest>
+
