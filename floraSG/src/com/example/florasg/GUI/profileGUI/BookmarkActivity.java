@@ -7,9 +7,6 @@ import com.example.florasg.MainActivity;
 import com.example.florasg.R;
 import com.example.florasg.Controller.BookmarkManager;
 import com.example.florasg.GUI.PlantInfo;
-import com.example.florasg.GUI.TabMainActivity;
-import com.example.florasg.GUI.searchGUI.SearchActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.Toast;
 
 public class BookmarkActivity extends Activity {
 	

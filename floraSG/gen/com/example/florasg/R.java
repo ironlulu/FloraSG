@@ -60,19 +60,22 @@ public final class R {
         public static final int habit_habit_herb=0x7f02000f;
         public static final int habit_habit_shrub=0x7f020010;
         public static final int habit_habit_tree=0x7f020011;
-        public static final int ic_launcher=0x7f020012;
-        public static final int ic_tab_browse=0x7f020013;
-        public static final int ic_tab_camera=0x7f020014;
-        public static final int ic_tab_news=0x7f020015;
-        public static final int ic_tab_profile=0x7f020016;
-        public static final int ic_tab_search=0x7f020017;
-        public static final int main_bg=0x7f020018;
+        public static final int ic_action_favorite=0x7f020012;
+        public static final int ic_action_make_favorite=0x7f020013;
+        public static final int ic_launcher=0x7f020014;
+        public static final int ic_tab_browse=0x7f020015;
+        public static final int ic_tab_camera=0x7f020016;
+        public static final int ic_tab_news=0x7f020017;
+        public static final int ic_tab_profile=0x7f020018;
+        public static final int ic_tab_search=0x7f020019;
+        public static final int main_bg=0x7f02001a;
     }
     public static final class id {
-        public static final int action_aboutus=0x7f0b0027;
-        public static final int action_faq=0x7f0b0026;
+        public static final int action_aboutus=0x7f0b0029;
+        public static final int action_faq=0x7f0b0028;
         public static final int action_settings=0x7f0b0025;
-        public static final int action_updates=0x7f0b0028;
+        public static final int action_updates=0x7f0b002a;
+        public static final int add=0x7f0b0026;
         public static final int bookmarkListTable=0x7f0b0000;
         public static final int bookmarkRow=0x7f0b0014;
         public static final int categoryListScrollView=0x7f0b0008;
@@ -95,6 +98,7 @@ public final class R {
         public static final int plantImg=0x7f0b0015;
         public static final int plantInfoTable=0x7f0b0005;
         public static final int plantName=0x7f0b0016;
+        public static final int remove=0x7f0b0027;
         public static final int resultButton=0x7f0b000e;
         public static final int seacrhResultsTableScrollView=0x7f0b0010;
         public static final int searchResultRow=0x7f0b001a;
