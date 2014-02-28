@@ -29,6 +29,7 @@ public class PlantInfo extends Activity {
 	BookmarkManager bm;
 	private String bookmarkStatus;
 	public boolean isBookmark;
+	int ID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,9 @@ public class PlantInfo extends Activity {
 		View newRow;
 		TextView newTitle;
 		TextView newContent;
+		
+		// get speciesID
+		ID = plantObj.getSpeciesID();
 		
 		// Open bookmarkManage and ready to add bookmark
 		bm = new BookmarkManager(this);
@@ -225,15 +229,14 @@ public class PlantInfo extends Activity {
 	    switch (item.getItemId()) {
 	    case R.id.add:
 	    	isBookmark = true;
-	        //bm.toggleBookmark(MainActivity.plant)
+	        bm.toggleBookmark(ID);
 	        invalidateOptionsMenu();
 	        Toast.makeText(getApplicationContext(), 
                     "Add to Bookmark List!", Toast.LENGTH_SHORT).show();
-	        //Toast("Removed from Favourites");
 	        return true;
 	    case R.id.remove:
 	        isBookmark = false;
-	        //bm.toggleBookmark(MainActivity.plant)
+	        bm.toggleBookmark(ID);
 	        invalidateOptionsMenu();
 	        Toast.makeText(getApplicationContext(), 
                     "Deleted from Bookmark List!", Toast.LENGTH_SHORT).show();
