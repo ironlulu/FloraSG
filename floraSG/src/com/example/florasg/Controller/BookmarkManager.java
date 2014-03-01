@@ -71,7 +71,7 @@ public class BookmarkManager {
 		cursor.moveToFirst();
 		int cursorSize = cursor.getCount();
 		for (int i = 0; i < cursorSize; i++) {
-			speciesCode = cursor.getString(0);
+			speciesCode = cursor.getString(0).toLowerCase();
 			scientificName = cursor.getString(1);
 			p = new ArrayList<String>();
 			p.add(speciesCode);

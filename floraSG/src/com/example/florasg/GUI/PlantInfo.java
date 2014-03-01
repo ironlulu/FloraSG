@@ -1,5 +1,7 @@
 package com.example.florasg.GUI;
 
+import java.io.IOException;
+
 import com.example.florasg.MainActivity;
 import com.example.florasg.R;
 import com.example.florasg.Controller.BookmarkManager;
@@ -10,7 +12,11 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.widget.DrawerLayout.LayoutParams;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,11 +31,12 @@ public class PlantInfo extends Activity {
 	
 	private TableLayout infoTable;
 	private Plant plantObj;
-	PlantDataRetriever PDR;
-	BookmarkManager bm;
+	private PlantDataRetriever PDR;
+	private BookmarkManager bm;
 	private String bookmarkStatus;
 	public boolean isBookmark;
-	int ID;
+	private int ID;
+	private String speciesCode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +60,10 @@ public class PlantInfo extends Activity {
 		TextView newTitle;
 		TextView newContent;
 		
-		// get speciesID
+		// get speciesID and code
 		ID = plantObj.getSpeciesID();
+		speciesCode = plantObj.getSpeciesCode().toLowerCase();
+		Log.d("SpeciesCode", speciesCode);
 		
 		// Open bookmarkManage and ready to add bookmark
 		bm = new BookmarkManager(this);
@@ -73,11 +82,36 @@ public class PlantInfo extends Activity {
 		LinearLayout imgRow = (LinearLayout) findViewById(R.id.imageListScrollView);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
         params.setMargins(24, 20, 24, 10);
+        
+        AssetManager am = getAssets();
+        String[] files;
+        try {
+        	files = am.list(speciesCode);
+        	Log.d("No of imgs", Integer.toString(files.length));
+        	
+        	int noImages = files.length;
+        	for(int j=0;j<noImages;j++){
+        		//Log.i("species image","species image name: "+speciesCode+"/"+files[j]);
+        		Bitmap bmp=BitmapFactory.decodeStream(am.open(speciesCode+"/"+files[j]));
+        		int bmpW = 240;
+        		int bmpH = 360;
+        		bmp = Bitmap.createScaledBitmap(bmp, bmpW, bmpH, true);
+        		ImageView newImage = new ImageView(this);
+        		newImage.setImageBitmap(bmp);	
+        		imgRow.addView(newImage,params);
+        	} 
+        } catch (IOException e) {
+        	// TODO Auto-generated catch block
+        	e.printStackTrace();
+        }
+        
+        /*
 		for (int i=0;i<10;i++){
 			ImageView newImage = new ImageView(this);
 			newImage.setImageResource(R.drawable.acraur_leaf);
 			imgRow.addView(newImage,params);
 		}
+		*/
 		
 		
 		// Display detailed information
