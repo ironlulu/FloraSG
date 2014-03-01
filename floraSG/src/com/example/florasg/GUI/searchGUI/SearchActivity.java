@@ -79,7 +79,7 @@ public class SearchActivity extends Activity {
 		categoryList = (ArrayList<String>) ser.getAllCategory();
 
 		/*
-		//tetsing
+		//testing using hard-code categories
 		categoryList.add("Habit");
 		categoryList.add("Leaf");
 		categoryList.add("Flower");
@@ -163,6 +163,12 @@ public class SearchActivity extends Activity {
 
 	protected void onResume(Bundle savedInstanceState){
 		super.onResume();
+		//descIdList =  new ArrayList<Integer>();
+
+	}
+	
+	protected void onPause(Bundle savedInstanceState){
+		super.onPause();
 		//descIdList =  new ArrayList<Integer>();
 
 	}
@@ -341,6 +347,12 @@ public class SearchActivity extends Activity {
 				//newdescIconCheckBox.setId(descId);
 
 				newdescIconCheckBox.setTag(descId);
+				Log.i("debug","desc list length is "+descIdList.size());
+				for(int descListIndex = 0;descListIndex<descIdList.size();descListIndex++){
+					if(descId == descIdList.get(descListIndex)){
+						newdescIconCheckBox.setChecked(true);
+					}
+				}
 				newdescIconCheckBox.setOnCheckedChangeListener(checkBoxListener);
 				newdescImageScrollView.addView(newdescIcon);
 			}

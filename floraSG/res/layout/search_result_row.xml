@@ -3,7 +3,7 @@
     android:id="@+id/searchResultRow"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" 
-
+	
     
     android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -13,11 +13,22 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/speciesNameTextView"
+            android:id="@+id/sciNameTextView"
+            android:layout_width="120dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:text="empty"
+            android:textIsSelectable="true"
+            android:color="@color/black" />
+        
+        <TextView
+            android:id="@+id/comNameTextView"
             android:layout_width="120dp"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -37,16 +48,14 @@
     <HorizontalScrollView
         android:id="@+id/speciesScrollView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/search_result_species_image_margin" >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/speciesImageScrollView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:dividerPadding="@dimen/activity_horizontal_padding"
-            android:orientation="horizontal"
-            android:paddingRight="@dimen/activity_horizontal_padding" >
+            android:dividerPadding="@dimen/search_result_species_image_margin"
+            android:orientation="horizontal">
         </LinearLayout>
     </HorizontalScrollView>
 

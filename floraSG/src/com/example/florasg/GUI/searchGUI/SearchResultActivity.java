@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -22,17 +23,21 @@ import android.widget.TextView;
 
 import com.example.florasg.R;
 import com.example.florasg.Controller.PlantDataRetriever;
+import com.example.florasg.GUI.PlantInfo;
 
 public class SearchResultActivity extends Activity {
+	public final static  String SCI_NAME = "com.example.florasg.GUI.searchGUI.SCI_NAME";
 
 	private TableLayout newseacrhResultsTableScrollView;
-	PlantDataRetriever pdr = new PlantDataRetriever(this);
-	List<String[]> searchResults = new ArrayList<String[]>();
+	PlantDataRetriever pdr ;
+	List<String[]> searchResults;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		setContentView(R.layout.activity_search_result);
+		
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		Intent intent = getIntent();		
@@ -40,55 +45,35 @@ public class SearchResultActivity extends Activity {
 
 		newseacrhResultsTableScrollView = (TableLayout) findViewById(R.id.seacrhResultsTableScrollView);
 		View newSearchResultRow = null;
-
-		//Print out the checked characteristics for testing
-		/*
-		String s = "The desc ids are\n";
-		s += Integer.toString(descIdList.size());
-		s += "\n";
-
+		
+		pdr = new PlantDataRetriever(this);
+		
 		for(int i=0;i<descIdList.size();i++){
 
-			s = s + descIdList.get(i);
-			s = s+"\n";
+			Log.i("desc id", " id is " + descIdList.get(i));
+			
 
 		}
 
-		TextView searchResult = (TextView) findViewById(R.id.searchResult);
-		searchResult.setText(s);
-		 */
-
 		//TODO
+		searchResults = new ArrayList<String[]>();
 		pdr.openDB();
-		searchResults = pdr.searchPlantbyCharacteristics(descIdList);
-		//hard code the searchPlants for testing
-
-		/*
-		Plant p = new Plant(1, null,  "sciName1", null, "comName1", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
-		searchResults.add(p);
-		p = new Plant(2, null,  "sciName2", null, "comName2", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
-		searchResults.add(p);
-		p = new Plant(3, null,  "sciName3", null, "comName3", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
-		searchResults.add(p);
-		p = new Plant(4, null,  "sciName4", null, "comName4", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
-		searchResults.add(p);
-		p = new Plant(5, null,  "sciName5", null, "comName5", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
-		searchResults.add(p);
-		p = new Plant(6, null,  "sciName6", null, "comName6", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
-		searchResults.add(p);
-		p = new Plant(7, null,  "sciName7", null, "comName7", null, null, null, 0, 0, null, null, null, null, null, null, null, null);
-		searchResults.add(p);
-		 */
+		searchResults = pdr.searchPlantbyCharacteristics(descIdList);	
 
 		int noSpecies = searchResults.size();
+		Log.i("debug","search result size is "+noSpecies);
 		for(int i=0;i<noSpecies;i++){
 			String[] plant = searchResults.get(i);
 			newSearchResultRow = inflater.inflate(R.layout.search_result_row, null);
-
-			TextView newSpeciesName = (TextView) newSearchResultRow.findViewById(R.id.speciesNameTextView);
+			
+			TextView newSciName = (TextView) newSearchResultRow.findViewById(R.id.sciNameTextView);
+			TextView newComName = (TextView) newSearchResultRow.findViewById(R.id.comNameTextView);
 			String speciesCode = plant[0];
-			String name = plant[1]+ "; "+ plant[2];
-			newSpeciesName.setText(name);
+			String sciName = plant[1];
+			String comName = plant[2];
+			
+			newSciName.setText(sciName);
+			newComName.setText(comName);
 
 			TextView newMatchNum = (TextView) newSearchResultRow.findViewById(R.id.matchNumber);
 			String match = null;
@@ -112,6 +97,7 @@ public class SearchResultActivity extends Activity {
 			 */
 
 			/*
+			testing by hard-code image source
 			if(i%2==0){
 				iv = new ImageView(getBaseContext());
 				iv.setImageResource(R.drawable.acraur1);	
@@ -157,8 +143,8 @@ public class SearchResultActivity extends Activity {
 				for(int j=0;j<noImages;j++){
 					Log.i("species image","species image name: "+speciesCode+"/"+files[j]);
 					Bitmap bmp=BitmapFactory.decodeStream(am.open(speciesCode+"/"+files[j]));
-					int bmpW = 120;
-					int bmpH = 80;
+					int bmpW = 80;
+					int bmpH = 120;
 					bmp = Bitmap.createScaledBitmap(bmp, bmpW, bmpH, true);
 					iv = new ImageView(getBaseContext());
 					iv.setImageBitmap(bmp);	
@@ -172,6 +158,8 @@ public class SearchResultActivity extends Activity {
 
 
 			newseacrhResultsTableScrollView.addView(newSearchResultRow);
+			TextView speciesName = (TextView) newSearchResultRow.findViewById(R.id.sciNameTextView);
+			speciesName.setOnClickListener(speciesRowListener);
 		}
 
 	}
@@ -184,5 +172,21 @@ public class SearchResultActivity extends Activity {
 
 		return true;
 	}
+	
+	public OnClickListener speciesRowListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+
+			Intent intent = new Intent(getBaseContext(), PlantInfo.class);
+			//TextView sciName = (TextView) v.findViewById(R.id.sciNameTextView);
+			//String sciNameStr = sciName.toString();
+			String sciNameStr = v.toString();
+			Log.i("sci name", "sci name is "+sciNameStr);
+			intent.putExtra(SCI_NAME, sciNameStr);
+			startActivity(intent);			
+		}
+
+	};
 
 }
