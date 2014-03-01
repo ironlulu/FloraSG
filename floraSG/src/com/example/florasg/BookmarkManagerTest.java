@@ -46,7 +46,11 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 	// can delete n numbers of bookmarks where n = size
 	public void testCase3() {
 		int size = 5; // modify this value when needed
-		bmk.deleteBookmarks(bmk.initTestCase3(size));
+		List<Integer> speciesIDs = new ArrayList<Integer>();
+		for (int i = 0; i < size; i++) {
+			speciesIDs.add(i + 1);
+		}
+		bmk.deleteBookmarks(speciesIDs);
 		boolean passed = false;
 		List<ArrayList<String>> results3 = bmk.viewBookmark();
 		if (results3.isEmpty()) {
