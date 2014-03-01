@@ -42,11 +42,6 @@ public class SearchActivity extends Activity {
 	private static final int       CATE_FRUIT = 4;
 	private static final int       CATE_OTHER = 5;
 
-	private static final String    CATE_HABIT_STRING = "Habit";
-	private static final String       CATE_LEAF_STRING = "Leaf";
-	private static final String       CATE_FLOWER_STRING = "Flower";
-	private static final String       CATE_FRUIT_STRING = "Fruit";
-	private static final String       CATE_OTHER_STRING = "Other";
 
 	private LinearLayout categoryScrollView;
 	private TableLayout descTableScrollView;
@@ -163,13 +158,11 @@ public class SearchActivity extends Activity {
 
 	protected void onResume(Bundle savedInstanceState){
 		super.onResume();
-		//descIdList =  new ArrayList<Integer>();
 
 	}
 	
 	protected void onPause(Bundle savedInstanceState){
 		super.onPause();
-		//descIdList =  new ArrayList<Integer>();
 
 	}
 
@@ -232,8 +225,6 @@ public class SearchActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			//updateSubCategoryView(cateId);
-			//descTableScrollView = (TableLayout) findViewById(R.id.subCateTableScrollView);
 			for(int i=0;i<descIdList.size();i++){
 				final int _id = descIdList.get(i);
 				CheckBox cb = ((CheckBox)descTableScrollView.findViewById(_id));
@@ -241,10 +232,6 @@ public class SearchActivity extends Activity {
 					cb.setChecked(false);
 			}
 			descIdList.clear();
-
-			//TODO
-			//clear all checkboxes
-
 		}
 
 	};
@@ -268,7 +255,8 @@ public class SearchActivity extends Activity {
 		}
 
 	};
-
+	
+	//update the subCategory view according to the category id number
 	private void updateSubCategoryView(int cate){
 
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -285,7 +273,9 @@ public class SearchActivity extends Activity {
 
 		for(int i=0;i<subCateList.size();i++){
 			String[] subCate = subCateList.get(i);
-			subCateNameList.add(subCate[1]);//get the subCate Name
+			
+			//get the subCate Name and put into the subCateNameList
+			subCateNameList.add(subCate[1]);
 		}
 
 		int subCateNum = subCateList.size();
@@ -342,6 +332,7 @@ public class SearchActivity extends Activity {
 				int descId = Integer.parseInt(descList.get(j)[0]);
 				String descName = descList.get(j)[1];
 				String descImgName = descList.get(j)[2];
+				
 				View newdescIcon = inflater.inflate(R.layout.sub_category_icon, null);
 
 				ImageView newdescIconImageView = (ImageView) newdescIcon.findViewById(R.id.descIconImageView);
@@ -360,10 +351,11 @@ public class SearchActivity extends Activity {
 
 				CheckBox newdescIconCheckBox = (CheckBox)newdescIcon.findViewById(R.id.descIconCheckBox);
 				newdescIconCheckBox.setText(descName);
-				//newdescIconCheckBox.setId(descId);
-
 				newdescIconCheckBox.setId(descId);
+				
 				Log.i("debug","desc list length is "+descIdList.size());
+				//TODO
+				//this part is duplicate
 				for(int descListIndex = 0;descListIndex<descIdList.size();descListIndex++){
 					if(descId == descIdList.get(descListIndex)){
 						newdescIconCheckBox.setChecked(true);
@@ -373,15 +365,13 @@ public class SearchActivity extends Activity {
 				newdescImageScrollView.addView(newdescIcon);
 			}
 
-
 			descTableScrollView.addView(newSubCategoryRow);
 
 		}
 
-
-
 	}
 
+	//Whenever the checkbox is changed, the descIdList will be changed
 	public OnCheckedChangeListener checkBoxListener = new OnCheckedChangeListener(){
 
 		@Override
@@ -399,8 +389,6 @@ public class SearchActivity extends Activity {
 		}
 
 	};
-
-
 
 }
 

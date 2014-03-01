@@ -1,0 +1,411 @@
+package com.example.florasg.GUI.searchGUI;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.florasg.R;
+import com.example.florasg.SearchElementRetriever;
+
+
+public class SearchActivity extends Activity {
+
+	public final static  String DESC_LIST = "com.example.florasg.GUI.searchGUI.DESC_LIST";
+	private static final int       CATE_HABIT = 1;
+	private static final int       CATE_LEAF = 2;
+	private static final int       CATE_FLOWER = 3;
+	private static final int       CATE_FRUIT = 4;
+	private static final int       CATE_OTHER = 5;
+
+	private static final String    CATE_HABIT_STRING = "Habit";
+	private static final String       CATE_LEAF_STRING = "Leaf";
+	private static final String       CATE_FLOWER_STRING = "Flower";
+	private static final String       CATE_FRUIT_STRING = "Fruit";
+	private static final String       CATE_OTHER_STRING = "Other";
+
+	private LinearLayout categoryScrollView;
+	private TableLayout descTableScrollView;
+	private ArrayList<String> categoryList = new ArrayList<String>();
+	private ArrayList<String[]> subCateList =  new ArrayList<String[]>();
+	private ArrayList<Integer> descIdList =  new ArrayList<Integer>();
+	private ArrayList<String[]> descList = new ArrayList<String[]>();
+
+	int cateId = CATE_HABIT;
+	SearchElementRetriever ser;
+
+	Button habitButton ;
+	Button leafButton ;
+	Button flowerButton ;
+	Button fruitButton ;
+	Button otherButton ;
+	Button clearButton;
+	Button resultButton;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_search);
+
+		categoryScrollView = (LinearLayout)findViewById(R.id.categoryListScrollView);
+		descTableScrollView = (TableLayout) findViewById(R.id.subCateTableScrollView);
+
+		descIdList =  new ArrayList<Integer>();
+
+		ser = new SearchElementRetriever(this);
+		ser.openDB();
+		categoryList = (ArrayList<String>) ser.getAllCategory();
+
+		/*
+		//testing using hard-code categories
+		categoryList.add("Habit");
+		categoryList.add("Leaf");
+		categoryList.add("Flower");
+		categoryList.add("Fruit");
+		categoryList.add("Other");
+		categoryList.add("blalala");
+		categoryList.add("blalala");
+		categoryList.add("blalala");
+		 */
+
+
+		int cateNum = categoryList.size();
+		for (int i = 0; i < cateNum; i++) {
+
+			Button btn = new Button(this);
+			btn.setId(i);
+			final int id_ = btn.getId();
+			String cate = categoryList.get(i);
+			btn.setText(cate);
+
+			Resources r = getResources();
+			int widthDp = (int) (getResources().getDimension(R.dimen.search_category_button_width) / getResources().getDisplayMetrics().density);
+			int heightDp = (int) (getResources().getDimension(R.dimen.search_category_button_height) / getResources().getDisplayMetrics().density);
+
+			int widthPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, widthDp, r.getDisplayMetrics());
+			int heightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, heightDp, r.getDisplayMetrics());
+			
+			btn.setWidth(widthPx);
+			btn.setHeight(heightPx);
+			
+			categoryScrollView.addView(btn);
+			Button btn1 = ((Button) findViewById(id_));
+
+			if(cate.equals("Habit"))
+				cateId = CATE_HABIT;
+			else if(cate.equals("Leaf"))
+				cateId = CATE_LEAF;
+			else if(cate.equals("Flower"))
+				cateId = CATE_FLOWER;
+			else if(cate.equals("Fruit"))
+				cateId = CATE_FRUIT;
+			else if(cate.equals("Other"))
+				cateId = CATE_OTHER;
+
+
+			switch(cateId){
+			case CATE_HABIT:
+				btn1.setOnClickListener(habitButtonListener);
+				break;
+			case CATE_LEAF:
+				btn1.setOnClickListener(leafButtonListener);
+				break;
+			case CATE_FLOWER:
+				btn1.setOnClickListener(flowerButtonListener);
+				break;
+			case CATE_FRUIT:
+				btn1.setOnClickListener(fruitButtonListener);
+				break;
+			case CATE_OTHER:
+				btn1.setOnClickListener(otherButtonListener);
+				break;
+			}
+
+		}
+
+		clearButton = (Button) findViewById(R.id.clearButton);
+		resultButton = (Button) findViewById(R.id.resultButton);
+		clearButton.setOnClickListener(clearButtonListener);
+		resultButton.setOnClickListener(resultButtonListener);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.search, menu);
+		return true;
+	}
+
+
+	protected void onResume(Bundle savedInstanceState){
+		super.onResume();
+		//descIdList =  new ArrayList<Integer>();
+
+	}
+	
+	protected void onPause(Bundle savedInstanceState){
+		super.onPause();
+		//descIdList =  new ArrayList<Integer>();
+
+	}
+
+	public OnClickListener habitButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View arg0) {
+			descTableScrollView.removeAllViews();			
+			updateSubCategoryView(CATE_HABIT);
+		}
+
+	};
+
+	public OnClickListener leafButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			descTableScrollView.removeAllViews();
+			updateSubCategoryView(CATE_LEAF);
+
+		}
+
+	};
+
+	public OnClickListener flowerButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			descTableScrollView.removeAllViews();
+			updateSubCategoryView(CATE_FLOWER);
+
+		}
+
+	};
+
+	public OnClickListener fruitButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			descTableScrollView.removeAllViews();
+			updateSubCategoryView(CATE_FRUIT);
+
+		}
+
+	};
+
+	public OnClickListener otherButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			descTableScrollView.removeAllViews();
+			updateSubCategoryView(CATE_OTHER);
+
+		}
+
+	};
+
+
+	public OnClickListener clearButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			//updateSubCategoryView(cateId);
+			//descTableScrollView = (TableLayout) findViewById(R.id.subCateTableScrollView);
+			for(int i=0;i<descIdList.size();i++){
+				final int _id = descIdList.get(i);
+				CheckBox cb = ((CheckBox)descTableScrollView.findViewById(_id));
+				if(cb != null)
+					cb.setChecked(false);
+			}
+			descIdList.clear();
+
+			//TODO
+			//clear all checkboxes
+
+		}
+
+	};
+
+
+	public OnClickListener resultButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			if(descIdList.size()==0){
+				
+				Toast toast = Toast.makeText(getApplicationContext(),"Please select at least one characteristic!", Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();			
+			
+			}else{
+			Intent intent = new Intent(getBaseContext(), SearchResultActivity.class); 
+			intent.putIntegerArrayListExtra(DESC_LIST, descIdList);
+			startActivity(intent);
+			}
+		}
+
+	};
+
+	private void updateSubCategoryView(int cate){
+
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		subCateList = (ArrayList<String[]>) ser.getSubCategory(cate);
+		ArrayList<String> subCateNameList = new ArrayList<String>();
+
+		/*
+		 * testing
+		subCateList.add("Habit");
+		subCateList.add("Habit sub2");
+		subCateList.add("Habit sub3");
+		 */
+
+		for(int i=0;i<subCateList.size();i++){
+			String[] subCate = subCateList.get(i);
+			subCateNameList.add(subCate[1]);//get the subCate Name
+		}
+
+		int subCateNum = subCateList.size();
+		View newSubCategoryRow = null;
+
+		for(int i=0;i<subCateNum;i++){
+			newSubCategoryRow = inflater.inflate(R.layout.sub_category_row, null);
+			TextView newSubCategoryTextView = (TextView) newSubCategoryRow.findViewById(R.id.subCategoryTextView);
+			newSubCategoryTextView.setText(subCateNameList.get(i));
+			LinearLayout newdescImageScrollView = (LinearLayout) newSubCategoryRow.findViewById(R.id.descImageScrollView);
+
+			newdescImageScrollView.removeAllViews();
+			descList.clear();
+			
+			Log.i("sub cate","sub cate id "+subCateList.get(i)[0]);
+			descList = (ArrayList<String[]>) ser.getDescription(Integer.parseInt(subCateList.get(i)[0]));
+
+			/*
+			 * testing
+			String[] characteristic1 = new String[3];
+			characteristic1[0] = Integer.toString(i*10+1);
+			characteristic1[1] = "aquatic";
+			characteristic1[2] = "habit_habit_aquatic";
+			descList.add(characteristic1);
+			String[] characteristic2 = new String[3];
+			characteristic2[0] = Integer.toString(i*10+2);
+			characteristic2[1] = "climber";
+			characteristic2[2] = "habit_habit_climber";
+			descList.add(characteristic2);
+			String[] characteristic3 = new String[3];
+			characteristic3[0] = Integer.toString(i*10+3);
+			characteristic3[1] = "epiphyte";
+			characteristic3[2] = "habit_habit_epiphyte";
+			descList.add(characteristic3);
+			String[] characteristic4 = new String[3];
+			characteristic4[0] = Integer.toString(i*10+4);
+			characteristic4[1] = "herb";
+			characteristic4[2] = "habit_habit_herb";
+			descList.add(characteristic4);
+			String[] characteristic5 = new String[3];
+			characteristic5[0] = Integer.toString(i*10+5);
+			characteristic5[1] = "shrub";
+			characteristic5[2] = "habit_habit_shrub";
+			descList.add(characteristic5);
+			String[] characteristic6 = new String[3];
+			characteristic6[0] = Integer.toString(i*10+6);
+			characteristic6[1] = "tree";
+			characteristic6[2] = "habit_habit_tree";
+			descList.add(characteristic6);
+			 */
+
+			int descNum = descList.size();
+			for(int j=0;j<descNum;j++){
+				int descId = Integer.parseInt(descList.get(j)[0]);
+				String descName = descList.get(j)[1];
+				String descImgName = descList.get(j)[2];
+				View newdescIcon = inflater.inflate(R.layout.sub_category_icon, null);
+
+				ImageView newdescIconImageView = (ImageView) newdescIcon.findViewById(R.id.descIconImageView);
+				
+				AssetManager assetManager = getAssets();
+		        InputStream istr = null;
+		        try {
+		        	int dot = descImgName.indexOf(".");
+		        	descImgName = new String(descImgName.substring(0,dot)+".JPG");
+		            istr = assetManager.open("descriptions/"+descImgName);
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        Bitmap bitmap = BitmapFactory.decodeStream(istr);
+		        newdescIconImageView.setImageBitmap(bitmap);
+
+				CheckBox newdescIconCheckBox = (CheckBox)newdescIcon.findViewById(R.id.descIconCheckBox);
+				newdescIconCheckBox.setText(descName);
+				//newdescIconCheckBox.setId(descId);
+
+				newdescIconCheckBox.setId(descId);
+				Log.i("debug","desc list length is "+descIdList.size());
+				for(int descListIndex = 0;descListIndex<descIdList.size();descListIndex++){
+					if(descId == descIdList.get(descListIndex)){
+						newdescIconCheckBox.setChecked(true);
+					}
+				}
+				newdescIconCheckBox.setOnCheckedChangeListener(checkBoxListener);
+				newdescImageScrollView.addView(newdescIcon);
+			}
+
+
+			descTableScrollView.addView(newSubCategoryRow);
+
+		}
+
+
+
+	}
+
+	public OnCheckedChangeListener checkBoxListener = new OnCheckedChangeListener(){
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			if(isChecked){
+				int c = (Integer)buttonView.getId();
+				descIdList.add(c);
+			}
+			else{
+				descIdList.remove(buttonView.getTag());
+
+			}
+
+		}
+
+	};
+
+
+
+}
+
+
+
+
+
+

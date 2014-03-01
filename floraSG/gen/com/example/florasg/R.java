@@ -24,6 +24,7 @@ public final class R {
         /**  Default screen margins, per the Android Design guidelines. 
          */
         public static final int black=0x7f060000;
+        public static final int pink=0x7f060002;
         public static final int white=0x7f060001;
     }
     public static final class dimen {

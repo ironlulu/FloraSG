@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BookmarkActivity extends Activity {
-	
+		
 	private ListView bookmarkListView;
 	private List<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
 	private ArrayList<String> bookmarkList = new ArrayList<String>();
@@ -95,8 +95,10 @@ public class BookmarkActivity extends Activity {
 				public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
 				{
 					TextView text = ((TextView) v.findViewById(R.id.plantName));
-					MainActivity.plant = text.getText().toString();
-					Intent intent = new Intent(getApplicationContext(), PlantInfo.class);  
+					//MainActivity.plant = text.getText().toString();
+					String sciNameStr =  text.getText().toString();
+					Intent intent = new Intent(getApplicationContext(), PlantInfo.class);
+					intent.putExtra(PlantInfo.SCI_NAME, sciNameStr);
 					startActivity(intent);
 				}
 			});
