@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.florasg.R;
 import com.example.florasg.Controller.PlantDataRetriever;
@@ -55,11 +57,11 @@ public class SearchResultActivity extends Activity {
 
 		}
 
-		//TODO
 		searchResults = new ArrayList<String[]>();
 		pdr.openDB();
 		searchResults = pdr.searchPlantbyCharacteristics(descIdList);	
 
+		
 		int noSpecies = searchResults.size();
 		Log.i("debug","search result size is "+noSpecies);
 		for(int i=0;i<noSpecies;i++){
@@ -79,7 +81,7 @@ public class SearchResultActivity extends Activity {
 
 			TextView newMatchNum = (TextView) newSearchResultRow.findViewById(R.id.matchNumber);
 			String match = null;
-			match = "Matches: "+plant[3];
+			match = " Matches: "+plant[3];
 			newMatchNum.setText(match);
 
 			LinearLayout newspeciesImageScrollView = (LinearLayout) newSearchResultRow.findViewById(R.id.speciesImageScrollView);

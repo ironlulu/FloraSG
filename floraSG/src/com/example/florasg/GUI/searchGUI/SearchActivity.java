@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.florasg.R;
 import com.example.florasg.SearchElementRetriever;
@@ -53,7 +55,7 @@ public class SearchActivity extends Activity {
 	private ArrayList<Integer> descIdList =  new ArrayList<Integer>();
 	private ArrayList<String[]> descList = new ArrayList<String[]>();
 
-
+	int cateId = CATE_HABIT;
 	SearchElementRetriever ser;
 
 	Button habitButton ;
@@ -113,8 +115,6 @@ public class SearchActivity extends Activity {
 			categoryScrollView.addView(btn);
 			Button btn1 = ((Button) findViewById(id_));
 
-
-			int cateId = 0;
 			if(cate.equals("Habit"))
 				cateId = CATE_HABIT;
 			else if(cate.equals("Leaf"))
@@ -232,7 +232,16 @@ public class SearchActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			descList.clear();
+			//updateSubCategoryView(cateId);
+			//descTableScrollView = (TableLayout) findViewById(R.id.subCateTableScrollView);
+			for(int i=0;i<descIdList.size();i++){
+				final int _id = descIdList.get(i);
+				CheckBox cb = ((CheckBox)descTableScrollView.findViewById(_id));
+				if(cb != null)
+					cb.setChecked(false);
+			}
+			descIdList.clear();
+
 			//TODO
 			//clear all checkboxes
 
@@ -245,10 +254,17 @@ public class SearchActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-
+			if(descIdList.size()==0){
+				
+				Toast toast = Toast.makeText(getApplicationContext(),"Please select at least one characteristic!", Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();			
+			
+			}else{
 			Intent intent = new Intent(getBaseContext(), SearchResultActivity.class); 
 			intent.putIntegerArrayListExtra(DESC_LIST, descIdList);
-			startActivity(intent);			
+			startActivity(intent);
+			}
 		}
 
 	};
@@ -346,7 +362,7 @@ public class SearchActivity extends Activity {
 				newdescIconCheckBox.setText(descName);
 				//newdescIconCheckBox.setId(descId);
 
-				newdescIconCheckBox.setTag(descId);
+				newdescIconCheckBox.setId(descId);
 				Log.i("debug","desc list length is "+descIdList.size());
 				for(int descListIndex = 0;descListIndex<descIdList.size();descListIndex++){
 					if(descId == descIdList.get(descListIndex)){
@@ -372,7 +388,7 @@ public class SearchActivity extends Activity {
 		public void onCheckedChanged(CompoundButton buttonView,
 				boolean isChecked) {
 			if(isChecked){
-				int c = (Integer)buttonView.getTag();
+				int c = (Integer)buttonView.getId();
 				descIdList.add(c);
 			}
 			else{
