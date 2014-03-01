@@ -8,23 +8,25 @@ import com.example.florasg.R;
 import com.example.florasg.Controller.BookmarkManager;
 import com.example.florasg.GUI.PlantInfo;
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TableLayout;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class BookmarkActivity extends Activity {
 	
+	/********************************************************************************
 	private TableLayout bookmarkTable;
 	private List<ArrayList<String>> bookmarkList = new ArrayList<ArrayList<String>>();
 	BookmarkManager bm;
 	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
@@ -37,10 +39,8 @@ public class BookmarkActivity extends Activity {
 			list.add(i + " dkaldkalkd;a");
 			bookmarkList.add(list);
 		}		
-		*/
+		
 		bm = new BookmarkManager(this);
-		//List<ArrayList<String>> bookmarkList = new ArrayList<ArrayList<String>>();
-		//TableLayout bookmarkTable;
 		
 		/*
 		bm.toggleBookmark(5);
@@ -63,8 +63,8 @@ public class BookmarkActivity extends Activity {
 		bm.toggleBookmark(12);
 		bm.toggleBookmark(2);
 		bm.toggleBookmark(44);
-		*/
-				
+		
+						
 		bookmarkList = bm.viewBookmark();
 		Log.d("Bookmark List Size", Integer.toString(bookmarkList.size()));
 		
@@ -82,6 +82,7 @@ public class BookmarkActivity extends Activity {
 			bookmarkTable.addView(newRow);
 			
 			newBtn.setOnClickListener(btnclick);
+			newBtn.setOnLongClickListener(btnlongclick);
 		}
 		
 	}
@@ -96,6 +97,50 @@ public class BookmarkActivity extends Activity {
 	        MainActivity.plant = btn.getText().toString();
 	        Intent intent = new Intent(getApplicationContext(), PlantInfo.class);  
 			startActivity(intent);
+	    }
+
+	};
+	
+	Button.OnLongClickListener btnlongclick = new Button.OnLongClickListener(){
+
+	    @Override
+	    public boolean onLongClick(View v) {
+	        
+	    	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+	    			BookmarkActivity.this);
+	    	
+	    	Log.d("Dialog", "Build Dialog!");
+
+	    	// set title
+	    	alertDialogBuilder.setTitle("Delete");
+
+	    	// set dialog message
+	    	alertDialogBuilder
+	    	.setMessage("Are you sure you want to delete this item?")
+	    	.setCancelable(false)
+	    	.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+	    		public void onClick(DialogInterface dialog,int id) {
+	    			// if this button is clicked, close
+	    			// current activity
+	    			dialog.cancel();
+	    		}
+	    	})
+	    	.setNegativeButton("No",new DialogInterface.OnClickListener() {
+	    		public void onClick(DialogInterface dialog,int id) {
+	    			// if this button is clicked, just close
+	    			// the dialog box and do nothing
+	    			dialog.cancel();
+	    		}
+	    	});
+
+	    	// create alert dialog
+	    	AlertDialog alertDialog = alertDialogBuilder.create();
+	    	Log.d("Dialog", "Dialog created!");
+
+	    	// show it
+	    	alertDialog.show();
+			
+			return true;
 	    }
 
 	};
@@ -122,6 +167,114 @@ public class BookmarkActivity extends Activity {
 			bookmarkTable.addView(newRow);
 			
 			newBtn.setOnClickListener(btnclick);
+			newBtn.setOnLongClickListener(btnlongclick);
 		}
 	}
+	*********************************************************************************/
+	
+	private ListView bookmarkListView;
+	private List<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
+	private ArrayList<String> bookmarkList = new ArrayList<String>();
+	BookmarkManager bm;
+	BookmarkAdapter adapter;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);		
+		setContentView(R.layout.activity_bookmark);
+		
+		//open bookmarkManager and get the bookmarkList
+		bm = new BookmarkManager(this);
+		
+		tempList = bm.viewBookmark();
+		
+		for (ArrayList<String>e: tempList){
+			bookmarkList.add(e.get(1));
+		}
+		Log.d("Bookmark List Size", Integer.toString(bookmarkList.size()));
+		
+		adapter = new BookmarkAdapter(this, 
+                R.layout.bookmark_row, bookmarkList);
+		
+		bookmarkListView = (ListView)findViewById(R.id.listView);
+		
+		bookmarkListView.setAdapter(adapter);
+		
+		bookmarkListView.setOnItemClickListener(new OnItemClickListener()
+        {
+                 // argument position gives the index of item which is clicked
+                public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
+                {
+                	TextView text = ((TextView) v.findViewById(R.id.plantName));
+                	MainActivity.plant = text.getText().toString();
+        	        Intent intent = new Intent(getApplicationContext(), PlantInfo.class);  
+        			startActivity(intent);
+                 }
+        });
+		
+		bookmarkListView.setOnItemLongClickListener(new OnItemLongClickListener()
+        {
+                 // argument position gives the index of item which is clicked
+                public boolean onItemLongClick(AdapterView<?> arg0, View v,int position, long arg3)
+                {
+                	final int pos = position;
+                	TextView text = ((TextView) v.findViewById(R.id.plantName));
+                	MainActivity.plant = text.getText().toString();
+        	        
+                	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookmarkActivity.this);
+
+                	// set title
+                	alertDialogBuilder.setTitle("Delete");
+
+                	// set dialog message
+                	alertDialogBuilder
+                	.setMessage("Confirm to delete this bookmark?")
+                	.setCancelable(false)
+                	.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                		public void onClick(DialogInterface dialog,int id) {
+                			// if this button is clicked, close
+                			// current activity
+                			bookmarkList.remove(pos);
+                			adapter.notifyDataSetChanged();
+                		}
+                	})
+                	.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                		public void onClick(DialogInterface dialog,int id) {
+                			// if this button is clicked, just close
+                			// the dialog box and do nothing
+                			dialog.cancel();
+                		}
+                	});
+
+                	// create alert dialog
+                	AlertDialog alertDialog = alertDialogBuilder.create();
+
+                	// show it
+                	alertDialog.show();
+					return true;
+                 }
+        });
+		
+	}
+	
+	public void onRestart() { 
+	    super.onRestart();
+	    //When BACK BUTTON is pressed, the activity on the stack is restarted
+	    //Do what you want on the refresh procedure here
+	    Log.d("TAG", "BookmarkList: onRestart()");
+	    	    
+	    bookmarkList.clear();
+	    tempList.clear();
+	    
+	    tempList = bm.viewBookmark();
+		
+		for (ArrayList<String>e: tempList){
+			bookmarkList.add(e.get(1));
+		}
+		Log.d("New Bookmark List Size", Integer.toString(bookmarkList.size()));
+	    
+		adapter.notifyDataSetChanged();
+	}
+	
 }
