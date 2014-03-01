@@ -1,22 +1,27 @@
 package com.example.florasg.GUI;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.example.florasg.MainActivity;
 import com.example.florasg.R;
 import com.example.florasg.Controller.BookmarkManager;
 import com.example.florasg.Controller.PlantDataRetriever;
+import com.example.florasg.GUI.searchGUI.SearchActivity;
+import com.example.florasg.GUI.searchGUI.SearchResultActivity;
 import com.example.florasg.Model.Plant;
 
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.widget.DrawerLayout.LayoutParams;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,8 +47,14 @@ public class PlantInfo extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_plant_info);
-		setTitle(MainActivity.plant);
-				
+		//setTitle(MainActivity.plant);
+		
+		//this is to handle call from search result page
+		Intent intent = getIntent();
+		String sciName =  intent.getStringExtra(SearchResultActivity.SCI_NAME);	
+		//TODO
+		//you can add call from bookmark page
+		
 		/*
 		for (int i=0;i<20;i++){
 			ImageView newImage = new ImageView(this);
@@ -55,7 +66,7 @@ public class PlantInfo extends Activity {
 		// Open plantDatabase and get plantObj
 		PDR = new PlantDataRetriever(this);
 		PDR.openDB();
-		plantObj = PDR.getPlant(MainActivity.plant);
+		plantObj = PDR.getPlant(sciName);
 		View newRow;
 		TextView newTitle;
 		TextView newContent;
@@ -260,20 +271,23 @@ public class PlantInfo extends Activity {
 	
 	@SuppressLint("NewApi")
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Toast toast;
 	    switch (item.getItemId()) {
 	    case R.id.add:
 	    	isBookmark = true;
 	        bm.toggleBookmark(ID);
 	        invalidateOptionsMenu();
-	        Toast.makeText(getApplicationContext(), 
-                    "Add to Bookmark List!", Toast.LENGTH_SHORT).show();
+	        toast = Toast.makeText(getApplicationContext(),"Add to bookmark list!", Toast.LENGTH_SHORT);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
 	        return true;
 	    case R.id.remove:
 	        isBookmark = false;
 	        bm.toggleBookmark(ID);
 	        invalidateOptionsMenu();
-	        Toast.makeText(getApplicationContext(), 
-                    "Deleted from Bookmark List!", Toast.LENGTH_SHORT).show();
+	        toast = Toast.makeText(getApplicationContext(),"Delete from bookmark list!", Toast.LENGTH_SHORT);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
 	        return true;
 	    default:
 	        return super.onOptionsItemSelected(item);

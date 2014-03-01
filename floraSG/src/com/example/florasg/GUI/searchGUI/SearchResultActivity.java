@@ -73,6 +73,8 @@ public class SearchResultActivity extends Activity {
 			String comName = plant[2];
 			
 			newSciName.setText(sciName);
+			newSciName.setId(i);
+			final int _id = newSciName.getId();
 			newComName.setText(comName);
 
 			TextView newMatchNum = (TextView) newSearchResultRow.findViewById(R.id.matchNumber);
@@ -155,10 +157,9 @@ public class SearchResultActivity extends Activity {
 				e.printStackTrace();
 			}  
 
-
-
 			newseacrhResultsTableScrollView.addView(newSearchResultRow);
-			TextView speciesName = (TextView) newSearchResultRow.findViewById(R.id.sciNameTextView);
+			
+			TextView speciesName = ((TextView) findViewById(_id));
 			speciesName.setOnClickListener(speciesRowListener);
 		}
 
