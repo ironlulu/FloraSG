@@ -91,7 +91,7 @@ public class BookmarkActivity extends Activity {
 				{
 					final int pos = position;
 					TextView text = ((TextView) v.findViewById(R.id.plantName));
-					MainActivity.plant = text.getText().toString();
+					String sciNameStr =  text.getText().toString();
 
 					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookmarkActivity.this);
 
@@ -106,6 +106,7 @@ public class BookmarkActivity extends Activity {
 						public void onClick(DialogInterface dialog,int id) {
 							// if this button is clicked, close
 							// current activity
+							
 							bookmarkList.remove(pos);
 							adapter.notifyDataSetChanged();
 						}

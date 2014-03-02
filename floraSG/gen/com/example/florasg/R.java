@@ -24,8 +24,10 @@ public final class R {
         /**  Default screen margins, per the Android Design guidelines. 
          */
         public static final int black=0x7f060000;
+        public static final int green=0x7f060004;
         public static final int pink=0x7f060002;
         public static final int white=0x7f060001;
+        public static final int yellow=0x7f060003;
     }
     public static final class dimen {
         /** 
@@ -77,33 +79,34 @@ public final class R {
         public static final int main_bg=0x7f02001a;
     }
     public static final class id {
-        public static final int action_aboutus=0x7f0c0028;
-        public static final int action_faq=0x7f0c0027;
-        public static final int action_settings=0x7f0c0024;
-        public static final int action_updates=0x7f0c0029;
-        public static final int add=0x7f0c0025;
+        public static final int action_aboutus=0x7f0c0029;
+        public static final int action_faq=0x7f0c0028;
+        public static final int action_settings=0x7f0c0025;
+        public static final int action_updates=0x7f0c002a;
+        public static final int add=0x7f0c0026;
         public static final int categoryListScrollView=0x7f0c0008;
         public static final int categoryScrollView=0x7f0c0007;
         public static final int clearButton=0x7f0c000d;
         public static final int comNameTextView=0x7f0c001a;
         public static final int content=0x7f0c0017;
         public static final int contentRow=0x7f0c0004;
-        public static final int descIconCheckBox=0x7f0c001f;
-        public static final int descIconImageView=0x7f0c001e;
-        public static final int descImageScrollView=0x7f0c0023;
-        public static final int descScrollView=0x7f0c0022;
+        public static final int descIconCheckBox=0x7f0c0020;
+        public static final int descIconImageView=0x7f0c001f;
+        public static final int descImageScrollView=0x7f0c0024;
+        public static final int descScrollView=0x7f0c0023;
         public static final int helloID=0x7f0c0011;
         public static final int imageListScrollView=0x7f0c0003;
         public static final int imageRow=0x7f0c0001;
         public static final int imageScrollView=0x7f0c0002;
         public static final int infoRow=0x7f0c0015;
+        public static final int line1=0x7f0c001e;
         public static final int list=0x7f0c0012;
         public static final int listView=0x7f0c0000;
         public static final int matchNumber=0x7f0c001b;
         public static final int plantImg=0x7f0c0013;
         public static final int plantInfoTable=0x7f0c0005;
         public static final int plantName=0x7f0c0014;
-        public static final int remove=0x7f0c0026;
+        public static final int remove=0x7f0c0027;
         public static final int resultButton=0x7f0c000e;
         public static final int sciNameTextView=0x7f0c0019;
         public static final int seacrhResultsTableScrollView=0x7f0c0010;
@@ -113,8 +116,8 @@ public final class R {
         public static final int speciesScrollView=0x7f0c001c;
         public static final int subCateScrollView=0x7f0c000a;
         public static final int subCateTableScrollView=0x7f0c000b;
-        public static final int subCategoryRow=0x7f0c0020;
-        public static final int subCategoryTextView=0x7f0c0021;
+        public static final int subCategoryRow=0x7f0c0021;
+        public static final int subCategoryTextView=0x7f0c0022;
         public static final int tableRow1=0x7f0c0006;
         public static final int tableRow2=0x7f0c0009;
         public static final int tableRow3=0x7f0c000c;

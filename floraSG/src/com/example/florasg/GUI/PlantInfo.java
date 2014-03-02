@@ -50,11 +50,12 @@ public class PlantInfo extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_plant_info);
-		//setTitle(MainActivity.plant);
+		
 
 		//this is to handle call from search result page
 		Intent intent = getIntent();
 		String sciName = intent.getExtras().getString(SCI_NAME);
+		setTitle(sciName);
 		//TODO
 		//you can add call from bookmark page
 
