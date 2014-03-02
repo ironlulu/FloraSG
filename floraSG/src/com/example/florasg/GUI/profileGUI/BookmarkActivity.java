@@ -8,6 +8,8 @@ import com.example.florasg.MainActivity;
 import com.example.florasg.R;
 import com.example.florasg.Controller.BookmarkManager;
 import com.example.florasg.GUI.PlantInfo;
+import com.example.florasg.Model.Bookmark;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;

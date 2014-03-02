@@ -1,4 +1,4 @@
-package com.example.florasg.GUI.profileGUI;
+package com.example.florasg.Model;
 
 public class Bookmark {
 	

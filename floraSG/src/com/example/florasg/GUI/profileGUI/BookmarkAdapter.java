@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.example.florasg.R;
+import com.example.florasg.Model.Bookmark;
 
 import android.content.Context;
 import android.content.res.AssetManager;
