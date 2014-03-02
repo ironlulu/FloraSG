@@ -20,10 +20,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
@@ -40,6 +46,7 @@ public class BookmarkActivity extends Activity {
 	private ArrayList<Bookmark> bookmarkList = new ArrayList<Bookmark>();
 	BookmarkManager bm;
 	BookmarkAdapter adapter;
+	private int position;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,7 @@ public class BookmarkActivity extends Activity {
 			bookmarkListView = (ListView)findViewById(R.id.listView);
 
 			bookmarkListView.setAdapter(adapter);
+			registerForContextMenu(bookmarkListView);
 
 			bookmarkListView.setOnItemClickListener(new OnItemClickListener()
 			{
@@ -78,7 +86,6 @@ public class BookmarkActivity extends Activity {
 				public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
 				{
 					TextView text = ((TextView) v.findViewById(R.id.plantName));
-					//MainActivity.plant = text.getText().toString();
 					String sciNameStr =  text.getText().toString();
 					Intent intent = new Intent(getApplicationContext(), PlantInfo.class);
 					intent.putExtra(PlantInfo.SCI_NAME, sciNameStr);
@@ -86,6 +93,8 @@ public class BookmarkActivity extends Activity {
 				}
 			});
 
+			
+			/*
 			bookmarkListView.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
 				// argument position gives the index of item which is clicked
@@ -129,6 +138,7 @@ public class BookmarkActivity extends Activity {
 					return true;
 				}
 			});
+			*/
 		}
 		
 	}
@@ -158,6 +168,31 @@ public class BookmarkActivity extends Activity {
 			toast.show();
 	    }
 	}
+	
+	@Override  
+	public void onCreateContextMenu(ContextMenu menu, View v,  
+			ContextMenuInfo menuInfo) {  
+		// TODO Auto-generated method stub  
+		super.onCreateContextMenu(menu, v, menuInfo); 
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+	    menu.setHeaderTitle(bookmarkList.get(info.position).getName());
+		MenuInflater m = getMenuInflater();  
+		m.inflate(R.menu.context_menu, menu);  
+	}  
+	
+	 @Override  
+   public boolean onContextItemSelected(MenuItem item) {  
+        switch(item.getItemId()){  
+             case R.id.delete:  
+                  AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();  
+                  position = (int) info.id;
+                  bm.toggleBookmark(bookmarkList.get(position).getName());
+                  bookmarkList.remove(position);  
+                  this.adapter.notifyDataSetChanged();
+                  return true;  
+        }  
+        return super.onContextItemSelected(item);  
+   }  
 	
 	
 	/*

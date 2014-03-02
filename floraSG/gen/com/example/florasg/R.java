@@ -79,17 +79,18 @@ public final class R {
         public static final int main_bg=0x7f02001a;
     }
     public static final class id {
-        public static final int action_aboutus=0x7f0c0029;
-        public static final int action_faq=0x7f0c0028;
+        public static final int action_aboutus=0x7f0c002a;
+        public static final int action_faq=0x7f0c0029;
         public static final int action_settings=0x7f0c0025;
-        public static final int action_updates=0x7f0c002a;
-        public static final int add=0x7f0c0026;
+        public static final int action_updates=0x7f0c002b;
+        public static final int add=0x7f0c0027;
         public static final int categoryListScrollView=0x7f0c0008;
         public static final int categoryScrollView=0x7f0c0007;
         public static final int clearButton=0x7f0c000d;
         public static final int comNameTextView=0x7f0c001a;
         public static final int content=0x7f0c0017;
         public static final int contentRow=0x7f0c0004;
+        public static final int delete=0x7f0c0026;
         public static final int descIconCheckBox=0x7f0c0020;
         public static final int descIconImageView=0x7f0c001f;
         public static final int descImageScrollView=0x7f0c0024;
@@ -106,7 +107,7 @@ public final class R {
         public static final int plantImg=0x7f0c0013;
         public static final int plantInfoTable=0x7f0c0005;
         public static final int plantName=0x7f0c0014;
-        public static final int remove=0x7f0c0027;
+        public static final int remove=0x7f0c0028;
         public static final int resultButton=0x7f0c000e;
         public static final int sciNameTextView=0x7f0c0019;
         public static final int seacrhResultsTableScrollView=0x7f0c0010;
@@ -150,21 +151,23 @@ public final class R {
         public static final int bookmark=0x7f0b0001;
         public static final int browse=0x7f0b0002;
         public static final int camera=0x7f0b0003;
-        public static final int faq=0x7f0b0004;
-        public static final int map=0x7f0b0005;
-        public static final int news=0x7f0b0006;
-        public static final int photo=0x7f0b0007;
-        public static final int plant_info=0x7f0b0008;
-        public static final int profile=0x7f0b0009;
-        public static final int search=0x7f0b000a;
-        public static final int search_result=0x7f0b000b;
-        public static final int select_char=0x7f0b000c;
-        public static final int starting=0x7f0b000d;
-        public static final int tab_main=0x7f0b000e;
-        public static final int updates=0x7f0b000f;
+        public static final int context_menu=0x7f0b0004;
+        public static final int faq=0x7f0b0005;
+        public static final int map=0x7f0b0006;
+        public static final int news=0x7f0b0007;
+        public static final int photo=0x7f0b0008;
+        public static final int plant_info=0x7f0b0009;
+        public static final int profile=0x7f0b000a;
+        public static final int search=0x7f0b000b;
+        public static final int search_result=0x7f0b000c;
+        public static final int select_char=0x7f0b000d;
+        public static final int starting=0x7f0b000e;
+        public static final int tab_main=0x7f0b000f;
+        public static final int updates=0x7f0b0010;
     }
     public static final class string {
         public static final int action_aboutus=0x7f080002;
+        public static final int action_delete=0x7f080027;
         public static final int action_faq=0x7f080001;
         public static final int action_settings=0x7f080004;
         public static final int action_updates=0x7f080003;
@@ -181,27 +184,27 @@ public final class R {
         public static final int habit_habit_tree=0x7f08001b;
         public static final int hello_world=0x7f080005;
         public static final int news_content=0x7f08000d;
-        public static final int pref_default_display_name=0x7f08002c;
-        public static final int pref_description_social_recommendations=0x7f08002a;
+        public static final int pref_default_display_name=0x7f08002d;
+        public static final int pref_description_social_recommendations=0x7f08002b;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f08002e;
+        public static final int pref_header_data_sync=0x7f08002f;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f080028;
+        public static final int pref_header_general=0x7f080029;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f080031;
-        public static final int pref_ringtone_silent=0x7f080034;
-        public static final int pref_title_add_friends_to_messages=0x7f08002d;
-        public static final int pref_title_display_name=0x7f08002b;
-        public static final int pref_title_new_message_notifications=0x7f080032;
-        public static final int pref_title_ringtone=0x7f080033;
-        public static final int pref_title_social_recommendations=0x7f080029;
-        public static final int pref_title_sync_frequency=0x7f08002f;
-        public static final int pref_title_system_sync_settings=0x7f080030;
-        public static final int pref_title_vibrate=0x7f080035;
+        public static final int pref_header_notifications=0x7f080032;
+        public static final int pref_ringtone_silent=0x7f080035;
+        public static final int pref_title_add_friends_to_messages=0x7f08002e;
+        public static final int pref_title_display_name=0x7f08002c;
+        public static final int pref_title_new_message_notifications=0x7f080033;
+        public static final int pref_title_ringtone=0x7f080034;
+        public static final int pref_title_social_recommendations=0x7f08002a;
+        public static final int pref_title_sync_frequency=0x7f080030;
+        public static final int pref_title_system_sync_settings=0x7f080031;
+        public static final int pref_title_vibrate=0x7f080036;
         public static final int profile_content=0x7f08000e;
         public static final int search_category_flower=0x7f080012;
         public static final int search_category_fruit=0x7f080013;
@@ -223,7 +226,7 @@ public final class R {
         public static final int title_activity_search=0x7f080006;
         public static final int title_activity_search_result=0x7f080022;
         public static final int title_activity_select_char=0x7f08001e;
-        public static final int title_activity_settings=0x7f080027;
+        public static final int title_activity_settings=0x7f080028;
         public static final int title_activity_updates=0x7f080025;
     }
     public static final class style {
