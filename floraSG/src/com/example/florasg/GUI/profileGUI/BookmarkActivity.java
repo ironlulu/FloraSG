@@ -1,5 +1,6 @@
 package com.example.florasg.GUI.profileGUI;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,24 +10,32 @@ import com.example.florasg.Controller.BookmarkManager;
 import com.example.florasg.GUI.PlantInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class BookmarkActivity extends Activity {
-		
+
 	private ListView bookmarkListView;
 	private List<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
-	private ArrayList<String> bookmarkList = new ArrayList<String>();
+	private ArrayList<Bookmark> bookmarkList = new ArrayList<Bookmark>();
 	BookmarkManager bm;
 	BookmarkAdapter adapter;
 	
@@ -39,35 +48,6 @@ public class BookmarkActivity extends Activity {
 		//open bookmarkManager and get the bookmarkList
 		bm = new BookmarkManager(this);
 		
-		// For testing
-		/*
-		bm.toggleBookmark(1);
-		bm.toggleBookmark(2);
-		bm.toggleBookmark(3);
-		bm.toggleBookmark(4);
-		bm.toggleBookmark(5);
-		bm.toggleBookmark(6);
-		bm.toggleBookmark(7);
-		bm.toggleBookmark(8);
-		bm.toggleBookmark(9);
-		bm.toggleBookmark(10);
-		bm.toggleBookmark(11);
-		bm.toggleBookmark(12);
-		bm.toggleBookmark(13);
-		bm.toggleBookmark(14);
-		bm.toggleBookmark(15);
-		bm.toggleBookmark(16);
-		bm.toggleBookmark(17);
-		bm.toggleBookmark(18);
-		bm.toggleBookmark(19);
-		bm.toggleBookmark(20);
-		bm.toggleBookmark(21);
-		bm.toggleBookmark(22);
-		bm.toggleBookmark(23);
-		bm.toggleBookmark(24);
-		bm.toggleBookmark(25);
-		*/
-		
 		tempList = bm.viewBookmark();
 		
 		if(tempList.isEmpty()){
@@ -78,7 +58,8 @@ public class BookmarkActivity extends Activity {
 		} else {
 
 			for (ArrayList<String>e: tempList){
-				bookmarkList.add(e.get(1));
+				Bookmark item = new Bookmark(e.get(0),e.get(1));
+				bookmarkList.add(item);
 			}
 			Log.d("Bookmark List Size", Integer.toString(bookmarkList.size()));
 
@@ -161,7 +142,8 @@ public class BookmarkActivity extends Activity {
 	    tempList = bm.viewBookmark();
 	    		
 	    for (ArrayList<String>e: tempList){
-	    	bookmarkList.add(e.get(1));
+	    	Bookmark item = new Bookmark(e.get(0),e.get(1));
+			bookmarkList.add(item);
 	    }
 	    Log.d("New Bookmark List Size", Integer.toString(bookmarkList.size()));
 
@@ -174,156 +156,190 @@ public class BookmarkActivity extends Activity {
 	    }
 	}
 	
-}
+	
+	/*
+	private TableLayout bookmarkTable;
+	private List<ArrayList<String>> bookmarkList = new ArrayList<ArrayList<String>>();
+	BookmarkManager bm;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);		
+		setContentView(R.layout.activity_bookmark);
+
+		bm = new BookmarkManager(this);
+
+		
+		bm.toggleBookmark(5);
+		bm.toggleBookmark(30);
+		bm.toggleBookmark(3);
+		bm.toggleBookmark(7);
+		bm.toggleBookmark(9);
+		bm.toggleBookmark(10);
+		bm.toggleBookmark(20);
+		bm.toggleBookmark(60);
+		bm.toggleBookmark(45);
+		bm.toggleBookmark(13);
+		bm.toggleBookmark(27);
+		bm.toggleBookmark(34);
+		bm.toggleBookmark(1);
+		bm.toggleBookmark(4);
+		bm.toggleBookmark(25);
+		bm.toggleBookmark(18);
+		bm.toggleBookmark(21);
+		bm.toggleBookmark(12);
+		bm.toggleBookmark(2);
+		bm.toggleBookmark(44);
+		
 
 
- 
-/********************************************************************************
-private TableLayout bookmarkTable;
-private List<ArrayList<String>> bookmarkList = new ArrayList<ArrayList<String>>();
-BookmarkManager bm;
+		bookmarkList = bm.viewBookmark();
+		Log.d("Bookmark List Size", Integer.toString(bookmarkList.size()));
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);		
-	setContentView(R.layout.activity_bookmark);
+		bookmarkTable = (TableLayout) findViewById(R.id.bookmarkListTable);
+
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		for (int i=0;i<bookmarkList.size();i++){
+			//TableRow tr = new TableRow(this);
+			//tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+			View newRow = inflater.inflate(R.layout.bookmark_row, null);
 			
-	/*
-	for (int i=0; i<10;i++){
-		ArrayList<String> list = new ArrayList<String>();
-		list.add("img"+i);
-		list.add(i + " dkaldkalkd;a");
-		bookmarkList.add(list);
-	}		
-	
-	bm = new BookmarkManager(this);
-	
-	/*
-	bm.toggleBookmark(5);
-	bm.toggleBookmark(30);
-	bm.toggleBookmark(3);
-	bm.toggleBookmark(7);
-	bm.toggleBookmark(9);
-	bm.toggleBookmark(10);
-	bm.toggleBookmark(20);
-	bm.toggleBookmark(60);
-	bm.toggleBookmark(45);
-	bm.toggleBookmark(13);
-	bm.toggleBookmark(27);
-	bm.toggleBookmark(34);
-	bm.toggleBookmark(1);
-	bm.toggleBookmark(4);
-	bm.toggleBookmark(25);
-	bm.toggleBookmark(18);
-	bm.toggleBookmark(21);
-	bm.toggleBookmark(12);
-	bm.toggleBookmark(2);
-	bm.toggleBookmark(44);
-	
-					
-	bookmarkList = bm.viewBookmark();
-	Log.d("Bookmark List Size", Integer.toString(bookmarkList.size()));
-	
-	bookmarkTable = (TableLayout) findViewById(R.id.bookmarkListTable);
-	
-	LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	for (int i=0;i<bookmarkList.size();i++){
-		//TableRow tr = new TableRow(this);
-		//tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-		View newRow = inflater.inflate(R.layout.bookmark_row, null);
-		ImageView newImage = (ImageView) newRow.findViewById(R.id.plantImg);
-		newImage.setImageResource(R.drawable.ic_launcher);
-		Button newBtn = (Button) newRow.findViewById(R.id.plantName);
-		newBtn.setText(bookmarkList.get(i).get(1));
-		bookmarkTable.addView(newRow);
-		
-		newBtn.setOnClickListener(btnclick);
-		newBtn.setOnLongClickListener(btnlongclick);
+			ImageView newImage = (ImageView) newRow.findViewById(R.id.plantImg);
+			String speciesCode = bookmarkList.get(i).get(0);			
+			AssetManager am = getAssets();
+	        //String[] files;
+	        try {
+	        	//files = am.list(speciesCode);
+	        	//Log.d("No of imgs", Integer.toString(files.length));
+	        	       	
+	        	//Log.i("species image","species image name: "+speciesCode+"/"+files[j]);
+	        	Bitmap bmp=BitmapFactory.decodeStream(am.open(speciesCode+"/"+speciesCode+".jpeg"));
+	        	int bmpW = 120;
+	        	int bmpH = 180;
+	        	bmp = Bitmap.createScaledBitmap(bmp, bmpW, bmpH, true);
+	        	newImage.setImageBitmap(bmp);	
+	        	 
+	        } catch (IOException e) {
+	        	// TODO Auto-generated catch block
+	        	e.printStackTrace();
+	        }
+	        
+			//newImage.setImageResource(R.drawable.ic_launcher);
+			Button newBtn = (Button) newRow.findViewById(R.id.plantName);
+			newBtn.setText(bookmarkList.get(i).get(1));
+			
+			bookmarkTable.addView(newRow);
+
+			newBtn.setOnClickListener(btnclick);
+			newBtn.setOnLongClickListener(btnlongclick);
+		}
+
 	}
-	
+
+	Button.OnClickListener btnclick = new Button.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+
+			Button btn = (Button)v;
+			//Toast.makeText(getApplicationContext(), button.getText().toString(),2).show(); 
+			MainActivity.plant = btn.getText().toString();
+			Intent intent = new Intent(getApplicationContext(), PlantInfo.class);  
+			startActivity(intent);
+		}
+
+	};
+
+	Button.OnLongClickListener btnlongclick = new Button.OnLongClickListener(){
+
+		@Override
+		public boolean onLongClick(View v) {
+
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					v.getContext());
+
+			Log.d("Dialog", "Build Dialog!");
+
+			// set title
+			alertDialogBuilder.setTitle("Delete");
+
+			// set dialog message
+			alertDialogBuilder
+			.setMessage("Are you sure you want to delete this item?")
+			.setCancelable(false)
+			.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, close
+					// current activity
+					dialog.cancel();
+				}
+			})
+			.setNegativeButton("No",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, just close
+					// the dialog box and do nothing
+					dialog.cancel();
+				}
+			});
+
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+			Log.d("Dialog", "Dialog created!");
+
+			// show it
+			alertDialog.show();
+
+			return true;
+		}
+
+	};
+
+	public void onRestart() { 
+		super.onRestart();
+		//When BACK BUTTON is pressed, the activity on the stack is restarted
+		//Do what you want on the refresh procedure here
+		Log.d("TAG", "BookmarkList: onRestart()");
+
+		bookmarkTable.removeAllViews();	
+		bookmarkList.clear();
+
+		bookmarkList = bm.viewBookmark();
+		Log.d("Bookmark List Size", Integer.toString(bookmarkList.size()));
+
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		for (int i=0;i<bookmarkList.size();i++){
+			//TableRow tr = new TableRow(this);
+			//tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+			View newRow = inflater.inflate(R.layout.bookmark_row, null);
+			
+			ImageView newImage = (ImageView) newRow.findViewById(R.id.plantImg);
+			String speciesCode = bookmarkList.get(i).get(0);			
+			AssetManager am = getAssets();
+	        //String[] files;
+	        try {
+	        	//files = am.list(speciesCode);
+	        	Bitmap bmp=BitmapFactory.decodeStream(am.open(speciesCode+"/"+speciesCode+".jpeg"));
+	        	int bmpW = 120;
+	        	int bmpH = 180;
+	        	bmp = Bitmap.createScaledBitmap(bmp, bmpW, bmpH, true);
+	        	newImage.setImageBitmap(bmp);	
+	        	 
+	        } catch (IOException e) {
+	        	// TODO Auto-generated catch block
+	        	e.printStackTrace();
+	        }
+	        
+			//newImage.setImageResource(R.drawable.ic_launcher);
+			Button newBtn = (Button) newRow.findViewById(R.id.plantName);
+			newBtn.setText(bookmarkList.get(i).get(1));
+			
+			bookmarkTable.addView(newRow);
+
+			newBtn.setOnClickListener(btnclick);
+			newBtn.setOnLongClickListener(btnlongclick);
+		}
+	}
+	*/
 }
 
-Button.OnClickListener btnclick = new Button.OnClickListener(){
 
-    @Override
-    public void onClick(View v) {
-
-        Button btn = (Button)v;
-        //Toast.makeText(getApplicationContext(), button.getText().toString(),2).show(); 
-        MainActivity.plant = btn.getText().toString();
-        Intent intent = new Intent(getApplicationContext(), PlantInfo.class);  
-		startActivity(intent);
-    }
-
-};
-
-Button.OnLongClickListener btnlongclick = new Button.OnLongClickListener(){
-
-    @Override
-    public boolean onLongClick(View v) {
-        
-    	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-    			BookmarkActivity.this);
-    	
-    	Log.d("Dialog", "Build Dialog!");
-
-    	// set title
-    	alertDialogBuilder.setTitle("Delete");
-
-    	// set dialog message
-    	alertDialogBuilder
-    	.setMessage("Are you sure you want to delete this item?")
-    	.setCancelable(false)
-    	.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-    		public void onClick(DialogInterface dialog,int id) {
-    			// if this button is clicked, close
-    			// current activity
-    			dialog.cancel();
-    		}
-    	})
-    	.setNegativeButton("No",new DialogInterface.OnClickListener() {
-    		public void onClick(DialogInterface dialog,int id) {
-    			// if this button is clicked, just close
-    			// the dialog box and do nothing
-    			dialog.cancel();
-    		}
-    	});
-
-    	// create alert dialog
-    	AlertDialog alertDialog = alertDialogBuilder.create();
-    	Log.d("Dialog", "Dialog created!");
-
-    	// show it
-    	alertDialog.show();
-		
-		return true;
-    }
-
-};
-
-public void onRestart() { 
-    super.onRestart();
-    //When BACK BUTTON is pressed, the activity on the stack is restarted
-    //Do what you want on the refresh procedure here
-    Log.d("TAG", "BookmarkList: onRestart()");
-    	    
-    bookmarkTable.removeAllViews();	
-    bookmarkList.clear();
-    
-    bookmarkList = bm.viewBookmark();
-    Log.d("Bookmark List Size", Integer.toString(bookmarkList.size()));
-    
-    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	for (int i=0;i<bookmarkList.size();i++){
-		View newRow = inflater.inflate(R.layout.bookmark_row, null);
-		ImageView newImage = (ImageView) newRow.findViewById(R.id.plantImg);
-		newImage.setImageResource(R.drawable.ic_launcher);
-		Button newBtn = (Button) newRow.findViewById(R.id.plantName);
-		newBtn.setText(bookmarkList.get(i).get(1));
-		bookmarkTable.addView(newRow);
-		
-		newBtn.setOnClickListener(btnclick);
-		newBtn.setOnLongClickListener(btnlongclick);
-	}
-}
-*********************************************************************************/
