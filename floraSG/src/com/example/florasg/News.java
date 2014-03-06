@@ -8,10 +8,10 @@ public class News {
 	private int news_ID;
 	private String title;
 	private String content;
-	private String date;
+	private Date date;
 	private URL url;
 	
-	public News(int news_ID, String title, String content, String date, URL url) {
+	public News(int news_ID, String title, String content, Date date, URL url) {
 		super();
 		this.news_ID = news_ID;
 		this.title = title;
@@ -32,7 +32,7 @@ public class News {
 		return content;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 

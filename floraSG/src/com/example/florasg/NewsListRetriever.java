@@ -3,6 +3,7 @@ package com.example.florasg;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,11 @@ import android.util.Log;
 
 public class NewsListRetriever {
 	private SQLiteDatabase database;
-	private DataBaseHelper dbHelper;
+	private NewsDataBaseHelper dbHelper;
 	
 	public NewsListRetriever(Context context) {
 		// open database for access
-		dbHelper = new DataBaseHelper(context);
+		dbHelper = new NewsDataBaseHelper(context);
 		try {
 			dbHelper.createDataBase();
 		} catch (IOException ioe) {
@@ -34,23 +35,24 @@ public class NewsListRetriever {
 		database = dbHelper.getDatabase();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public List<News> getLatestNews () {
 		List<News> newsList = new ArrayList<News>();
 		Cursor cursor;
 		int news_ID;
 		String title;
 		String content;
-		String date;
+		Date date;
 		URL url = null;
 		
-		cursor = database.rawQuery("SELECT * FROM news", null);
+		cursor = database.rawQuery("SELECT * FROM news ORDER BY date DESC", null);
 		cursor.moveToFirst();
 		int cursorSize = cursor.getCount();
 		for (int i = 0; i < cursorSize; i++) {
 			news_ID = cursor.getInt(0);
 			title = cursor.getString(2);
 			content = cursor.getString(3);
-			date = cursor.getString(1);
+			date = Date.valueOf(cursor.getString(1));
 			try {
 				url = new URL(cursor.getString(4));
 			} catch (MalformedURLException e) {
@@ -65,18 +67,20 @@ public class NewsListRetriever {
 		return newsList;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public News getNewsItem (int news_ID){
 		Cursor cursor;
 		String title;
 		String content;
-		String date;
+		Date date;
 		URL url = null;
 		
 		cursor = database.rawQuery("SELECT * FROM news WHERE news_id = ?", new String[]{Integer.toString(news_ID)});
 		cursor.moveToFirst();
 		title = cursor.getString(2);
 		content = cursor.getString(3);
-		date = cursor.getString(1);
+		String[] temp = cursor.getString(1).split("-");
+		date = new Date(Integer.valueOf(temp[0]), Integer.valueOf(temp[1]), Integer.valueOf(temp[2]));
 		try {
 			url = new URL(cursor.getString(4));
 		} catch (MalformedURLException e) {
