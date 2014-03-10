@@ -35,7 +35,6 @@ public class NewsListRetriever {
 		database = dbHelper.getDatabase();
 	}
 	
-	@SuppressWarnings("deprecation")
 	public List<News> getLatestNews () {
 		List<News> newsList = new ArrayList<News>();
 		Cursor cursor;

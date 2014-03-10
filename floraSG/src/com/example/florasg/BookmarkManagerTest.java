@@ -22,7 +22,7 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 
 	// can view an empty list of bookmarks without crashing
 	public void testCase1() {
-		bmk.initTestCase1(); //change all bookmark statuses to false
+		bmk.initTestCase1(); // change all bookmark statuses to false
 		boolean passed = false;
 		List<ArrayList<String>> results1 = bmk.viewBookmark();
 		if (results1.isEmpty()) {
@@ -45,7 +45,7 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 
 	// can delete n numbers of bookmarks where n = size
 	public void testCase3() {
-		bmk.initTestCase1(); //change all bookmark statuses to false
+		bmk.initTestCase1(); // change all bookmark statuses to false
 		bmk.toggleBookmark("Acrostichum aureum"); //toggle one of them
 		boolean passed = false;
 		List<ArrayList<String>> results3 = bmk.viewBookmark();
