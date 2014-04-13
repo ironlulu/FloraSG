@@ -13,8 +13,13 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="descTableScrollView" key="selection"/>
+		<item value="DESC_LIST" key="selection"/>
 		<list key="findhistory">
+			<item value="DESC_LIST"/>
+			<item value="DESC"/>
+			<item value="intent.putExtra(imgPath, INPUT_IMAGE);"/>
+			<item value="Sea"/>
+			<item value="plantinfo"/>
 			<item value="newSearchResultRow"/>
 			<item value="char"/>
 			<item value="param"/>
