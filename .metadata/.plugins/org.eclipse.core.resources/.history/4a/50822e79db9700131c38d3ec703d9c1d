@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -33,31 +34,31 @@ public class BookmarkManager {
 	}
 	
 	// toggle a plant's bookmark status
-	public boolean toggleBookmark(int species_id) {
-        Cursor getBookmark;
-        getBookmark = database.rawQuery("SELECT bookmark FROM species WHERE species_id = ?", new String[]{Integer.toString(species_id)});
-        getBookmark.moveToFirst();
-        String oriBookmark = getBookmark.getString(0);
-        
-        if (oriBookmark.equals("TRUE")) {
-            database.execSQL("UPDATE species SET bookmark = ? WHERE species_id = ?", new String[]{"FALSE", Integer.toString(species_id)});
-        }
-        else {
-            database.execSQL("UPDATE species SET bookmark = ? WHERE species_id = ?", new String[]{"TRUE", Integer.toString(species_id)});
-        }
-        
-        Cursor afterToggle;
-        afterToggle = database.rawQuery("SELECT bookmark FROM species WHERE species_id = ?", new String[]{Integer.toString(species_id)});
-        afterToggle.moveToFirst();
-        String newStatus = afterToggle.getString(0);
-        
-        if (newStatus.equals(oriBookmark)) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
+	public boolean toggleBookmark(String scientific_name) {
+		Cursor getBookmark;
+		getBookmark = database.rawQuery("SELECT bookmark FROM species WHERE scientific_name = ?", new String[]{scientific_name});
+		getBookmark.moveToFirst();
+		String oriBookmark = getBookmark.getString(0);
+		
+		if (oriBookmark.equals("TRUE")) {
+			database.execSQL("UPDATE species SET bookmark = ? WHERE scientific_name = ?", new String[]{"FALSE", scientific_name});
+		}
+		else {
+			database.execSQL("UPDATE species SET bookmark = ? WHERE scientific_name = ?", new String[]{"TRUE", scientific_name});
+		}
+		
+		Cursor afterToggle;
+		afterToggle = database.rawQuery("SELECT bookmark FROM species WHERE scientific_name = ?", new String[]{scientific_name});
+		afterToggle.moveToFirst();
+		String newStatus = afterToggle.getString(0);
+		
+		if (newStatus.equals(oriBookmark)) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 	
 	// return a list of all bookmarked plants' scientific name and species code
 	public List<ArrayList<String>> viewBookmark() {
@@ -85,7 +86,7 @@ public class BookmarkManager {
 		return bookmarked_plants;
 	}
 	
-	// change multiple plants' bookmark status to FALSE
+	/* change multiple plants' bookmark status to FALSE
 	public void deleteBookmarks(List<Integer> plantsToBeUnbookmarked) {
 		int size = plantsToBeUnbookmarked.size();
 		for (int i = 0; i < size; i++) {
@@ -95,7 +96,7 @@ public class BookmarkManager {
 		}
 		
 		return;
-	}
+	}*/
 	
 	// For testing purposes only
 	public void initTestCase1() {

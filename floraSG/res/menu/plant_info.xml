@@ -9,5 +9,30 @@
     android:id="@+id/remove"
     android:icon="@drawable/ic_action_favorite"
     android:showAsAction="always"/>
+	
+	<item
+        android:id="@+id/action_faq"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_faq"/>
+    <item
+        android:id="@+id/action_aboutus"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_aboutus"/>
+    <item
+        android:id="@+id/action_updates"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_updates"/>
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
 
 </menu>

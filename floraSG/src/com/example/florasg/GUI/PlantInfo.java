@@ -43,18 +43,19 @@ public class PlantInfo extends Activity {
 	private BookmarkManager bm;
 	private String bookmarkStatus;
 	public boolean isBookmark;
-	private int ID;
 	private String speciesCode;
+	private String sciName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_plant_info);
-		//setTitle(MainActivity.plant);
+		
 
 		//this is to handle call from search result page
 		Intent intent = getIntent();
-		String sciName = intent.getExtras().getString(SCI_NAME);
+		sciName = intent.getExtras().getString(SCI_NAME);
+		setTitle(sciName);
 		//TODO
 		//you can add call from bookmark page
 
@@ -75,7 +76,6 @@ public class PlantInfo extends Activity {
 		TextView newContent;
 
 		// get speciesID and code
-		ID = plantObj.getSpeciesID();
 		speciesCode = plantObj.getSpeciesCode().toLowerCase();
 		Log.d("SpeciesCode", speciesCode);
 
@@ -278,7 +278,7 @@ public class PlantInfo extends Activity {
 		switch (item.getItemId()) {
 		case R.id.add:
 			isBookmark = true;
-			bm.toggleBookmark(ID);
+			bm.toggleBookmark(sciName);
 			invalidateOptionsMenu();
 			toast = Toast.makeText(getApplicationContext(),"Add to bookmark list!", Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
@@ -286,7 +286,7 @@ public class PlantInfo extends Activity {
 			return true;
 		case R.id.remove:
 			isBookmark = false;
-			bm.toggleBookmark(ID);
+			bm.toggleBookmark(sciName);
 			invalidateOptionsMenu();
 			toast = Toast.makeText(getApplicationContext(),"Delete from bookmark list!", Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);

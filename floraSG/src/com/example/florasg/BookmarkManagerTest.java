@@ -23,7 +23,11 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 
 	// can view an empty list of bookmarks without crashing
 	public void testCase1() {
+<<<<<<< HEAD
 		//bmk.initTestCase1();
+=======
+		bmk.initTestCase1(); // change all bookmark statuses to false
+>>>>>>> origin/data
 		boolean passed = false;
 		List<ArrayList<String>> results1 = bmk.viewBookmark();
 		if (results1.isEmpty()) {
@@ -35,8 +39,12 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 	// can view n numbers of bookmarks where n = expected
 	public void testCase2() {
 		int expected = 5; // modify this value when needed
+<<<<<<< HEAD
 		//bmk.initTestCase2(expected);
 
+=======
+		bmk.initTestCase2(expected); //bookmark expected numbers of plants
+>>>>>>> origin/data
 		boolean passed = false;
 		List<ArrayList<String>> results2 = bmk.viewBookmark();
 		if (results2.size() == expected) {
@@ -48,15 +56,20 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 
 	// can delete n numbers of bookmarks where n = size
 	public void testCase3() {
+<<<<<<< HEAD
 		int size = 5; // modify this value when needed
 		List<Integer> speciesIDs = new ArrayList<Integer>();
 		for (int i = 0; i < size; i++) {
 			speciesIDs.add(i + 1);
 		}
 		//bmk.deleteBookmarks(speciesIDs);
+=======
+		bmk.initTestCase1(); // change all bookmark statuses to false
+		bmk.toggleBookmark("Acrostichum aureum"); //toggle one of them
+>>>>>>> origin/data
 		boolean passed = false;
 		List<ArrayList<String>> results3 = bmk.viewBookmark();
-		if (results3.isEmpty()) {
+		if (results3.size() == 1) {
 			passed = true;
 		}
 		assertTrue(passed);

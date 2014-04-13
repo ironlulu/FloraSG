@@ -40,5 +40,6 @@
     <string name="title_activity_about_us">About Us</string>
     <string name="title_activity_updates">Updates</string>
     <string name="title_activity_plant_info">PlantInfo</string>
+    <string name="action_delete">Delete</string>
 
 </resources>
