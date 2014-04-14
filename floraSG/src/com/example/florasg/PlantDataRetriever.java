@@ -58,6 +58,9 @@ public class PlantDataRetriever {
 		String associatedFauna;
 		String reference;
 		String bookmarkStatus;
+		
+		Plant p;
+		
 		Cursor cursor;
 		cursor=database.rawQuery("SELECT * FROM species WHERE scientific_name= ?", new String[]{scientific_name});
 		cursor.moveToFirst();
@@ -81,10 +84,29 @@ public class PlantDataRetriever {
 		associatedFauna=cursor.getString(14);
 		reference=cursor.getString(15);
 		bookmarkStatus=cursor.getString(17);
-		return new Plant(speciesID,speciesCode,scientificName,authorName,commonName,family,
+		/*return new Plant(speciesID,speciesCode,scientificName,authorName,commonName,family,
 				description,habitat,minLeafSize,maxLeafSize, distribution, 
 				conservationStatus,growthRequirement,horticulturalFeatures,uses,
-				associatedFauna,reference,bookmarkStatus);
+				associatedFauna,reference,bookmarkStatus);*/
+		p=new Plant(speciesID, speciesCode, scientificName);
+		p.setAuthorName(authorName);
+		p.setComName(commonName);
+		p.setFamily(family);
+		p.setDescription(description);
+		p.setHabitat(habitat);
+		p.setMinLeafSize(minLeafSize);
+		p.setMaxLeafSize(maxLeafSize);
+		p.setDistribution(distribution);
+		p.setConservationStatus(conservationStatus);
+		p.setGrowthReq(growthRequirement);
+		p.setHorticulturalFeatures(horticulturalFeatures);
+		p.setUses(uses);
+		p.setAssociatedFauna(associatedFauna);
+		p.setReference(reference);
+		p.setBookmarkStatus(bookmarkStatus);
+		
+		return p;
+		
 	}
 	
 	//search by characteristics

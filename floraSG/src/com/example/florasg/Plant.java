@@ -21,7 +21,7 @@ public class Plant {
 	private String reference;
 	private String bookmarkStatus;
 	
-	Plant(int _id, String _speciesCode, String _sciName, String _authorName, String _comName, String _family, String _description, String 
+	/*Plant(int _id, String _speciesCode, String _sciName, String _authorName, String _comName, String _family, String _description, String 
 			_habitat, int _minLeafSize, int _maxLeafSize, String _distribution, String _conservationStatus,
 			String _growthReq, String _horticulturalFeatures, String _uses, String _associatedFauna,
 			String _reference, String _bookmarkStatus) {
@@ -43,7 +43,32 @@ public class Plant {
 		associatedFauna = _associatedFauna;
 		reference = _reference;
 		bookmarkStatus = _bookmarkStatus;				
+	}*/
+	
+	Plant(int _id, String _speciesCode, String _sciName){
+		speciesID = _id;
+		speciesCode= _speciesCode;
+		sciName = _sciName;
+		authorName= "";
+		comName = "";
+		family = "";
+		description = "";
+		habitat = "";
+		minLeafSize = 0;
+		maxLeafSize	= 0;
+		distribution = "";
+		conservationStatus = "";
+		growthReq = "";
+		horticulturalFeatures = "";
+		uses = "";
+		associatedFauna = "";
+		reference = "";
+		bookmarkStatus = "";	
 	}
+	
+	/*
+	 * Getter Methods
+	 */
 
 	public int getSpeciesID() {
 		return speciesID;
@@ -115,6 +140,70 @@ public class Plant {
 	
 	public String getReference(){
 		return reference;
+	}
+	
+	/*
+	 * Setter Methods
+	 */
+	
+	public void setAuthorName(String _authorName){
+		authorName= _authorName;
+	}
+	
+	public void setComName(String _comName){
+		comName = _comName;
+	}
+	
+	public void setFamily(String _family){
+		family = _family;
+	}
+	
+	public void setDescription(String _description){
+		description = _description;
+	}
+	
+	public void setHabitat(String _habitat){
+		habitat = _habitat;
+	}
+	
+	public void setMinLeafSize(int _minLeafSize){
+		minLeafSize = _minLeafSize;
+	}
+	
+	public void setMaxLeafSize(int _maxLeafSize){
+		maxLeafSize	= _maxLeafSize;
+	}
+	
+	public void setDistribution(String _distribution){
+		distribution = _distribution;
+	}
+	
+	public void setConservationStatus(String _conservationStatus){
+		conservationStatus = _conservationStatus;
+	}
+	
+	public void setGrowthReq(String _growthReq){
+		growthReq = _growthReq;
+	}
+	
+	public void setHorticulturalFeatures(String _horticulturalFeatures){
+		horticulturalFeatures = _horticulturalFeatures;
+	}
+	
+	public void setUses(String _uses){
+		uses = _uses;
+	}
+	
+	public void setAssociatedFauna(String _associatedFauna){
+		associatedFauna = _associatedFauna;
+	}
+	
+	public void setReference(String _reference){
+		reference = _reference;
+	}
+	
+	public void setBookmarkStatus(String _bookmarkStatus){
+		bookmarkStatus = _bookmarkStatus;
 	}
 
 } 
