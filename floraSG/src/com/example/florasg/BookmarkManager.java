@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -15,6 +16,7 @@ public class BookmarkManager {
 	private DataBaseHelper dbHelper;
 
 	public BookmarkManager(Context context) {
+		// open database for access
 		dbHelper = new DataBaseHelper(context);
 		try {
 			dbHelper.createDataBase();
@@ -70,7 +72,7 @@ public class BookmarkManager {
 		cursor.moveToFirst();
 		int cursorSize = cursor.getCount();
 		for (int i = 0; i < cursorSize; i++) {
-			speciesCode = cursor.getString(0);
+			speciesCode = cursor.getString(0).toLowerCase();
 			scientificName = cursor.getString(1);
 			p = new ArrayList<String>();
 			p.add(speciesCode);
@@ -84,8 +86,8 @@ public class BookmarkManager {
 		return bookmarked_plants;
 	}
 	
-	// change multiple plants' bookmark status to FALSE
-	public void deleteBookmarks(List<String> plantsToBeUnbookmarked) {
+	/* change multiple plants' bookmark status to FALSE
+	public void deleteBookmarks(List<Integer> plantsToBeUnbookmarked) {
 		int size = plantsToBeUnbookmarked.size();
 		for (int i = 0; i < size; i++) {
 			while (!toggleBookmark(plantsToBeUnbookmarked.get(i))) {
@@ -94,16 +96,16 @@ public class BookmarkManager {
 		}
 		
 		return;
-	}
+	}*/
 	
-	// For testing purpose only
+	// For testing purposes only
 	public void initTestCase1() {
 		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		
 		return;
 	}
 	
-	// For testing purpose only
+	// For testing purposes only
 	public void initTestCase2(int size) {
 		database.execSQL("UPDATE species SET bookmark = ?", new String[]{"FALSE"});
 		for (int i = 0; i < size; i++) {
@@ -112,19 +114,5 @@ public class BookmarkManager {
 		}
 		
 		return;
-	}
-	
-	// For testing purpose only
-	public List<String> initTestCase3(int size) {
-		List<String> p = new ArrayList<String>();
-		initTestCase2(size);
-		for (int i = 0; i < size; i++) {
-			String species_id = Integer.toString(i + 1);
-			Cursor c = database.rawQuery("SELECT scientific_name FROM species WHERE species_id = ?", new String[]{species_id});
-			c.moveToFirst();
-			p.add(c.getString(0));
-		}
-		
-		return p;
 	}
 }
