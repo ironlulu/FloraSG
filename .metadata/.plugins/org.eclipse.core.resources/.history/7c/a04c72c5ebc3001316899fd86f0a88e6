@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/subCategoryRow"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:background="@android:color/transparent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/subCategoryTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textIsSelectable="true"
+            android:clickable="true"
+            android:background="@color/green"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingBottom="5dp" />
+
+        <HorizontalScrollView
+            android:id="@+id/descScrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:id="@+id/descImageScrollView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:dividerPadding="@dimen/description_image_margin"
+                android:orientation="horizontal" >
+
+              
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+</TableRow>

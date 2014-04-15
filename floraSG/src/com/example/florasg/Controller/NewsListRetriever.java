@@ -7,15 +7,15 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD:floraSG/src/com/example/florasg/Controller/NewsListRetriever.java
-import com.example.florasg.Model.News;
-=======
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
->>>>>>> origin/data:floraSG/src/com/example/florasg/NewsListRetriever.java
+
+import com.example.florasg.NewsDataBaseHelper;
+import com.example.florasg.Model.News;
+
 
 public class NewsListRetriever {
 	private SQLiteDatabase database;

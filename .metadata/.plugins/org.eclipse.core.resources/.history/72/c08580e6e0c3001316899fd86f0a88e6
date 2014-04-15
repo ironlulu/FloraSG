@@ -1,0 +1,69 @@
+package com.example.florasg.GUI.newsGUI;
+
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.florasg.R;
+import com.example.florasg.Controller.NewsListRetriever;
+import com.example.florasg.Model.News;
+
+public class NewsActivity extends Activity {
+
+	private NewsListRetriever nlr;
+	private ListView newsListView;
+	private List<News> newsList;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_news);
+
+		nlr = new NewsListRetriever(this);
+		newsList = nlr.getLatestNews();
+
+		if(newsList.isEmpty()){
+
+			Toast toast = Toast.makeText(getApplicationContext(),"Your news list is empty!", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();			
+		} else {
+
+			LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			newsListView = (ListView) findViewById(R.id.newsListView);
+			newsListView.removeAllViews();
+			View newsRow = null;
+
+			int noNews = newsList.size(); 
+			for(int i=0;i<noNews;i++){
+
+				News news = newsList.get(i);
+				newsRow = inflater.inflate(R.layout.news_row, null);
+				TextView newsTitle = (TextView) newsRow.findViewById(R.id.newsTitle);
+				newsTitle.setText(news.getTitle());
+				
+				newsListView.addView(newsRow);
+				
+			}
+		}
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.news, menu);
+		return true;
+	}
+
+}

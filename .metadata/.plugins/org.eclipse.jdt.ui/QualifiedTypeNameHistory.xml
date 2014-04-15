@@ -8,7 +8,11 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.example.florasg.GUI.searchGUI.SearchResultActivity"/>
-<fullyQualifiedTypeName name="android.os.Handler"/>
 <fullyQualifiedTypeName name="com.example.florasg.GUI.PlantInfo"/>
 <fullyQualifiedTypeName name="com.example.florasg.GUI.profileGUI.BookmarkActivity"/>
+<fullyQualifiedTypeName name="java.util.logging.Handler"/>
+<fullyQualifiedTypeName name="com.example.florasg.R"/>
+<fullyQualifiedTypeName name="android.os.Handler"/>
+<fullyQualifiedTypeName name="android.widget.ArrayAdapter"/>
+<fullyQualifiedTypeName name="com.example.florasg.R.id"/>
 </qualifiedTypeNameHistroy>

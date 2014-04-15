@@ -15,6 +15,7 @@ import com.example.florasg.FaqActivity;
 import com.example.florasg.R;
 import com.example.florasg.SettingsActivity;
 import com.example.florasg.UpdatesActivity;
+import com.example.florasg.GUI.newsGUI.NewsActivity;
 import com.example.florasg.GUI.profileGUI.ProfileActivity;
 import com.example.florasg.GUI.searchGUI.SearchActivity;
 

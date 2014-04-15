@@ -31,15 +31,18 @@
     <string name="habit_habit_tree">tree</string>
     <string name="button_clear">Clear</string>
     <string name="button_result">Result</string>
+    <string name="text_loading_message">Trying hard to load results...</string>
     <string name="title_activity_select_char">SelectCharActivity</string>
     <string name="title_activity_bookmark">BookmarkActivity</string>
     <string name="title_activity_photo">PhotoActivity</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_search_result">Search Result</string>
+    <string name="title_activity_loading_screen">Loading Result</string>
     <string name="title_activity_faq">FAQ</string>
     <string name="title_activity_about_us">About Us</string>
     <string name="title_activity_updates">Updates</string>
     <string name="title_activity_plant_info">PlantInfo</string>
     <string name="action_delete">Delete</string>
+    <string name="title_activity_news_info">NewsInfoActivity</string>
 
 </resources>
