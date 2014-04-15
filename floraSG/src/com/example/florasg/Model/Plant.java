@@ -21,8 +21,9 @@ public class Plant {
 	private String associatedFauna;
 	private String reference;
 	private String bookmarkStatus;
-	
-	public Plant(int _id, String _speciesCode, String _sciName, String _authorName, String _comName, String _family, String _description, String 
+
+	/*Plant(int _id, String _speciesCode, String _sciName, String _authorName, String _comName, String _family, String _description, String 
+>>>>>>> origin/data:floraSG/src/com/example/florasg/Plant.java
 			_habitat, int _minLeafSize, int _maxLeafSize, String _distribution, String _conservationStatus,
 			String _growthReq, String _horticulturalFeatures, String _uses, String _associatedFauna,
 			String _reference, String _bookmarkStatus) {
@@ -44,7 +45,32 @@ public class Plant {
 		associatedFauna = _associatedFauna;
 		reference = _reference;
 		bookmarkStatus = _bookmarkStatus;				
+	}*/
+	
+	public Plant(int _id, String _speciesCode, String _sciName){
+		speciesID = _id;
+		speciesCode= _speciesCode;
+		sciName = _sciName;
+		authorName= "";
+		comName = "";
+		family = "";
+		description = "";
+		habitat = "";
+		minLeafSize = 0;
+		maxLeafSize	= 0;
+		distribution = "";
+		conservationStatus = "";
+		growthReq = "";
+		horticulturalFeatures = "";
+		uses = "";
+		associatedFauna = "";
+		reference = "";
+		bookmarkStatus = "";	
 	}
+	
+	/*
+	 * Getter Methods
+	 */
 
 	public int getSpeciesID() {
 		return speciesID;
@@ -62,101 +88,66 @@ public class Plant {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public String getHabitat() {
 		return habitat;
 	}
 
-	public void setHabitat(String habitat) {
-		this.habitat = habitat;
-	}
+
 
 	public int getMinLeafSize() {
 		return minLeafSize;
 	}
 
-	public void setMinLeafSize(int minLeafSize) {
-		this.minLeafSize = minLeafSize;
-	}
 
 	public int getMaxLeafSize() {
 		return maxLeafSize;
 	}
 
-	public void setMaxLeafSize(int maxLeafSize) {
-		this.maxLeafSize = maxLeafSize;
-	}
+
 
 	public String getDistribution() {
 		return distribution;
 	}
 
-	public void setDistribution(String distribution) {
-		this.distribution = distribution;
-	}
 
 	public String getConservationStatus() {
 		return conservationStatus;
 	}
 
-	public void setConservationStatus(String conservationStatus) {
-		this.conservationStatus = conservationStatus;
-	}
+
 
 	public String getGrowthReq() {
 		return growthReq;
 	}
 
-	public void setGrowthReq(String growthReq) {
-		this.growthReq = growthReq;
-	}
+
 
 	public String getHorticulturalFeatures() {
 		return horticulturalFeatures;
-	}
-
-	public void setHorticulturalFeatures(String horticulturalFeatures) {
-		this.horticulturalFeatures = horticulturalFeatures;
 	}
 
 	public String getUses() {
 		return uses;
 	}
 
-	public void setUses(String uses) {
-		this.uses = uses;
-	}
 
 	public String getAssociatedFauna() {
 		return associatedFauna;
 	}
 
-	public void setAssociatedFauna(String associatedFauna) {
-		this.associatedFauna = associatedFauna;
-	}
 
 	public String getBookmarkStatus() {
 		return bookmarkStatus;
 	}
 
-	public void setBookmarkStatus(String bookmarkStatus) {
-		this.bookmarkStatus = bookmarkStatus;
-	}
+
 
 	public void setSciName(String sciName) {
 		this.sciName = sciName;
 	}
 
-	public void setComName(String comName) {
-		this.comName = comName;
-	}
 
-	public void setFamily(String family) {
-		this.family = family;
-	}
 
 	public String getSciName() {
 		return sciName;
@@ -176,6 +167,70 @@ public class Plant {
 	
 	public String getReference(){
 		return reference;
+	}
+	
+	/*
+	 * Setter Methods
+	 */
+	
+	public void setAuthorName(String _authorName){
+		authorName= _authorName;
+	}
+	
+	public void setComName(String _comName){
+		comName = _comName;
+	}
+	
+	public void setFamily(String _family){
+		family = _family;
+	}
+	
+	public void setDescription(String _description){
+		description = _description;
+	}
+	
+	public void setHabitat(String _habitat){
+		habitat = _habitat;
+	}
+	
+	public void setMinLeafSize(int _minLeafSize){
+		minLeafSize = _minLeafSize;
+	}
+	
+	public void setMaxLeafSize(int _maxLeafSize){
+		maxLeafSize	= _maxLeafSize;
+	}
+	
+	public void setDistribution(String _distribution){
+		distribution = _distribution;
+	}
+	
+	public void setConservationStatus(String _conservationStatus){
+		conservationStatus = _conservationStatus;
+	}
+	
+	public void setGrowthReq(String _growthReq){
+		growthReq = _growthReq;
+	}
+	
+	public void setHorticulturalFeatures(String _horticulturalFeatures){
+		horticulturalFeatures = _horticulturalFeatures;
+	}
+	
+	public void setUses(String _uses){
+		uses = _uses;
+	}
+	
+	public void setAssociatedFauna(String _associatedFauna){
+		associatedFauna = _associatedFauna;
+	}
+	
+	public void setReference(String _reference){
+		reference = _reference;
+	}
+	
+	public void setBookmarkStatus(String _bookmarkStatus){
+		bookmarkStatus = _bookmarkStatus;
 	}
 
 } 
