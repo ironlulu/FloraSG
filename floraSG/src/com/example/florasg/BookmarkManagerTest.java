@@ -43,13 +43,13 @@ public class BookmarkManagerTest extends ActivityInstrumentationTestCase2<MainAc
 		assertTrue(passed);
 	}
 
-	// can delete n numbers of bookmarks where n = size
+	// can toggle n numbers of bookmarks where n = size
 	public void testCase3() {
 		bmk.initTestCase1(); // change all bookmark statuses to false
-		bmk.toggleBookmark("Acrostichum aureum"); //toggle one of them
+		bmk.toggleBookmark("Acrostichum aureum"); //toggle one of them, add more if needed
 		boolean passed = false;
 		List<ArrayList<String>> results3 = bmk.viewBookmark();
-		if (results3.size() == 1) {
+		if (results3.size() == 1) { // change this value accordingly
 			passed = true;
 		}
 		assertTrue(passed);
