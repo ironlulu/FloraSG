@@ -9,10 +9,16 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -44,17 +50,20 @@ public class MapActivity extends Activity {
 	private void initilizeMap() {
 		// TODO Auto-generated method stub
 		// create map
+		
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 		        .getMap();
 		    
 		if (map != null) {
+			// get current location
 			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+            LatLng latlng = null;
             
             if (location != null){
             	// gets the users current longitude and latitude.
-            	LatLng latlng=new LatLng(location.getLatitude(),location.getLongitude());
+            	latlng=new LatLng(location.getLatitude(),location.getLongitude());
             	
             	//Moves the camera to users current longitude and latitude
                 map.moveCamera(CameraUpdateFactory.newLatLng(latlng));
@@ -63,16 +72,58 @@ public class MapActivity extends Activity {
             
             }
             
-            Marker hamburg = map.addMarker(new MarkerOptions()
-				.position(HAMBURG).title("Hamburg"));
-            Marker kiel = map.addMarker(new MarkerOptions()
+            Marker marker = map.addMarker(new MarkerOptions()
+				.position(latlng));
+            /*Marker kiel = map.addMarker(new MarkerOptions()
 				.position(KIEL)
 				.title("Kiel")
 				.snippet("Kiel is cool")
 				.icon(BitmapDescriptorFactory
-					.fromResource(R.drawable.ic_launcher)));
+					.fromResource(R.drawable.ic_launcher)));*/
+            
+            // set custom info window for marker
+            map.setInfoWindowAdapter(new InfoWindowAdapter() {
+                
+                // Use default InfoWindow frame
+                @Override
+                public View getInfoWindow(Marker arg0) {                
+                    return null;
+                }            
+                
+                // Defines the contents of the InfoWindow
+                @Override
+                public View getInfoContents(Marker arg0) {
+                    
+                    // Getting view from the layout file info_window_layout
+                    View v = getLayoutInflater().inflate(R.layout.info_window, null);
+                                      
+                    // Getting reference to the Imageview to set image
+                    ImageView img = (ImageView) v.findViewById(R.id.photo);
+            		Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            		int bmpW = 260;
+    				int bmpH = 360;
+    				bmp = Bitmap.createScaledBitmap(bmp, bmpW, bmpH, true);
+    				img.setImageBitmap(bmp);
+            		
+            		// Getting reference to the TextView to set longitude
+                    TextView txt = (TextView) v.findViewById(R.id.date);
+                    
+                    // Setting the date
+                    txt.setText("11/01/2014");
+                   
+                    // Returning the view containing InfoWindow contents
+                    return v;
+                    
+                }
+                
+            });
 		}
 		
+	}
+	
+	protected void onResume() {
+		super.onResume();
+		initilizeMap();
 	}
 
 	@Override

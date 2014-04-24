@@ -1,15 +1,9 @@
 package com.example.florasg.GUI;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import com.example.florasg.MainActivity;
 import com.example.florasg.R;
 import com.example.florasg.Controller.BookmarkManager;
 import com.example.florasg.Controller.PlantDataRetriever;
-import com.example.florasg.GUI.profileGUI.BookmarkActivity;
-import com.example.florasg.GUI.searchGUI.SearchActivity;
-import com.example.florasg.GUI.searchGUI.SearchResultActivity;
 import com.example.florasg.Model.Plant;
 
 import android.os.Bundle;

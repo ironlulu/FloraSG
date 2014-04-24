@@ -265,64 +265,66 @@ containing a value of this type.
     }
     public static final class id {
         public static final int aboutUs=0x7f070005;
-        public static final int action_aboutus=0x7f070036;
-        public static final int action_faq=0x7f070035;
-        public static final int action_settings=0x7f070034;
-        public static final int action_updates=0x7f070037;
-        public static final int add=0x7f070039;
+        public static final int action_aboutus=0x7f070038;
+        public static final int action_faq=0x7f070037;
+        public static final int action_settings=0x7f070036;
+        public static final int action_updates=0x7f070039;
+        public static final int add=0x7f07003b;
         public static final int categoryListScrollView=0x7f070014;
         public static final int categoryScrollView=0x7f070013;
         public static final int clearButton=0x7f070019;
-        public static final int comNameTextView=0x7f070029;
-        public static final int content=0x7f070025;
+        public static final int comNameTextView=0x7f07002b;
+        public static final int content=0x7f070027;
         public static final int contentRow=0x7f070010;
-        public static final int delete=0x7f070038;
-        public static final int descIconCheckBox=0x7f07002f;
-        public static final int descIconImageView=0x7f07002e;
-        public static final int descImageScrollView=0x7f070033;
-        public static final int descScrollView=0x7f070032;
+        public static final int date=0x7f070022;
+        public static final int delete=0x7f07003a;
+        public static final int descIconCheckBox=0x7f070031;
+        public static final int descIconImageView=0x7f070030;
+        public static final int descImageScrollView=0x7f070035;
+        public static final int descScrollView=0x7f070034;
         public static final int helloID=0x7f07001d;
         public static final int hybrid=0x7f070004;
         public static final int imageListScrollView=0x7f07000f;
         public static final int imageRow=0x7f07000d;
         public static final int imageScrollView=0x7f07000e;
-        public static final int infoRow=0x7f070023;
-        public static final int line1=0x7f07002d;
+        public static final int infoRow=0x7f070025;
+        public static final int line1=0x7f07002f;
         public static final int list=0x7f07001e;
         public static final int listView=0x7f070006;
-        public static final int mainSpinner1=0x7f070021;
+        public static final int mainSpinner1=0x7f070023;
         public static final int map=0x7f070007;
-        public static final int matchNumber=0x7f07002a;
+        public static final int matchNumber=0x7f07002c;
         public static final int newsInfoContent=0x7f07000a;
         public static final int newsInfoDate=0x7f07000b;
         public static final int newsInfoTitle=0x7f070009;
         public static final int newsInfoUrl=0x7f07000c;
         public static final int newsListView=0x7f070008;
-        public static final int newsTitle=0x7f070022;
+        public static final int newsTitle=0x7f070024;
         public static final int none=0x7f070000;
         public static final int normal=0x7f070001;
+        public static final int photo=0x7f070021;
         public static final int plantImg=0x7f07001f;
         public static final int plantInfoTable=0x7f070011;
         public static final int plantName=0x7f070020;
-        public static final int remove=0x7f07003a;
+        public static final int remove=0x7f07003c;
         public static final int resultButton=0x7f07001a;
         public static final int satellite=0x7f070002;
-        public static final int sciNameTextView=0x7f070028;
+        public static final int sciNameTextView=0x7f07002a;
         public static final int seacrhResultsTableScrollView=0x7f07001c;
-        public static final int searchLoadingTextView=0x7f070026;
-        public static final int searchResultRow=0x7f070027;
+        public static final int searchLoadingTextView=0x7f070028;
+        public static final int searchResultRow=0x7f070029;
         public static final int searchResultsScrollView=0x7f07001b;
-        public static final int speciesImageScrollView=0x7f07002c;
-        public static final int speciesScrollView=0x7f07002b;
+        public static final int speciesImageScrollView=0x7f07002e;
+        public static final int speciesScrollView=0x7f07002d;
         public static final int subCateScrollView=0x7f070016;
         public static final int subCateTableScrollView=0x7f070017;
-        public static final int subCategoryRow=0x7f070030;
-        public static final int subCategoryTextView=0x7f070031;
+        public static final int subCategoryRow=0x7f070032;
+        public static final int subCategoryTextView=0x7f070033;
         public static final int tableRow1=0x7f070012;
         public static final int tableRow2=0x7f070015;
         public static final int tableRow3=0x7f070018;
         public static final int terrain=0x7f070003;
-        public static final int title=0x7f070024;
+        public static final int title=0x7f070026;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f090000;
@@ -345,13 +347,14 @@ containing a value of this type.
         public static final int activity_tab_main=0x7f03000e;
         public static final int activity_updates=0x7f03000f;
         public static final int bookmark_row=0x7f030010;
-        public static final int loading_screen=0x7f030011;
-        public static final int news_row=0x7f030012;
-        public static final int plant_info_row=0x7f030013;
-        public static final int search_loading_row=0x7f030014;
-        public static final int search_result_row=0x7f030015;
-        public static final int sub_category_icon=0x7f030016;
-        public static final int sub_category_row=0x7f030017;
+        public static final int info_window=0x7f030011;
+        public static final int loading_screen=0x7f030012;
+        public static final int news_row=0x7f030013;
+        public static final int plant_info_row=0x7f030014;
+        public static final int search_loading_row=0x7f030015;
+        public static final int search_result_row=0x7f030016;
+        public static final int sub_category_icon=0x7f030017;
+        public static final int sub_category_row=0x7f030018;
     }
     public static final class menu {
         public static final int about_us=0x7f0d0000;
@@ -375,7 +378,7 @@ containing a value of this type.
     }
     public static final class string {
         public static final int action_aboutus=0x7f08001d;
-        public static final int action_delete=0x7f080044;
+        public static final int action_delete=0x7f080041;
         public static final int action_faq=0x7f08001c;
         public static final int action_settings=0x7f08001f;
         public static final int action_updates=0x7f08001e;
@@ -404,9 +407,9 @@ containing a value of this type.
          */
         public static final int auth_client_using_bad_version_title=0x7f080014;
         public static final int browse_content=0x7f080026;
-        public static final int button_clear=0x7f080037;
-        public static final int button_result=0x7f080038;
-        public static final int camera_content=0x7f08002a;
+        public static final int button_clear=0x7f080034;
+        public static final int button_result=0x7f080035;
+        public static final int camera_content=0x7f080027;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -478,64 +481,62 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f080013;
-        public static final int habit_habit_aquatic=0x7f080031;
-        public static final int habit_habit_climber=0x7f080032;
-        public static final int habit_habit_epiphyte=0x7f080033;
-        public static final int habit_habit_herb=0x7f080034;
-        public static final int habit_habit_shrub=0x7f080035;
-        public static final int habit_habit_tree=0x7f080036;
+        public static final int date=0x7f080043;
+        public static final int habit_habit_aquatic=0x7f08002e;
+        public static final int habit_habit_climber=0x7f08002f;
+        public static final int habit_habit_epiphyte=0x7f080030;
+        public static final int habit_habit_herb=0x7f080031;
+        public static final int habit_habit_shrub=0x7f080032;
+        public static final int habit_habit_tree=0x7f080033;
         public static final int hello_world=0x7f080020;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f08001a;
-        public static final int news_content=0x7f080028;
-        public static final int pref_default_display_name=0x7f08004b;
-        public static final int pref_description_social_recommendations=0x7f080049;
+        public static final int pref_default_display_name=0x7f080049;
+        public static final int pref_description_social_recommendations=0x7f080047;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f08004d;
+        public static final int pref_header_data_sync=0x7f08004b;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f080047;
+        public static final int pref_header_general=0x7f080045;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f080050;
-        public static final int pref_ringtone_silent=0x7f080053;
-        public static final int pref_title_add_friends_to_messages=0x7f08004c;
-        public static final int pref_title_display_name=0x7f08004a;
-        public static final int pref_title_new_message_notifications=0x7f080051;
-        public static final int pref_title_ringtone=0x7f080052;
-        public static final int pref_title_social_recommendations=0x7f080048;
-        public static final int pref_title_sync_frequency=0x7f08004e;
-        public static final int pref_title_system_sync_settings=0x7f08004f;
-        public static final int pref_title_vibrate=0x7f080054;
-        public static final int profile_content=0x7f080029;
-        public static final int search_category_flower=0x7f08002d;
-        public static final int search_category_fruit=0x7f08002e;
-        public static final int search_category_habit=0x7f08002b;
-        public static final int search_category_leaf=0x7f08002c;
-        public static final int search_category_other=0x7f08002f;
-        public static final int search_content=0x7f080027;
-        public static final int search_subcategory_habit=0x7f080030;
-        public static final int text_loading_message=0x7f080039;
-        public static final int title_activity_about_us=0x7f080041;
-        public static final int title_activity_bookmark=0x7f08003b;
+        public static final int pref_header_notifications=0x7f08004e;
+        public static final int pref_ringtone_silent=0x7f080051;
+        public static final int pref_title_add_friends_to_messages=0x7f08004a;
+        public static final int pref_title_display_name=0x7f080048;
+        public static final int pref_title_new_message_notifications=0x7f08004f;
+        public static final int pref_title_ringtone=0x7f080050;
+        public static final int pref_title_social_recommendations=0x7f080046;
+        public static final int pref_title_sync_frequency=0x7f08004c;
+        public static final int pref_title_system_sync_settings=0x7f08004d;
+        public static final int pref_title_vibrate=0x7f080052;
+        public static final int search_category_flower=0x7f08002a;
+        public static final int search_category_fruit=0x7f08002b;
+        public static final int search_category_habit=0x7f080028;
+        public static final int search_category_leaf=0x7f080029;
+        public static final int search_category_other=0x7f08002c;
+        public static final int search_subcategory_habit=0x7f08002d;
+        public static final int text_loading_message=0x7f080036;
+        public static final int title_activity_about_us=0x7f08003e;
+        public static final int title_activity_bookmark=0x7f080038;
         public static final int title_activity_browse=0x7f080022;
         public static final int title_activity_camera=0x7f080024;
-        public static final int title_activity_faq=0x7f080040;
-        public static final int title_activity_loading_screen=0x7f08003f;
-        public static final int title_activity_map=0x7f08003d;
+        public static final int title_activity_faq=0x7f08003d;
+        public static final int title_activity_loading_screen=0x7f08003c;
+        public static final int title_activity_map=0x7f08003a;
         public static final int title_activity_news=0x7f080023;
-        public static final int title_activity_news_info=0x7f080045;
-        public static final int title_activity_photo=0x7f08003c;
-        public static final int title_activity_plant_info=0x7f080043;
+        public static final int title_activity_news_info=0x7f080042;
+        public static final int title_activity_photo=0x7f080039;
+        public static final int title_activity_plant_info=0x7f080040;
         public static final int title_activity_profile=0x7f080025;
         public static final int title_activity_search=0x7f080021;
-        public static final int title_activity_search_result=0x7f08003e;
-        public static final int title_activity_select_char=0x7f08003a;
-        public static final int title_activity_settings=0x7f080046;
-        public static final int title_activity_updates=0x7f080042;
+        public static final int title_activity_search_result=0x7f08003b;
+        public static final int title_activity_select_char=0x7f080037;
+        public static final int title_activity_settings=0x7f080044;
+        public static final int title_activity_updates=0x7f08003f;
     }
     public static final class style {
         /** 

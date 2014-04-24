@@ -13,9 +13,6 @@
     <string name="title_activity_camera">Camera</string>
     <string name="title_activity_profile">Profile</string>
     <string name="browse_content">Browse content</string>
-    <string name="search_content">Search content</string>
-    <string name="news_content">News conent</string>
-    <string name="profile_content">Profile content</string>
     <string name="camera_content">Camera content</string>
     <string name="search_category_habit">Habit</string>
     <string name="search_category_leaf">Leaf</string>
@@ -44,5 +41,6 @@
     <string name="title_activity_plant_info">PlantInfo</string>
     <string name="action_delete">Delete</string>
     <string name="title_activity_news_info">NewsInfoActivity</string>
+    <string name="date">Date:</string>
 
 </resources>
