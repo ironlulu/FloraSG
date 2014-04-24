@@ -1,8 +1,6 @@
 package com.example.florasg;
 
 
-import java.util.ArrayList;
-
 import com.example.florasg.GUI.TabMainActivity;
 
 import android.app.Activity;

@@ -1,16 +1,68 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AboutUsActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_aboutus" />
-
-</RelativeLayout>
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    
+	    <TextView 
+	        android:id="@+id/aboutUs"
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:text="The FloraSG application is designed to provide information on native plants in Singapore, and thus familiarize the user with some of these species. It can be used as a plant identification tool that works through the selection of a set of characters which best fits the species that the user has encountered. Alternatively, the user may simply browse for information on a known species. This app is currently limited to the native species planted at the University Hall of the National University of Singapore, Kent Ridge campus."
+	    	android:textSize="20sp"
+	        />
+	    
+	    <TextView
+	        android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"    
+            android:textColor="#006633"
+            android:textSize="16sp"
+            android:text="Development Team:" />
+	    
+	    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"    
+            android:textSize="16sp"
+            android:text="NUS SOC FloraSG team" />
+	    
+	    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"    
+            android:textSize="16sp"
+            android:text="NUS Biology departemnt" />
+	    
+	    <TextView
+	        android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"    
+            android:textColor="#006633"
+            android:textSize="16sp"
+            android:text="Contact:" />
+	    
+	    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"    
+            android:textSize="16sp"
+            android:text="floraSG@nus.edu.sg" />
+	    
+	    
+	    
+	    
+	    
+	    
+    </LinearLayout>
+    
+</ScrollView>

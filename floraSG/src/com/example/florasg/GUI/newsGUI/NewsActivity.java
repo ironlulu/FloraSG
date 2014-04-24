@@ -19,8 +19,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.florasg.R;
 import com.example.florasg.Controller.NewsListRetriever;
-import com.example.florasg.GUI.PlantInfo;
-import com.example.florasg.Model.Bookmark;
 import com.example.florasg.Model.News;
 
 public class NewsActivity extends Activity {
