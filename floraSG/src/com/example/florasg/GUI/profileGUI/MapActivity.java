@@ -37,7 +37,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapActivity extends Activity {
 		
 	static final LatLng PGP = new LatLng(1.290, 103.780);
-	static final LatLng KIEL = new LatLng(53.551, 9.993);
+	static final LatLng place1 = new LatLng(1.2828013, 103.8659992);
+	static final LatLng place2 = new LatLng(1.3191185, 103.7071972);
+	static final LatLng USS = new LatLng(1.254347,103.82324199999994);
+	static final LatLng Hill = new LatLng(1.3931172,103.774174);
 	private GoogleMap map;
 
 	@Override
@@ -87,6 +90,18 @@ public class MapActivity extends Activity {
 			
             Marker marker = map.addMarker(new MarkerOptions()
 				.position(PGP));
+            
+            Marker marker1 = map.addMarker(new MarkerOptions()
+			.position(place1));
+            
+            Marker marker2 = map.addMarker(new MarkerOptions()
+			.position(place2));
+            
+            Marker marker3 = map.addMarker(new MarkerOptions()
+			.position(USS));
+            
+            Marker marker4 = map.addMarker(new MarkerOptions()
+			.position(Hill));
             
             //Moves the camera to users current longitude and latitude
             map.moveCamera(CameraUpdateFactory.newLatLng(PGP));
