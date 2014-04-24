@@ -23,7 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/*
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
@@ -32,12 +32,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-*/
+
 
 public class MapActivity extends Activity {
-	
-	/*
-	
+		
 	static final LatLng PGP = new LatLng(1.290, 103.780);
 	static final LatLng KIEL = new LatLng(53.551, 9.993);
 	private GoogleMap map;
@@ -66,7 +64,7 @@ public class MapActivity extends Activity {
 		        .getMap();
 		    
 		if (map != null) {
-		*/
+		
 			/*
 			// get current location
 			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -86,15 +84,15 @@ public class MapActivity extends Activity {
             }
             */
             
-			/*
+			
             Marker marker = map.addMarker(new MarkerOptions()
 				.position(PGP));
             
-          //Moves the camera to users current longitude and latitude
+            //Moves the camera to users current longitude and latitude
             map.moveCamera(CameraUpdateFactory.newLatLng(PGP));
             //Animates camera and zooms to preferred state on the user's current location.
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(PGP,(float) 12));
-            */
+            
 	
 	
 	
@@ -106,7 +104,6 @@ public class MapActivity extends Activity {
 					.fromResource(R.drawable.ic_launcher)));*/
             
             // set custom info window for marker
-	/*
             map.setInfoWindowAdapter(new InfoWindowAdapter() {
                 
                 // Use default InfoWindow frame
@@ -178,7 +175,7 @@ public class MapActivity extends Activity {
 		getMenuInflater().inflate(R.menu.map, menu);
 		return true;
 	}
-	*/
+	
 	
 
 }

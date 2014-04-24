@@ -34,7 +34,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class BrowseActivity extends Activity implements  OnItemClickListener, OnItemSelectedListener  {
-/*	    
+    
 	    //browse name view
 		private static final int   SCIENTIFIC_NAME = 1;
 		private static final int   COMMON_NAME = 2;
@@ -49,24 +49,34 @@ public class BrowseActivity extends Activity implements  OnItemClickListener, On
 		int buttonId = SCIENTIFIC_NAME;
 		
 		PlantDataRetriever pdr;
-		
+		AutoCompleteTextView textView=null;
+	    private ArrayAdapter<ArrayList<String>> adapter;
 		Button scientificButton ;
 		Button commonButton ;
 		Button familyButton ;
 		BrowseAdapter browseAdapter;
-		//search view
-	//	private ListView searchResultListView;
-	//	ArrayAdapter<String> adapter;
-		//EditText inputSearch;
-	//	ArrayList<String[]> searchList;
 		
-
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_browse);
-
-			//buttonNameView = (LinearLayout)findViewById(R.id.buttonNameView);
+			 /* Initialize AutoCompleteTextView values
+	         
+            // Get AutoCompleteTextView reference from xml
+            textView = (AutoCompleteTextView) findViewById(R.id.searchInput);
+          //These values show in autocomplete
+            List<ArrayList<String>> results=pdr.searchPlantbyKeyword(textView.getText().toString()); 
+            //Create adapter    
+            adapter = new ArrayAdapter<ArrayList<String>>(this, android.R.layout.simple_dropdown_item_1line, results);
+             
+            textView.setThreshold(1);
+             
+           //Set adapter to AutoCompleteTextView
+            textView.setAdapter(adapter);
+            textView.setOnItemSelectedListener(this);
+            textView.setOnItemClickListener(this);
+         */
+            buttonNameView = (LinearLayout)findViewById(R.id.browseMode);
 			//tableScrollView = (TableLayout) findViewById(R.id.tableScrollView);
 			buttonList.add("Scientific");
 			buttonList.add("Common");
@@ -193,77 +203,7 @@ public class BrowseActivity extends Activity implements  OnItemClickListener, On
 						}
 					});
 
-			}
-		search
-		ListView searchResultListView = (ListView) findViewById(R.id.searchView);
-        EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
-        List<ArrayList<String>> results=pdr.searchPlantbyKeyword(inputSearch); 
-        // Adding items to listview
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.plant_name, results);
-        searchResultListView.setAdapter(adapter);
-        
-        //Enabling Search Filter
-         
-        inputSearch.addTextChangedListener(new TextWatcher() {
-             
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                BrowseActivity.this.adapter.getFilter().filter(cs);   
-            }
-             
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                    int arg3) {
-                // TODO Auto-generated method stub
-                 
-            }
-             
-           
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				
-			}
-        });
-	}*/
-	
-	   // Initialize variables
-	      
-	    AutoCompleteTextView textView=null;
-	    private ArrayAdapter<ArrayList<String>> adapter;
-	    PlantDataRetriever pdr;
-	    
-	    
-	    /** Called when the activity is first created. */
-	    @Override
-	    public void onCreate(Bundle bundle) {
-	        super.onCreate(bundle);
-	         
-	        setContentView(R.layout.activity_browse);
-	        pdr = new PlantDataRetriever(this);
-			pdr.openDB();
-	          
-	        // Initialize AutoCompleteTextView values
-	         
-	            // Get AutoCompleteTextView reference from xml
-	            textView = (AutoCompleteTextView) findViewById(R.id.searchInput);
-	          //These values show in autocomplete
-	            List<ArrayList<String>> results=pdr.searchPlantbyKeyword(textView.getText().toString()); 
-	            //Create adapter    
-	            adapter = new ArrayAdapter<ArrayList<String>>(this, android.R.layout.simple_dropdown_item_1line, results);
-	             
-	            textView.setThreshold(1);
-	             
-	           //Set adapter to AutoCompleteTextView
-	            textView.setAdapter(adapter);
-	            textView.setOnItemSelectedListener(this);
-	            textView.setOnItemClickListener(this);
-	         
-	           
-	    }
-	 
-	     
+			}	     
 	    @Override
 	    public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
 	            long arg3) {
@@ -296,13 +236,13 @@ public class BrowseActivity extends Activity implements  OnItemClickListener, On
 	        Log.d("AutocompleteContacts", "Position:"+arg2+" Plant:"+arg0.getItemAtPosition(arg2));
 	         
 	    }
-	     
-	    protected void onResume() {
-	        super.onResume();
-	    }
-	  
+	 
 	    protected void onDestroy() {
 	        super.onDestroy();
 	    }
 	    
 	}
+
+
+
+
