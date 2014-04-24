@@ -7,12 +7,24 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context=".CameraActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:text="@string/camera_content" />
+<SurfaceView
+    android:id="@+id/surfaceview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/captureBack" />
+
+<Button
+    android:id="@+id/captureBack"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:onClick="onClick"
+    android:text="Take Photo"
+    android:layout_gravity="center" />
 
 </RelativeLayout>
+
