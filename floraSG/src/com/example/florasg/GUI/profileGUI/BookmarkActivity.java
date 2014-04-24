@@ -47,7 +47,7 @@ public class BookmarkActivity extends Activity {
 		
 		if(tempList.isEmpty()){
 			
-			Toast toast = Toast.makeText(getApplicationContext(),"Your Bookmark List is empty!", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(),"Your Bookmark List is empty!", Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();			
 		} else {

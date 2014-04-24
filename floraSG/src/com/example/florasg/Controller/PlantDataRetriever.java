@@ -182,15 +182,73 @@ public class PlantDataRetriever {
 	}
 	
 	//browse plant
-	public List<Plant> browsePlant(int browsing_mode){
-		List<Plant> all_plant=new ArrayList<Plant>();
-		return all_plant;
-	}
-	
-	//search plant by keyword
-	public List<Plant> searchPlantbyKeyword(String keyword){
-		List<Plant> result=new ArrayList<Plant>();
-		return result;
-	}
+		@SuppressWarnings("null")
+		public List<String> browsePlant(int browsing_mode){
+			List<String> all_plant=new ArrayList<String>();
+			Cursor cursor=null;
+			/*construct a description count bucket table to tally characteristics matched
+			for each plant*/
+			switch (browsing_mode){
+			
+			case 1:
+				cursor=database.rawQuery("SELECT scientific_name FROM species ORDER BY scientific_name ASC", null);
+				break;
+			case 2:
+				cursor=database.rawQuery("SELECT common_name FROM species ORDER BY common_name ASC", null);
+				break;
+			case 3:
+				cursor=database.rawQuery("SELECT family_name FROM species ORDER BY family_name ASC", null);
+				break;
+			default:
+				System.out.println("No such browsing option");
+				break;
+			}
+			
+				cursor.moveToFirst();
+				System.out.println("No. of column= "+cursor.getColumnCount());
+				
+				String plantNameParticular=null;
+				
+				while (!cursor.isAfterLast()) {
+				//get plant name information to pass to GUI 
+				
+				plantNameParticular=cursor.getString(0);//scientificName
+				all_plant.add(plantNameParticular);
+				cursor.moveToNext();
+			    }
+		    cursor.close();
+			return all_plant;
+		}
+		
+		//search plant by keyword (the keyword is any parts of the scientific name or common name or family name)
+		public List<ArrayList<String>> searchPlantbyKeyword(String keyword){
+			List<ArrayList<String>> searchResult=new ArrayList<ArrayList<String>>();
+			ArrayList<String> p;
+			Cursor cursor;
+			String speciesCode;
+			String scientificName;
+			String commonName;
+			String familyName;
+
+			cursor=database.rawQuery("SELECT * FROM species WHERE scientific_name LIKE '%?' OR common_name LIKE '%?' OR family_name LIKE '%?'", new String[]{keyword});
+			cursor.moveToFirst();
+			System.out.println("No. of column= "+cursor.getColumnCount());
+			int cursorSize = cursor.getCount();
+			
+			//get plant name information to pass to GUI
+			for (int i = 0; i < cursorSize; i++) {
+				speciesCode = cursor.getString(0).toLowerCase();
+				scientificName = cursor.getString(1);
+				commonName=cursor.getString(2);
+				familyName=cursor.getString(4);
+				p = new ArrayList<String>();
+				p.add(speciesCode);
+				p.add(scientificName);
+				searchResult.add(p);
+				cursor.moveToNext();
+			}
+	        cursor.close();
+			return searchResult;
+		}
 
 }
