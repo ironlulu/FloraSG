@@ -146,6 +146,8 @@ public class SearchActivity extends Activity {
 		resultButton = (Button) findViewById(R.id.resultButton);
 		clearButton.setOnClickListener(clearButtonListener);
 		resultButton.setOnClickListener(resultButtonListener);
+		
+		updateSubCategoryView(CATE_HABIT);
 	}
 
 	@Override

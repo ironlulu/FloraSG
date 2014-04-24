@@ -69,10 +69,6 @@ public class SearchResultActivity extends Activity {
 		
 		LoadingOperation();
 
-
-
-
-
 	}
 
 	protected void LoadingOperation() {
