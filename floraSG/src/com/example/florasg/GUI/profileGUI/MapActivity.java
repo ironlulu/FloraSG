@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends Activity {
 	
-	static final LatLng HAMBURG = new LatLng(53.558, 9.927);
+	static final LatLng PGP = new LatLng(1.290, 103.780);
 	static final LatLng KIEL = new LatLng(53.551, 9.993);
 	private GoogleMap map;
 
@@ -61,6 +62,7 @@ public class MapActivity extends Activity {
 		        .getMap();
 		    
 		if (map != null) {
+			/*
 			// get current location
 			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
@@ -77,9 +79,15 @@ public class MapActivity extends Activity {
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,(float) 12));
             
             }
+            */
             
             Marker marker = map.addMarker(new MarkerOptions()
-				.position(latlng));
+				.position(PGP));
+            
+          //Moves the camera to users current longitude and latitude
+            map.moveCamera(CameraUpdateFactory.newLatLng(PGP));
+            //Animates camera and zooms to preferred state on the user's current location.
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(PGP,(float) 12));
             /*Marker kiel = map.addMarker(new MarkerOptions()
 				.position(KIEL)
 				.title("Kiel")
@@ -117,7 +125,8 @@ public class MapActivity extends Activity {
     				Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
     		        try {
 						List<Address>addresses = geoCoder.getFromLocation(position.latitude, position.longitude, 1);
-					
+						//Log.d("latitude:", Double.toString(position.latitude));
+						//Log.d("longitude:", Double.toString(position.longitude));
     				
 						for (int i = 0; i < addresses.get(0)
 								.getMaxAddressLineIndex(); i++) {
