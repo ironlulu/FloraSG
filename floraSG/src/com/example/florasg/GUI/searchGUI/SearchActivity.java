@@ -103,10 +103,10 @@ public class SearchActivity extends Activity {
 
 			int widthPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, widthDp, r.getDisplayMetrics());
 			int heightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, heightDp, r.getDisplayMetrics());
-			
+
 			btn.setWidth(widthPx);
 			btn.setHeight(heightPx);
-			
+
 			categoryScrollView.addView(btn);
 			Button btn1 = ((Button) findViewById(id_));
 
@@ -146,7 +146,7 @@ public class SearchActivity extends Activity {
 		resultButton = (Button) findViewById(R.id.resultButton);
 		clearButton.setOnClickListener(clearButtonListener);
 		resultButton.setOnClickListener(resultButtonListener);
-		
+
 		updateSubCategoryView(CATE_HABIT);
 	}
 
@@ -162,7 +162,7 @@ public class SearchActivity extends Activity {
 		super.onResume();
 
 	}
-	
+
 	protected void onPause(Bundle savedInstanceState){
 		super.onPause();
 
@@ -244,20 +244,20 @@ public class SearchActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			if(descIdList.size()==0){
-				
+
 				Toast toast = Toast.makeText(getApplicationContext(),"Please select at least one characteristic!", Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();			
-			
+
 			}else{
-			Intent intent = new Intent(getBaseContext(), SearchResultActivity.class); 
-			intent.putIntegerArrayListExtra(DESC_LIST, descIdList);
-			startActivity(intent);
+				Intent intent = new Intent(getBaseContext(), SearchResultActivity.class); 
+				intent.putIntegerArrayListExtra(DESC_LIST, descIdList);
+				startActivity(intent);
 			}
 		}
 
 	};
-	
+
 	//update the subCategory view according to the category id number
 	private void updateSubCategoryView(int cate){
 
@@ -275,7 +275,7 @@ public class SearchActivity extends Activity {
 
 		for(int i=0;i<subCateList.size();i++){
 			String[] subCate = subCateList.get(i);
-			
+
 			//get the subCate Name and put into the subCateNameList
 			subCateNameList.add(subCate[1]);
 		}
@@ -291,7 +291,7 @@ public class SearchActivity extends Activity {
 
 			newdescImageScrollView.removeAllViews();
 			descList.clear();
-			
+
 			Log.i("sub cate","sub cate id "+subCateList.get(i)[0]);
 			descList = (ArrayList<String[]>) ser.getDescription(Integer.parseInt(subCateList.get(i)[0]));
 
@@ -334,27 +334,27 @@ public class SearchActivity extends Activity {
 				int descId = Integer.parseInt(descList.get(j)[0]);
 				String descName = descList.get(j)[1];
 				String descImgName = descList.get(j)[2];
-				
+
 				View newdescIcon = inflater.inflate(R.layout.sub_category_icon, null);
 
 				ImageView newdescIconImageView = (ImageView) newdescIcon.findViewById(R.id.descIconImageView);
-				
+
 				AssetManager assetManager = getAssets();
-		        InputStream istr = null;
-		        try {
-		        	int dot = descImgName.indexOf(".");
-		        	descImgName = new String(descImgName.substring(0,dot)+".JPG");
-		            istr = assetManager.open("descriptions/"+descImgName);
-		        } catch (IOException e) {
-		            e.printStackTrace();
-		        }
-		        Bitmap bitmap = BitmapFactory.decodeStream(istr);
-		        newdescIconImageView.setImageBitmap(bitmap);
+				InputStream istr = null;
+				try {
+					int dot = descImgName.indexOf(".");
+					descImgName = new String(descImgName.substring(0,dot)+".JPG");
+					istr = assetManager.open("descriptions/"+descImgName);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				Bitmap bitmap = BitmapFactory.decodeStream(istr);
+				newdescIconImageView.setImageBitmap(bitmap);
 
 				CheckBox newdescIconCheckBox = (CheckBox)newdescIcon.findViewById(R.id.descIconCheckBox);
 				newdescIconCheckBox.setText(descName);
 				newdescIconCheckBox.setId(descId);
-				
+
 				Log.i("debug","desc list length is "+descIdList.size());
 				//TODO
 				//this part is duplicate
