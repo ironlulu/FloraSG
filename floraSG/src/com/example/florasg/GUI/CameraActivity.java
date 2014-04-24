@@ -1,316 +1,295 @@
 package com.example.florasg.GUI;
 
+import java.io.IOException;
 import com.example.florasg.R;
-
-import android.annotation.SuppressLint;
-//import android.os.Bundle;
-//import android.app.Activity;
-//import android.view.Menu;
-//import android.content.Intent;
-//import android.graphics.Bitmap;
-//import android.graphics.BitmapFactory;
-//import android.view.View;
-//import android.widget.ImageView;
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
-//import java.io.InputStream;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-
-import android.content.pm.PackageManager;
-import android.hardware.Camera;
-import android.hardware.Camera.CameraInfo;
-import android.util.Log;
+import android.provider.MediaStore;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.hoho.android.usbserial.driver.UsbSerialDriver;
-//import com.hoho.android.usbserial.driver.UsbSerialProber;
-//import com.hoho.android.usbserial.util.HexDump;
-//import com.hoho.android.usbserial.util.SerialInputOutputManager;
-
-
-/*public class CameraActivity extends Activity implements SurfaceHolder.Callback {	
-
-
-	//===camera var================
-	private TextView mTitleTextView;
-	static Camera mCamera; // shared var with picHandler
-	private int mCameraId = 0;
-	private SurfaceView mSurfaceView;
-	private SurfaceHolder mSurfaceHolder;
-	boolean myPreviewState = false;
-	static boolean myTakeState = false;// shared var with picHandler
-	private int count = 0;
-	private final static String DEBUG_TAG = "CameraActivity";
-	
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.camera, menu);
-//		return true;
-//	}
-
-	//====sys function for camera==========
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_camera);
-
-		getWindow().setFormat(PixelFormat.UNKNOWN);
-		mSurfaceView = (SurfaceView) findViewById(R.id.surfaceview);
-		mSurfaceHolder = mSurfaceView.getHolder();
-		mSurfaceHolder.addCallback(this);
-
-		mCameraId = findBackCamera();// ret cam found.
-		mCamera = Camera.open(mCameraId);
-		setCameraParam();
-		 Button buttonTakePhoto= (Button)findViewById(R.id.captureBack);
-		    buttonTakePhoto.setOnClickListener(new View.OnClickListener(){
-		    	public void onClick(View view) {
-
-					if (myTakeState == true) {//still taking pic. do nothing
-						//appendLog("true myTakeState");
-						Log.e(DEBUG_TAG, "true myTakeState");
-
-
-					} else {
-						//appendLog("false myTakeState");
-						Log.e(DEBUG_TAG, "false myTakeState");
-						if (mCamera != null) {
-							myTakeState = true;
-							count++;
-						mCamera.takePicture(null, null, new picHandler(
-								getApplicationContext()));
-						//appendLog("mCamera.autoPic" + " " + count);
-						Toast.makeText(getBaseContext(), "mCamera.autoPic",
-								Toast.LENGTH_SHORT).show();
-						}
-					}
-				}// end auto pic
-		    });*
-			
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-		if (mCamera != null && myPreviewState) {
-			mCamera.stopPreview();
-			mCamera.release();
-			mCamera = null;
-
-			myPreviewState = false;
-		}
-	}
-
-	
-	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		if (mCamera == null) {// camera was released when pause
-			mCamera = Camera.open(mCameraId);
-			setCameraParam();// reopen cam
-		}
-	}
-	
-	//==functions for camera===================
-	// after take pic refresh preview on surface
-	private void refreshSurfacePreview() {
-			// start preview after pic taken
-			mCamera.startPreview();
-			myPreviewState = true;
-			myTakeState = false;// guard for take pic
-			System.out.println("refresh surface preview");
-		}
-
-		// After a picture is taken, you must restart the preview before the user
-		// can take another picture
-	public void onClick(View view) {
-
-		if (myTakeState == true) {//still taking pic. do nothing
-			//appendLog("true myTakeState");
-			Log.e(DEBUG_TAG, "true myTakeState");
-
-
-		} else {
-			//appendLog("false myTakeState");
-			Log.e(DEBUG_TAG, "false myTakeState");
-			if (mCamera != null) {
-				myTakeState = true;
-				count++;
-			mCamera.takePicture(null, null, new picHandler(
-					getApplicationContext()));
-			//appendLog("mCamera.autoPic" + " " + count);
-			Toast.makeText(getBaseContext(), "mCamera.autoPic",
-					Toast.LENGTH_SHORT).show();
-			}
-		}
-	}// end auto pic
-
-		
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-		// TODO Auto-generated method stub
-		setCameraParam();
-
-		//style1
-		try {
-			mCamera.setPreviewDisplay(holder);
-			mCamera.startPreview();
-			myPreviewState = true;
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			//appendLog("set preview disp holder");
-		}
-	}// end surface changed
-	
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
-		// put mCamera preview in the surface
-		//appendLog("surface created");
-
-		if (mCamera != null) {
-			try {
-				//appendLog("Created set Camera Param");
-				// mCamera param
-				Camera.Parameters params = mCamera.getParameters();
-				// set the focus mode
-				params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-				// set Camera parameters
-				mCamera.setParameters(params);
-
-				// preview param
-				mCamera.setPreviewDisplay(holder);
-				mCamera.startPreview();
-				myPreviewState = true;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				
-			}
-		}// end if
-	}
-	
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
-		// ==shin==========
-		if (mCamera != null && myPreviewState) {
-			mCamera.stopPreview();
-			mCamera.release();
-			mCamera = null;
-			myPreviewState = false;
-		}
-		// =============
-	}// end surface destroy
-	
-	public static void setCameraParam() {
-		if (mCamera != null) {
-			try {
-
-				// mCamera param
-				Camera.Parameters params = mCamera.getParameters();
-				// set the focus mode
-				params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-				// set Camera parameters
-				mCamera.setParameters(params);
-				// mCamera.setDisplay(surfaceHolder);//method unavail
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-
-			}
-		}// end if
-	}// end set mCamera
-	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
-	private int findBackCamera() {
-		int mCameraId = -1;
-		String mCameraState = "";
-		// Search for the back mCamera
-		int numberOfCameras = Camera.getNumberOfCameras();
-		for (int i = 0; i < numberOfCameras; i++) {
-			CameraInfo info = new CameraInfo();
-			Camera.getCameraInfo(i, info);
-			if (info.facing == CameraInfo.CAMERA_FACING_BACK) {
-				Log.d(DEBUG_TAG, "Camera found");
-				mTitleTextView.setText("Camera Found");
-				mCameraId = i;
-				mCameraState = "mCamera found=" + " " + mCameraId;
-				Toast.makeText(getBaseContext(), "mCamera found",
-						Toast.LENGTH_LONG).show();
-				break;
-			}
-		}
-		return mCameraId;
-	}// end find mCamera
-
-}//end class
-*/
-
-@SuppressLint("NewApi")
 public class CameraActivity extends Activity {
-	  private final static String DEBUG_TAG = "TakePhotoActivity";
-	  private Camera camera;
-	  private int cameraId = 0;
-
-	  @Override
-	  public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.activity_camera);
-
-	    // do we have a camera?
-	    if (!getPackageManager()
-	        .hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-	      Toast.makeText(this, "No camera on this device", Toast.LENGTH_LONG)
-	          .show();
-	    } else {
-	      cameraId = findBackFacingCamera();
-	      if (cameraId < 0) {
-	        Toast.makeText(this, "No front facing camera found.",
-	            Toast.LENGTH_LONG).show();
-	      } else {
-	        camera = Camera.open(cameraId);
-	      }
-	    }
-	  }
-
-	  public void onClick(View view) {
-	    camera.takePicture(null, null,
-	        new picHandler(getApplicationContext()));
-	  }
-
-	  private int findBackFacingCamera() {
-	    int cameraId = -1;
-	    // Search for the front facing camera
-	    int numberOfCameras = Camera.getNumberOfCameras();
-	    for (int i = 0; i < numberOfCameras; i++) {
-	      CameraInfo info = new CameraInfo();
-	      Camera.getCameraInfo(i, info);
-	      if (info.facing == CameraInfo.CAMERA_FACING_BACK) {
-	        Log.d(DEBUG_TAG, "Camera found");
-	        cameraId = i;
-	        Toast.makeText(getBaseContext(), "mCamera found",
-					Toast.LENGTH_LONG).show();
-	        break;
-	      }
-	    }
-	    return cameraId;
-	  }// end find mCamera
-	  
-	  @Override
-	  protected void onPause() {
-	    if (camera != null) {
-	      camera.release();
-	      camera = null;
-	    }
-	    super.onPause();
-	  }
-
-	}
+	final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
+    
+    
+    Uri imageUri                      = null;
+    static TextView imageDetails      = null;
+    public  static ImageView showImg  = null;
+    CameraActivity CameraActivity = null;
+     
+     
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+         
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera);
+        CameraActivity = this;
+         
+        imageDetails = (TextView) findViewById(R.id.imageDetails);
+         
+        showImg = (ImageView) findViewById(R.id.showImg);
+         
+        final Button photo = (Button) findViewById(R.id.photo);
+         
+         
+         
+        photo.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                 
+              /*************************** Camera Intent Start ************************/ 
+                 
+                // Define the file-name to save photo taken by Camera activity
+                 
+                String fileName = "FloraSG_.jpg";
+                 
+                // Create parameters for Intent with filename
+                 
+                ContentValues values = new ContentValues();
+                 
+                values.put(MediaStore.Images.Media.TITLE, fileName);
+                 
+                values.put(MediaStore.Images.Media.DESCRIPTION,"Image capture by FloraSG camera");
+                 
+                // imageUri is the current activity attribute, define and save it for later usage  
+                 
+                imageUri = getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                 
+                /**** EXTERNAL_CONTENT_URI : style URI for the "primary" external storage volume. ****/
+ 
+                 
+                // Standard Intent action that can be sent to have the camera
+                // application capture an image and return it.  
+                 
+                Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
+                 
+                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                  
+                 intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+                  
+                startActivityForResult( intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                
+             /*************************** Camera Intent End ************************/
+                 
+                 
+            }    
+             
+        });
+    }
+ 
+ 
+     @Override
+     protected void onActivityResult( int requestCode, int resultCode, Intent data)
+        {
+            if ( requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+                 
+                if ( resultCode == RESULT_OK) {
+                 
+                   /*********** Load Captured Image And Data Start ****************/
+                     
+                    String imageId = convertImageUriToFile( imageUri,CameraActivity);
+                     
+ 
+                   //  Create and excecute AsyncTask to load capture image
+ 
+                    new LoadImagesFromSDCard().execute(""+imageId);
+                     
+                  /*********** Load Captured Image And Data End ****************/
+                     
+                
+                } else if ( resultCode == RESULT_CANCELED) {
+                     
+                    Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_SHORT).show();
+                } else {
+                     
+                    Toast.makeText(this, " Picture was not taken ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+      
+      
+     /************ Convert Image Uri path to physical path **************/
+      
+     public static String convertImageUriToFile ( Uri imageUri, Activity activity )  {
+      
+            Cursor cursor = null;
+            int imageID = 0;
+             
+            try {
+             
+              
+                String [] proj={
+                                 MediaStore.Images.Media.DATA,
+                                 MediaStore.Images.Media._ID,
+                                 MediaStore.Images.Thumbnails._ID,
+                                 MediaStore.Images.ImageColumns.ORIENTATION
+                               };
+                 
+                cursor = activity.managedQuery(
+                         
+                                imageUri,         //  Get data for specific image URI
+                                proj,             //  Which columns to return
+                                null,             //  WHERE clause; which rows to return (all rows)
+                                null,             //  WHERE clause selection arguments (none)
+                                null              //  Order-by clause (ascending by name)
+                                 
+                             );
+                                   
+                //  Get Query Data
+                 
+                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
+                int columnIndexThumb = cursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails._ID);
+                int file_ColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                 
+                //int orientation_ColumnIndex = cursor.
+                //    getColumnIndexOrThrow(MediaStore.Images.ImageColumns.ORIENTATION);
+                 
+                int size = cursor.getCount();
+                 
+                /*******  If size is 0, there are no images on the SD Card. *****/
+                 
+                if (size == 0) {
+ 
+ 
+                    imageDetails.setText("No Image");
+                }
+                else
+                {
+                
+                    int thumbID = 0;
+                    if (cursor.moveToFirst()) {
+                         
+                        /**************** Captured image details ************/
+                         
+                        /*****  Used to show image on view in LoadImagesFromSDCard class ******/
+                        imageID     = cursor.getInt(columnIndex);
+                         
+                        thumbID     = cursor.getInt(columnIndexThumb);
+                         
+                        String Path = cursor.getString(file_ColumnIndex);
+                         
+                        //String orientation =  cursor.getString(orientation_ColumnIndex);
+                         
+                        String CapturedImageDetails = " CapturedImageDetails : \n\n"
+                                                          +" ImageID :"+imageID+"\n"
+                                                          +" ThumbID :"+thumbID+"\n"
+                                                          +" Path :"+Path+"\n";
+                         
+                        // Show Captured Image detail on activity
+                        imageDetails.setText( CapturedImageDetails );
+                         
+                    }
+                }    
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+             
+            // Return Captured Image ImageID ( By this ImageID Image will load from sdcard )
+             
+            return ""+imageID;
+        }
+      
+      
+         /**
+         * Async task for loading the images from the SD card.
+         *
+         * @author Android Example
+         *
+         */
+          
+        // Class with extends AsyncTask class
+         
+     public class LoadImagesFromSDCard  extends AsyncTask<String, Void, Void> {
+             
+            private ProgressDialog Dialog = new ProgressDialog(CameraActivity.this);
+             
+            Bitmap mBitmap;
+             
+            protected void onPreExecute() {
+                /****** NOTE: You can call UI Element here. *****/
+                 
+                // Progress Dialog
+                Dialog.setMessage(" Loading image from Sdcard..");
+                Dialog.show();
+            }
+ 
+ 
+            // Call after onPreExecute method
+            protected Void doInBackground(String... urls) {
+                 
+                Bitmap bitmap = null;
+                Bitmap newBitmap = null;
+                Uri uri = null;       
+                     
+                     
+                    try {
+                         
+                        /**  Uri.withAppendedPath Method Description
+                        * Parameters
+                        *    baseUri  Uri to append path segment to
+                        *    pathSegment  encoded path segment to append
+                        * Returns
+                        *    a new Uri based on baseUri with the given segment appended to the path
+                        */
+                         
+                        uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + urls[0]);
+                         
+                        /**************  Decode an input stream into a bitmap. *********/
+                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                         
+                        if (bitmap != null) {
+                             
+                            /********* Creates a new bitmap, scaled from an existing bitmap. ***********/
+ 
+                            newBitmap = Bitmap.createScaledBitmap(bitmap, 170, 170, true);
+                             
+                            bitmap.recycle();
+                             
+                            if (newBitmap != null) {
+                                 
+                                mBitmap = newBitmap;
+                            }
+                        }
+                    } catch (IOException e) {
+                        // Error fetching image, try to recover
+                         
+                        /********* Cancel execution of this task. **********/
+                        cancel(true);
+                    }
+                 
+                return null;
+            }
+             
+             
+            protected void onPostExecute(Void unused) {
+                 
+                // NOTE: You can call UI Element here.
+                 
+                // Close progress dialog
+                  Dialog.dismiss();
+                 
+                if(mBitmap != null)
+                {
+                  // Set Image to ImageView  
+                   
+                   showImg.setImageBitmap(mBitmap);
+                }  
+                 
+            }
+             
+        }
+}
