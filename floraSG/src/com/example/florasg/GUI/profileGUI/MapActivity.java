@@ -1,8 +1,14 @@
 package com.example.florasg.GUI.profileGUI;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 import com.example.florasg.R;
 
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -105,15 +111,35 @@ public class MapActivity extends Activity {
     				bmp = Bitmap.createScaledBitmap(bmp, bmpW, bmpH, true);
     				img.setImageBitmap(bmp);
             		
-            		// Getting reference to the TextView to set longitude
-                    TextView txt = (TextView) v.findViewById(R.id.date);
-                    
+    				// get address
+    				LatLng position = arg0.getPosition();
+    				String strCompleteAddress= "";
+    				Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
+    		        try {
+						List<Address>addresses = geoCoder.getFromLocation(position.latitude, position.longitude, 1);
+					
+    				
+						for (int i = 0; i < addresses.get(0)
+								.getMaxAddressLineIndex(); i++) {
+							strCompleteAddress += addresses.get(0)
+									.getAddressLine(i) + "\n";
+						}
+    		        } catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+    		        // Getting reference to the TextView to set address
+                    TextView addr = (TextView) v.findViewById(R.id.address);                    
                     // Setting the date
-                    txt.setText("11/01/2014");
+                    addr.setText(strCompleteAddress);
+    				
+            		// Getting reference to the TextView to set date
+                    TextView txt = (TextView) v.findViewById(R.id.date);                    
+                    // Setting the date
+                    txt.setText("Date: 11/01/2014");
                    
                     // Returning the view containing InfoWindow contents
-                    return v;
-                    
+                    return v;                   
                 }
                 
             });
