@@ -4,30 +4,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import com.example.florasg.R;
-
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.florasg.R;
+import com.example.florasg.Controller.ImageLocationRetriever;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -88,6 +82,15 @@ public class MapActivity extends Activity {
             map.moveCamera(CameraUpdateFactory.newLatLng(PGP));
             //Animates camera and zooms to preferred state on the user's current location.
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(PGP,(float) 12));
+            
+            //Provide a filename for the imagelocationretriever to retrieve the latitude and
+            //longitude of the image
+            /*ImageLocationRetriever ILRetriever = new ImageLocationRetriever();
+            float[] dataLatLong = new float[]{0, 0};
+            
+            if(ILRetriever.hasLatLongData(filename)) {
+            	dataLatLong = ILRetriever.getLatLongFromImage(filename);
+            }*/
             /*Marker kiel = map.addMarker(new MarkerOptions()
 				.position(KIEL)
 				.title("Kiel")
