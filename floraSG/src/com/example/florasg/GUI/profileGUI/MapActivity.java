@@ -16,8 +16,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.florasg.R;
-import com.example.florasg.Controller.ImageLocationRetriever;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
@@ -26,10 +24,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.example.florasg.R;
+import com.example.florasg.Controller.ImageLocationRetriever;
+
 public class MapActivity extends Activity {
-	
+		
 	static final LatLng PGP = new LatLng(1.290, 103.780);
-	static final LatLng KIEL = new LatLng(53.551, 9.993);
+	static final LatLng place1 = new LatLng(1.2828013, 103.8659992);
+	static final LatLng place2 = new LatLng(1.3191185, 103.7071972);
+	static final LatLng USS = new LatLng(1.254347,103.82324199999994);
+	static final LatLng Hill = new LatLng(1.3931172,103.774174);
 	private GoogleMap map;
 
 	@Override
@@ -56,6 +60,7 @@ public class MapActivity extends Activity {
 		        .getMap();
 		    
 		if (map != null) {
+		
 			/*
 			// get current location
 			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -75,10 +80,23 @@ public class MapActivity extends Activity {
             }
             */
             
+			
             Marker marker = map.addMarker(new MarkerOptions()
 				.position(PGP));
             
-          //Moves the camera to users current longitude and latitude
+            Marker marker1 = map.addMarker(new MarkerOptions()
+			.position(place1));
+            
+            Marker marker2 = map.addMarker(new MarkerOptions()
+			.position(place2));
+            
+            Marker marker3 = map.addMarker(new MarkerOptions()
+			.position(USS));
+            
+            Marker marker4 = map.addMarker(new MarkerOptions()
+			.position(Hill));
+            
+            //Moves the camera to users current longitude and latitude
             map.moveCamera(CameraUpdateFactory.newLatLng(PGP));
             //Animates camera and zooms to preferred state on the user's current location.
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(PGP,(float) 12));
@@ -170,5 +188,7 @@ public class MapActivity extends Activity {
 		getMenuInflater().inflate(R.menu.map, menu);
 		return true;
 	}
+	
+	
 
 }
