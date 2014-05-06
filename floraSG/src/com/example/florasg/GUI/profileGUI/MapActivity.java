@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -60,7 +61,8 @@ public class MapActivity extends Activity {
 		        .getMap();
 		    
 		if (map != null) {
-		
+			
+			Log.d("map", "map created!");
 			/*
 			// get current location
 			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

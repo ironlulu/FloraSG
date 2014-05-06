@@ -42,5 +42,6 @@
     <string name="action_delete">Delete</string>
     <string name="title_activity_news_info">NewsInfoActivity</string>
     <string name="address">Address:</string>
+    <string name="blog_list">Popular Blogs about Plants</string>
 
 </resources>
